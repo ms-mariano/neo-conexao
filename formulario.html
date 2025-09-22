@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="formstyle.css">
+</head>
+<body>
+    <h1>Cadastro do Aluno</h1>
+    <form action="http://127.0.0.1:5000/cadastrar_form" method="get">
+
+        <label for="nome">Nome Completo:</label>
+        <input type="text" id="nome" name="nome" required>
+        <br>
+
+        <label for="bairro">Data de nascimento:</label>
+        <input type="date" id="bairro" name="bairro" required>
+        <br>
+    
+        <label for="problema">E-mail:</label>
+        <input type="email" id="problema" name="problema" required>
+
+        <label for="etnia">Serie:</label>
+        <select id="etnia" name="etnia" required>
+            <option value="">Selecione</option>
+            <option value="6">6° Ens. Fundamental II</option>
+            <option value="7">7° Ens. Fundamental II</option>
+            <option value="8">8° Ens. Fundamental II</option>
+            <option value="9">9° Ens. Fundamental II</option>
+            <option value="10">1° Ens. Medio</option>
+            <option value="11">2° Ens. Medio</option>
+            <option value="12">3° Ens. Medio</option>
+            <option value="13">4° Ens. Medio</option>
+        </select>
+
+        <label for=""></label>
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>
