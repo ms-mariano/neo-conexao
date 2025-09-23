@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Problemas Urbanos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Cadastro de Alunos</h1>
+    <form action="http://127.0.0.1:5000/cadastrar_form" method="get">
+        <label for="nome">Nome Completo:</label>
+        <input type="text" name="nome" id="nome" required>
+
+        <label for="email">Email (@escola):</label>
+        <input type="email" name="email" required>
+
+        <label for="telefone">Telefone (+55):</label>
+        <input type="text" name="telefone" id="telefone" required>
+
+        <label for="cgm">CGM:</label>
+        <input type="text" name="cgm" id="cgm" required>
+
+        <label for="idade">Data de Nascimento:</label>
+        <input type="date" name="idade" id="idade" required>
+
+        <label for="bairro">Bairro:</label>
+        <input type="text" id="bairro" name="bairro" required>
+
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" required>
+
+        <label for="genero">Gênero:</label>
+        <input type="radio" name="genero" id="genero" required>Masculino
+        <input type="radio" name="genero" id="genero" required>Feminino
+        <input type="radio" name="genero" id="genero" required>Não informar
+
+        <label for="etnia">Identificação Étnico-Racial:</label>
+        <select id="etnia" name="etnia" required>
+            <option value="">Selecione</option>
+            <option value="Branca">Branca</option>
+            <option value="Preta">Preta</option>
+            <option value="Parda">Parda</option>
+            <option value="Indígena">Indígena</option>
+            <option value="Amarela">Amarela</option>
+            <option value="Naoidentificar">Não me indentificar</option>
+        </select>
+
+        <label for="notificacoes">Deseja receber notificações por e-mail</label>
+        <input type="checkbox" name="notificacoes" id="notificacoes"><br>
+          
+        <button type="submit">Cadastrar</button>
+    </form>
+
+</body>
+
+</html>
