@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neoconexão</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <button class="menu-btn">☰</button>
+            <ul class="menu">
+                <!-- Corrigido: Removido .html e usando rotas do Flask -->
+                <li><a href="{{ url_for('home') }}">Início</a></li>
+                <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+                <li><a href="{{ url_for('blog') }}">Blog</a></li>
+                <li><a href="{{ url_for('chat') }}">Chat</a></li>
+                <li><a href="{{ url_for('perfil') }}">Perfil</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Corrigido: Imagem na pasta static -->
+    <img src="{{ url_for('static', filename='images/A_NEOCONEXAO.png') }}" alt="Neoconexão">
+    
+    <p>O Projeto Neo Conexão surge como resposta ao problema da evasão escolar no Ensino Médio,
+        causada pela dificuldade que muitos jovens encontram em conciliar os estudos com o trabalho.
+        A proposta é desenvolver uma plataforma digital interativa que reúna informações sobre
+        escolas técnicas da região, cursos ofertados e depoimentos de ex-alunos, incentivando os
+        estudantes a optarem pela educação profissionalizante.
+    </p>
+    <p>
+        Além disso, o site pretende divulgar vagas de estágio e jovem aprendiz, compatíveis com os horários escolares,
+        permitindo que os jovens permaneçam estudando enquanto ingressam no mercado de trabalho formal.
+    </p>
+</body>
+</html>
