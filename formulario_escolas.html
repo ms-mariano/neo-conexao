@@ -9,15 +9,15 @@
 <body>
     <h1>Cadastro de Escolas</h1>
     <form action="http://127.0.0.1:5000/cadastrar_form_escola" method="get">
-        <label for="Nome_da_instituiçao"> Nome_da_instituiçao:</label>
-        <input type="text" id="Nome_da_instituiçao" name="Nome_da_instituiçao" required>
+        <label for="Nome_da_instituicao"> Nome_da_instituicao:</label>
+        <input type="text" id="Nome_da_instituicao" name="Nome_da_instituicao" required>
 
-        <label for="Tipo_de_instituiçao">Tipo_de_instituiçao:</label>
-        <select type="text"  id="Tipo_de_instituiçao" name="Tipo_de_instituiçao" required>
-        <option value="">Selecione</option>
-        <option value="">Escolas particulares</option>
-        <option value="">Escolas publicas</option>
-        <option value="">Escolas técnicas</option>
+        <label for="Tipo_de_instituicao">Tipo_de_instituicao:</label>
+        <select type="text"  id="Tipo_de_instituicao" name="Tipo_de_instituicao" required>
+            <option value="">Selecione</option>
+            <option value="Escolas particulares">Escolas particulares</option>
+            <option value="Escolas publicas">Escolas publicas</option>
+            <option value="Escolas técnicas">Escolas técnicas</option>
         </select>
 
         <label for="INEP">INEP:</label>
@@ -38,20 +38,22 @@
         <label for="Turno_de_funcionamento">Turno_de_funcionamento:</label>
         <select type="text" id="Turno_de_funcionamento" name="Turno_de_funcionamento" required> 
             <option value="">Selecione</option>
-            <Option value="">Matutino</Option>
-            <Option value="">Vespertino</Option>
-            <Option value="">Noturno</Option>
-            <option value="">Integral</option>
+            <Option value="Matutino">Matutino</Option>
+            <Option value="Vespertino">Vespertino</Option>
+            <Option value="Noturno">Noturno</Option>
+            <option value="Integral">Integral</option>
         </select>
 
-        <label for="Nivel_de_escolaridade">Nivel_de_escolaridade:</label>
+        <label for="Nivel_de_escolaridade">Nível de escolaridade:</label>
         <select type="text"id="Nivel_de_escolaridade" name="Nivel_de_escolaridade"  required>
             <option value="">Selecione</option>
-            <option value="">Ens. Fundamental II</option>
-            <option value="">Ens. Medio</option>
-            <option value="">Ens. Fundamental II e Ens. Medio</option>
+            <option value="Ens._Fundamental_II">Ens. Fundamental II</option>
+            <option value="Ens._Medio">Ens. Medio</option>
+            <option value="Ens._Fundamental_II_e_Ens._Medio">Ens. Fundamental II e Ens. Medio</option>
         </select>
+
         <button type="submit">Cadastrar</button>
+        
     </form>
 </body>
 </html>

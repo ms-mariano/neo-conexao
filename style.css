@@ -1,158 +1,148 @@
 body {
-    font-family: "Unna", serif;
-    background-color: var(--color-white);
-    margin: 30px;
-    color: #333;
-    background-image: url(bolhas.png);
-    
+  font-family: Arial, sans-serif;
+  background-color: var(--color-white);
+  margin: 30px;
+  color: #333;
+  background-image: url(bolhas.png);
+  
 }
 
 :root{
-    --color-cyan: #00bcd2;
-    --color-darkpink: #d2008C;
-    --color-purple: #782CD9;
-    --color-darkpurple:#695eaf;
-    --color-white: #ffffff;
-    --color-grey: #eeeeee;
+  --color-cyan: #00bcd2;
+  --color-darkpink: #d2008C;
+  --color-purple: #782CD9;
+  --color-white: #ffffff;
+  --color-grey: #eeeeee;
 }
 
 header {
-    border-bottom: 1px solid var(--color-darkpurple);
-    color: var(--color-darkpurple);
-    padding: 0.1rem 2rem;
-    text-align: left;
-    flex-direction: row;   
-  }
-
-h2 {
-  padding-top: 50px;
-  text-align: center;
-  border-bottom: 1px solid var(--color-cyan);
-  color: var(--color-cyan);
+  border-bottom: 1px solid var(--color-purple);
+  padding: 0.1rem 2rem;
+  text-align: left;
+  flex-direction: row;   
 }
 
+
 p {
-  padding: 100px;
-  color: var(--color-darkpurple);
-  font-family: "Unna", serif;
+padding: 100px;
+color: var(--color-purple)
 }
 
 .p1 {
-  text-align: left;
-  padding-left: 10px;
+text-align: left;
+padding-left: 10px;
+font-family: unna;
 
 }
 
 .p2 {
-  text-align: right;
-  padding-right: 10px;
+text-align: right;
+padding-right: 10px;
 }
-
-
 
 .menu {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
-    color: inherit;
-  }
-  
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  color: inherit;
+}
+
 .menu li a {
-    margin: 10px 0;
-    text-align: center;
-    color: var(--color-purple);
-  }
-  
-  .menu-btn {
-    display: none;
-  }
-
-  @media (min-width: 768px) {
-    nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    main {
-      display: flex;
-      gap: -2rem;
-      flex-direction: column;
-    }
-  
-    .menu {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-  
-    .menu li {
-        margin: 0 15px;
-    }
-  }
-  
-  .text-center {
-    text-align: center;
-  }
-  
-  .btn {
-    padding: 10px 20px;
-    background-color: #0080ff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-h1 {
-    color: #2c3e50;
+  margin: 10px 0;
+  text-align: center;
+  color: var(--color-purple);
 }
 
-img {
-    margin: 0 auto;
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
-form {
-    background: #fff;
-    padding: 50px;
-    border-radius: 8px;
-    width: 400px;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
-}
-
-label {
-    font-weight: bold;
-    display: block;
-    margin-top: 10px;
-}
-
-input, select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #2c3e50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #34495e;
+.menu-btn {
+  display: none;
 }
 
 @media (min-width: 768px) {
-    nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+  nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  main {
+    display: flex;
+    gap: -2rem;
+    flex-direction: column;
+  }
+
+  .menu {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+  }
+
+  .menu li {
+      margin: 0 15px;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #0080ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+h1 {
+  color: #2c3e50;
+}
+
+img {
+  margin: 0 auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+form {
+  background: #fff;
+  padding: 50px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #34495e;
+}
+
+@media (min-width: 768px) {
+  nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
 }
