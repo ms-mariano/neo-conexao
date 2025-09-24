@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Unna", serif;
     background-color: var(--color-white);
     margin: 30px;
     color: #333;
@@ -11,27 +11,35 @@ body {
     --color-cyan: #00bcd2;
     --color-darkpink: #d2008C;
     --color-purple: #782CD9;
+    --color-darkpurple:#695eaf;
     --color-white: #ffffff;
     --color-grey: #eeeeee;
 }
 
 header {
-    border-bottom: 1px solid var(--color-purple);
+    border-bottom: 1px solid var(--color-darkpurple);
+    color: var(--color-darkpurple);
     padding: 0.1rem 2rem;
     text-align: left;
     flex-direction: row;   
   }
 
+h2 {
+  padding-top: 50px;
+  text-align: center;
+  border-bottom: 1px solid var(--color-cyan);
+  color: var(--color-cyan);
+}
 
 p {
   padding: 100px;
-  color: var(--color-purple)
+  color: var(--color-darkpurple);
+  font-family: "Unna", serif;
 }
 
 .p1 {
   text-align: left;
   padding-left: 10px;
-  font-family: unna;
 
 }
 
@@ -39,6 +47,8 @@ p {
   text-align: right;
   padding-right: 10px;
 }
+
+
 
 .menu {
     list-style: none;
