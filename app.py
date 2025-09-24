@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask 
 import csv
 import os
 from flask import request
+from flask import render_template
 
 app = Flask(__name__)
 
@@ -34,10 +35,10 @@ def sobre():
 
 @app.route("/cadastrar_escola")
 def cadastrar():
-    salvar_escola("CEEP","publico", "41129857", "78.146.230/0001-50", "(41) 3284-6820", "ceep@ceep.net.br", "Curitiba, Paraná", "Manha", "ensino medio")
+    salvar_escola("CEEP","publico", "41129857", "78.146.230/0001-50", "(41) 3284-6820", "ceep@ceep.net.br", "Curitiba", "Manha", "ensino medio")
     return "Escola cadastrada com sucesso!"
 
-@app.route("\listar_escola")
+@app.route("/listar_escola")
 def listar():
     escola = ler_escola()
     resposta = "<h1>Lista de escolas</h1><ul>"
