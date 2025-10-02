@@ -9,6 +9,7 @@
 <body>
     <h1>Cadastro de Escolas</h1>
     <form action="http://127.0.0.1:5000/cadastrar_form_escola" method="get">
+        
         <label for="Nome_da_instituicao"> Nome_da_instituicao:</label>
         <input type="text" id="Nome_da_instituicao" name="Nome_da_instituicao" required>
 
@@ -32,8 +33,46 @@
         <label for="Email">Email:</label>
         <input type="email" name="Email" id="Email" required>
 
-        <label for="Localidade">Localidade:</label>
-        <input type="text" name="Localidade" id="Localidade" required>
+        <label for="endereço">endereço:</label>
+        <input type="text"  id="endereço" name="endereço" required >
+
+        <label for="cep">cep:</label>
+        <input type="text" name="cep" id="cep" required>
+
+        <label for="cidade">cidade:</label>
+        <input type="text" name="cidade" id="cidade" required>
+
+        <label for="estado">estado:</label>
+        <select type="text" name="estado" id="estado" required>
+            <option value="Selecione"></option>
+            <option value="AC">AC</option>
+            <option value="AL">AL</option>
+            <option value="AM">AM</option>
+            <option value="AP">AP</option>
+            <option value="BA">BA</option>
+            <option value="CE">CE</option>
+            <option value="DF">DF</option>
+            <option value="ES">ES</option>
+            <option value="GO">GO</option>
+            <option value="MA">MA</option>
+            <option value="MG">MG</option>
+            <option value="MS">MS</option>
+            <option value="MT">MT</option>
+            <option value="PA">PA</option>
+            <option value="PB">PB</option>
+            <option value="PE">PE</option>
+            <option value="PI">PI</option>
+            <option value="PR">PR</option>
+            <option value="RJ">RJ</option>
+            <option value="RN">RN</option>
+            <option value="RO">RO</option>
+            <option value="RR">RR</option>
+            <option value="RS">RS</option>
+            <option value="SC">SC</option>
+            <option value="SE">SE</option>
+            <option value="SP">SP</option>
+            <option value="TO">TO</option>
+        </select>
 
         <label for="Turno_de_funcionamento">Turno_de_funcionamento:</label>
         <select type="text" id="Turno_de_funcionamento" name="Turno_de_funcionamento" required> 
@@ -51,6 +90,8 @@
             <option value="Ens._Medio">Ens. Medio</option>
             <option value="Ens._Fundamental_II_e_Ens._Medio">Ens. Fundamental II e Ens. Medio</option>
         </select>
+        <label for="Cursos_oferecidos">Cursos_oferecidos:</label>
+        <input type="text" name="Cursos_oferecidos" id="Cursos_oferecidos" required>
 
         <button type="submit">Cadastrar</button>
         
