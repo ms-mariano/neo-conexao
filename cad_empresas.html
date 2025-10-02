@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Empresas</title>
+</head>
+
+<body>
+
+    <form action="http://127.0.0.1:5000/cadastrar_form_empresas" method="get">
+        <link rel="stylesheet" href="style.css">
+        <h1>CADASTRO DE EMPRESAS</h1>
+        <label for="nome_da_empresa">Nome da Empresa:</label>
+        <input type="text" name="nome_da_empresa" id="nome_da_empresa" required>
+
+        <label for="nome_fantasia">Nome fantasia:</label>
+        <input type="text" name="nome_fantasia">
+
+        <label for="CNPJ">CNPJ:</label>
+        <input type="text" name="CNPJ" id="CNPJ" required>
+
+        <label for="Email">Email:</label>
+        <input type="email" name="Email" id="Email" required>
+
+        <label for="CEP">CEP:</label>
+        <input type="text" name="CEP" id="CEP" required>
+
+        <label for="Área de atuação">Área de atuação:</label>
+        <input type="text" id="area_de_atuacao" name="area_de_atuacao" required>
+
+        <label for="Endereço">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required>
+
+        <label for="etnia">Estado</label>
+        <select id="etnia" name="etnia" required>
+            <option value="">Selecione</option>
+            <option value="Branca">Branca</option>
+            <option value="Preta">Preta</option>
+            <option value="Parda">Parda</option>
+            <option value="Indígena">Indígena</option>
+            <option value="Amarela">Amarela</option>
+            <option value="Naoidentificar">Não me indentificar</option>
+        </select>
+    </form>
+    <button type="submit">Cadastrar</button>
+</body>
+
+</html>
