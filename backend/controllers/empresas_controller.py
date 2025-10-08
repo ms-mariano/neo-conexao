@@ -1,33 +1,50 @@
-import uuid, datetime
+import uuid, datetime, os, csv
 from utils.csv_utils import adicionar_registro
 
-CAMINHO = "data/empresas.csv"
-CAMPOS = [
-    "id_empresa", "nome_fantasia", "razao_social", "cnpj",
-    "endereco", "cidade", "estado", "telefone", "email",
-    "area_atuacao", "site", "data_registro"
+ARQUIVO_CSV = "data/empresas.csv"
+FIELDNAMES = [
+    'id_empresa', 'timestamp', 'nome', 'nome_fantasia', 'cnpj',
+    'endereco', 'bairro', 'cidade', 'cep', 'estado', 'telefone', 'email',
+    'area_atuacao'
 ]
 
-def cadastrar_empresa(dados):
-    obrigatorios = ["nome_fantasia", "cnpj", "email", "cidade", "estado"]
-    faltando = [c for c in obrigatorios if c not in dados or not str(dados[c]).strip()]
-    if faltando:
-        return {"erro": f"Campos obrigatórios ausentes: {', '.join(faltando)}"}, 400
+def ensure_csv():
+    os.makedirs(os.path.dirname (ARQUIVO_CSV), exist_ok = True)
+    if not os.path.isfile (ARQUIVO_CSV):
+        with open (ARQUIVO_CSV, 'w', newline='', encoding='utf-8') as f:
+            writer = csv. DictWriter(f, fieldnames=FIELDNAMES)
+            writer.writeheader()
 
-    empresa = {
-        "id_empresa": str(uuid.uuid4()),
-        "nome_fantasia": dados["nome_fantasia"].strip().title(),
-        "razao_social": dados.get("razao_social", "").strip().title(),
-        "cnpj": dados["cnpj"].strip(),
-        "endereco": dados.get("endereco", "").strip(),
-        "cidade": dados["cidade"].strip().title(),
-        "estado": dados["estado"].strip().upper(),
-        "telefone": dados.get("telefone", "").strip(),
-        "email": dados["email"].strip().lower(),
-        "area_atuacao": dados.get("area_atuacao", "").strip().capitalize(),
-        "site": dados.get("site", "").strip(),
-        "data_registro": datetime.datetime.now().isoformat()
+def norm(s):
+    return s.strip() if isinstance(s, str) else ''
+
+def validar(payload):
+    nome = norm(payload.get('nome', ''))
+    nome_fantasia = norm(payload.get('nome_fantasia', ''))
+    cnpj = norm(payload.get('cnpj', ''))
+    endereco = norm(payload.get('endereco', ''))
+    bairro = norm(payload.get('bairro', ''))
+    cidade = norm(payload.get('cidade', ''))
+    cep = norm(payload.get('cep', ''))
+    telefone = norm(payload.get('telefone', ''))
+    email = norm(payload.get('email', ''))
+    area_atuacao = norm(payload.get('area_atuacao', ''))
+
+
+    dados = {
+        nome: 'nome', 'nome_fantasia': nome_fantasia, 'cnpj': cnpj,
+        'endereco': endereco, 'bairro': bairro, 'cidade': cidade,
+         'cep': cep,  'telefone': telefone, 'email': email, 'area_atuacao': area_atuacao
     }
+    return dados
 
-    adicionar_registro(CAMINHO, empresa, CAMPOS)
-    return {"mensagem": "Empresa cadastrada com sucesso!", "dados": empresa}, 201
+def salvar(dados):
+    ensure_csv()
+    registro = dados.copy()
+    registro['id'] = str(uuid.uuid4())
+    registro['timestamp'] = datetime.now().isoformat(timespec='seconds')
+    with open(ARQUIVO_CSV, 'a', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
+        writer.writerow(registro)
+adicionar_registro(ARQUIVO_CSV, FIELDNAMES)
+return {"mensagem": "Empresa cadastrada com sucesso!", "dados":}, 201

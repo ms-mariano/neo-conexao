@@ -1,33 +1,36 @@
 import uuid, datetime
+import os
 from utils.csv_utils import adicionar_registro
 
-CAMINHO = "data/alunos.csv"
-CAMPOS = [
+ARQUIVO_CSV = "data/alunos.csv"
+FIELDNAMES= [
     "id_aluno", "nome", "idade", "email", "telefone",
     "cidade", "estado", "curso_interesse",
     "tipo_oportunidade", "escola_preferida", "data_registro"
 ]
 
-def cadastrar_aluno(dados):
-    """Lógica de cadastro de aluno (sem dependência do Flask)."""
-    obrigatorios = ["nome", "idade", "email", "curso_interesse", "tipo_oportunidade"]
-    faltando = [c for c in obrigatorios if c not in dados or not str(dados[c]).strip()]
-    if faltando:
-        return {"erro": f"Campos obrigatórios ausentes: {', '.join(faltando)}"}, 400
+def salvar_alunos(nome, email, telefone, cgm, idade, bairro, cidade, genero, etnia):
+    existe = os.path.isfile(ARQUIVO_CSV)
+    with open(ARQUIVO_CSV, mode='a', newline='', encoding= 'utf-8') as file:
+        escritor = csv.writer(file)
+        if not existe:
+            escritor.writerow(['nome', 'email', 'telefone', 'cgm', 'idade', 'bairro', 'cidade', 'genero', 'etnia'])
+        escritor.writerow([nome, email, telefone, cgm, idade, bairro, cidade, genero, etnia])
 
-    aluno = {
-        "id_aluno": str(uuid.uuid4()),
-        "nome": dados["nome"].strip().title(),
-        "idade": str(dados["idade"]).strip(),
-        "email": dados["email"].strip().lower(),
-        "telefone": dados.get("telefone", "").strip(),
-        "cidade": dados.get("cidade", "").strip().title(),
-        "estado": dados.get("estado", "").strip().upper(),
-        "curso_interesse": dados["curso_interesse"].strip().title(),
-        "tipo_oportunidade": dados["tipo_oportunidade"].strip().capitalize(),
-        "escola_preferida": dados.get("escola_preferida", "").strip(),
-        "data_registro": datetime.datetime.now().isoformat()
-    }
+#garantir que o arquivo CSV esteja disponível ou corretamente estruturado
+def ensure_csv():
+    os.mkedirs(os.path.dirname(ARQUIVO_CSV), exist_ok = True)
+    if not os.path.isfile(ARQUIVO_CSV):
+        with open(ARQUIVO_CSV, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
+            writer.writeheader()
 
-    adicionar_registro(CAMINHO, aluno, CAMPOS)
+def norm(s):
+    return s.strip() if isinstance(s, str) else ''
+
+def validar(payload):
+    aluno      = norm(payload.get('aluno', ''))
+    email      = norm(payload.get('email', ''))
+
+    adicionar_registro(ARQUIVO_CSV, aluno, FIELDNAMES)
     return {"mensagem": "Aluno cadastrado com sucesso!", "dados": aluno}, 201
