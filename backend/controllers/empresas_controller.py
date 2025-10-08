@@ -1,8 +1,5 @@
-from flask import Blueprint, request, jsonify
-from utils.csv_utils import adicionar_registro
 import uuid, datetime
-
-empresas_bp = Blueprint("empresas", __name__)
+from utils.csv_utils import adicionar_registro
 
 CAMINHO = "data/empresas.csv"
 CAMPOS = [
@@ -11,16 +8,11 @@ CAMPOS = [
     "area_atuacao", "site", "data_registro"
 ]
 
-# 🔹 Rota POST: /empresas/
-@empresas_bp.route("/", methods=["POST"])
-def cadastrar_empresa():
-    """Cadastra uma nova empresa no sistema."""
-    dados = request.json or {}
+def cadastrar_empresa(dados):
     obrigatorios = ["nome_fantasia", "cnpj", "email", "cidade", "estado"]
-
     faltando = [c for c in obrigatorios if c not in dados or not str(dados[c]).strip()]
     if faltando:
-        return jsonify({"erro": f"Campos obrigatórios ausentes: {', '.join(faltando)}"}), 400
+        return {"erro": f"Campos obrigatórios ausentes: {', '.join(faltando)}"}, 400
 
     empresa = {
         "id_empresa": str(uuid.uuid4()),
@@ -38,8 +30,4 @@ def cadastrar_empresa():
     }
 
     adicionar_registro(CAMINHO, empresa, CAMPOS)
-    return jsonify({
-        "mensagem": "Empresa cadastrada com sucesso!",
-        "dados": empresa,
-        "rota": "/empresas/"
-    }), 201
+    return {"mensagem": "Empresa cadastrada com sucesso!", "dados": empresa}, 201

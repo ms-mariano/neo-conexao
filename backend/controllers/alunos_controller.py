@@ -1,9 +1,5 @@
-from flask import Blueprint, request, jsonify
-from utils.csv_utils import adicionar_registro
 import uuid, datetime
-
-# Blueprint para agrupar rotas relacionadas a alunos
-alunos_bp = Blueprint("alunos", __name__)
+from utils.csv_utils import adicionar_registro
 
 CAMINHO = "data/alunos.csv"
 CAMPOS = [
@@ -12,16 +8,12 @@ CAMPOS = [
     "tipo_oportunidade", "escola_preferida", "data_registro"
 ]
 
-# 🔹 Rota POST: /alunos/
-@alunos_bp.route("/", methods=["POST"])
-def cadastrar_aluno():
-    """Cadastra um novo aluno no sistema."""
-    dados = request.json or {}
+def cadastrar_aluno(dados):
+    """Lógica de cadastro de aluno (sem dependência do Flask)."""
     obrigatorios = ["nome", "idade", "email", "curso_interesse", "tipo_oportunidade"]
-
     faltando = [c for c in obrigatorios if c not in dados or not str(dados[c]).strip()]
     if faltando:
-        return jsonify({"erro": f"Campos obrigatórios ausentes: {', '.join(faltando)}"}), 400
+        return {"erro": f"Campos obrigatórios ausentes: {', '.join(faltando)}"}, 400
 
     aluno = {
         "id_aluno": str(uuid.uuid4()),
@@ -38,8 +30,4 @@ def cadastrar_aluno():
     }
 
     adicionar_registro(CAMINHO, aluno, CAMPOS)
-    return jsonify({
-        "mensagem": "Aluno cadastrado com sucesso!",
-        "dados": aluno,
-        "rota": "/alunos/"
-    }), 201
+    return {"mensagem": "Aluno cadastrado com sucesso!", "dados": aluno}, 201
