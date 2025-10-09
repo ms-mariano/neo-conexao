@@ -1,5 +1,5 @@
 import uuid, datetime
-import os
+import os, csv
 from utils.csv_utils import adicionar_registro
 
 ARQUIVO_CSV = "data/alunos.csv"
@@ -31,6 +31,13 @@ def norm(s):
 def validar(payload):
     aluno      = norm(payload.get('aluno', ''))
     email      = norm(payload.get('email', ''))
+    telefone   = norm(payload.get('telefone', ''))
+    cgm        = norm(payload.get('cgm', ''))
+    idade      = norm(payload.get('idade', ''))
+    bairro     = norm(payload.get('bairro', '')) 
+    cidade     = norm(payload.get('telefone', ''))
+    genero     = norm(payload.get('genero', ''))
+    etnia      = norm(payload.get('etnia', ''))
 
     adicionar_registro(ARQUIVO_CSV, aluno, FIELDNAMES)
     return {"mensagem": "Aluno cadastrado com sucesso!", "dados": aluno}, 201

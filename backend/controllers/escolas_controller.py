@@ -43,16 +43,16 @@ def validar(payload):
     dados = {
         'Nome_da_instituicao': Nome_da_instituicao, 'Tipo_de_instituicao': Tipo_de_instituicao, 'INEP': INEP, 'CNPJ': CNPJ, 'Telefone':Telefone,'Email':Email, 'endereco':endereco, 'cidade':cidade, 'estado':estado, 'cep':cep,'Turno_de_funcionamento':Turno_de_funcionamento, 'Nivel_de_escolaridade':Nivel_de_escolaridade, 'cursos_oferecidos':cursos_oferecidos
     }
+    return dados
 
-def salvar(dados):
     
-def salvar_escola(Nome_da_instituicao, Tipo_de_instituicao, INEP, CNPJ, Telefone, Email, endereco, cidade, estado, cep, Turno_de_funcionamento, Nivel_de_escolaridade, cursos_oferecidos):
+def salvar_escola(dados):
     existe = os.path.isfile(ARQUIVO_CSV)
     with open(ARQUIVO_CSV, mode='a', newline='', encoding='utf-8') as file:
         escritor = csv.writer(file)
         if not existe:
             escritor.writerow([ 'Nome_da_instituicao', 'Tipo_de_instituicao', 'INEP', 'CNPJ', 'Telefone', 'Email', 'endereco', 'cidade', 'estado', 'cep', 'Turno_de_funcionamento', 'Nivel_de_escolaridade', 'cursos_oferecidos'])
-        escritor.writerow([Nome_da_instituicao, Tipo_de_instituicao, INEP, CNPJ, Telefone, Email, endereco, cidade, estado, cep, Turno_de_funcionamento, Nivel_de_escolaridade, cursos_oferecidos])
+        escritor.writerow([dados])
 
 def ler_escola():
     dados = []

@@ -10,7 +10,7 @@ def post_aluno():
     resposta, status = cadastrar_aluno(dados)
     return jsonify(resposta), status
 
- @alunos_route.route("/cadastrar_form")
+@alunos_bp.route("/cadastrar_form", methods=["POST"])
 def cadastrar_form():
     nome = request.args.get("Nome")
     email = request.args.get("Email")

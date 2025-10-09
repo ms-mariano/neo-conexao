@@ -1,4 +1,5 @@
-import uuid, datetime, os, csv
+import uuid, os, csv 
+from datetime import datetime
 from utils.csv_utils import adicionar_registro
 
 ARQUIVO_CSV = "data/empresas.csv"
@@ -32,7 +33,7 @@ def validar(payload):
 
 
     dados = {
-        nome: 'nome', 'nome_fantasia': nome_fantasia, 'cnpj': cnpj,
+        'nome': nome, 'nome_fantasia': nome_fantasia, 'cnpj': cnpj,
         'endereco': endereco, 'bairro': bairro, 'cidade': cidade,
          'cep': cep,  'telefone': telefone, 'email': email, 'area_atuacao': area_atuacao
     }
@@ -41,10 +42,11 @@ def validar(payload):
 def salvar(dados):
     ensure_csv()
     registro = dados.copy()
-    registro['id'] = str(uuid.uuid4())
+    registro['id_empresa'] = str(uuid.uuid4())
     registro['timestamp'] = datetime.now().isoformat(timespec='seconds')
-    with open(ARQUIVO_CSV, 'a', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
-        writer.writerow(registro)
-adicionar_registro(ARQUIVO_CSV, FIELDNAMES)
-return {"mensagem": "Empresa cadastrada com sucesso!", "dados":}, 201
+
+    adicionar_registro(ARQUIVO_CSV, registro, FIELDNAMES)
+    return {
+        "mensagem": "Empresa cadastrada com sucesso!",
+        "dados": dados
+    }, 201
