@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <head>
+        <meta charset = "UTF-8">
+        <meta name    = "viewport" content = "width=device-width, initial-scale=1.0">
+        <link rel     = "stylesheet" href  = "style.css">
+    <title>Cadastro de vagas</title>
+</head>
+<body>
+    <h1>Cadastro de Vagas</h1>
+    <form action="http://127.0.0.1:5000/cadastrar_form_vagas" method="get">
+        
+        <label for  = "titulo">Título:</label>
+        <input type = "text" id="titulo" name="titulo" required>
+
+        <label for  = "descricao">Descrição:</label>
+        <input type = "text" id="descricao" name="descricao" required>
+        
+        <label for  = "empresa_id">Empresa Id:</label>
+        <input type = "text" id="empresa_id" name="empresa_id" required>
+        
+        <label for  = "cidade">Cidade:</label>
+        <input type = "text" id="cidade" name="cidade" required>
+
+        <label for  = "remuneracao">Remuneração:</label>
+        <input type = "text" id="remuneracao" name="remuneracao" required>
+
+        <label for  = "requisitos">Requisitos:</label>
+        <input type = "text" id="requisitos" name="requisitos" required>
+        
+        <label for  = "tipo">Tipo de vagas:</label>
+        <select type= "text"  id="tipo" name="tipo" required>
+            <option value = "">Selecione</option>
+            <option value = "Jovem aprendiz"> Jovem aprendiz </option>
+            <option value = "Estagio">     Estágio     </option>
+            <option value = "Treinee">     Treinee     </option>
+            <option value = "Emprego">     Emprego     </option>
+        </select>
+
+        <label for  = "estado"> Estado: </label>
+        <select type= "text" name="estado" id="estado" required>
+            <option value = "Selecione"></option>
+            <option value = "AC"> AC </option>
+            <option value = "AL"> AL </option>
+            <option value = "AM"> AM </option>
+            <option value = "AP"> AP </option>
+            <option value = "BA"> BA </option>
+            <option value = "CE"> CE </option>
+            <option value = "DF"> DF </option>
+            <option value = "ES"> ES </option>
+            <option value = "GO"> GO </option>
+            <option value = "MA"> MA </option>
+            <option value = "MG"> MG </option>
+            <option value = "MS"> MS </option>
+            <option value = "MT"> MT </option>
+            <option value = "PA"> PA </option>
+            <option value = "PB"> PB </option>
+            <option value = "PE"> PE </option>
+            <option value = "PI"> PI </option>
+            <option value = "PR"> PR </option>
+            <option value = "RJ"> RJ </option>
+            <option value = "RN"> RN </option>
+            <option value = "RO"> RO </option>
+            <option value = "RR"> RR </option>
+            <option value = "RS"> RS </option>
+            <option value = "SC"> SC </option>
+            <option value = "SE"> SE </option>
+            <option value = "SP"> SP </option>
+            <option value = "TO"> TO </option>
+        </select>
+
+        <button type = "submit">Cadastrar</button>
+
+    </form>
+</body>
+</html>

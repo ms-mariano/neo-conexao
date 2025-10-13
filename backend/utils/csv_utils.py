@@ -10,6 +10,6 @@ def garantir_csv(ARQUIVO_CSV, FIELDNAMES):
 def adicionar_registro(ARQUIVO_CSV, registro, FIELDNAMES):
     """Adiciona um registro novo ao CSV"""
     garantir_csv(ARQUIVO_CSV, FIELDNAMES)
-    with open(ARQUIVO_CSV, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
+    with open(ARQUIVO_CSV, "a", newline = "", encoding = "utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames = FIELDNAMES)
         writer.writerow(registro)

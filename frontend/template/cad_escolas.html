@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+
+<head>
+    <meta charset = "UTF-8">
+    <meta name    = "viewport" content = "width=device-width, initial-scale=1.0">
+    <link rel     = "stylesheet" href  = "style.css">
+
+    <title>Cadastro de Escolas</title>
+</head>
+
+<body>
+    <h1>Cadastro de Escolas</h1>
+    <form action="http://127.0.0.1:5000/cadastrar_form_escola" method="get">
+        
+        <!-- campo para nome da escola -->
+        <label for  = "Nome_da_instituicao">Nome da instituicao:</label>
+        <input type = "text" id="Nome_da_instituicao" name="Nome_da_instituicao" required>
+
+        <!-- campo para tipo da escola -->
+        <label for  = "Tipo_de_instituicao">Tipo de instituicao:</label>
+        <select type= "text"  id="Tipo_de_instituicao" name="Tipo_de_instituicao" required>
+            <option value = "">Selecione</option>
+            <option value = "Escolas particulares"> Escolas particulares </option>
+            <option value = "Escolas publicas">     Escolas publicas     </option>
+            <option value = "Escolas técnicas">     Escolas técnicas     </option>
+        </select>
+
+        <!-- campo para INEP da escola -->
+        <label for  = "INEP"> INEP: </label>
+        <input type = "text" id="INEP" name="INEP" required>
+
+        <!-- campo para CNPJ da escola -->
+        <label for  = "CNPJ"> CNPJ: </label>
+        <input type = "text" id="CNPJ" name="CNPJ" required>
+
+        <!-- campo para telefone da escola -->
+        <label for  = "Telefone"> Telefone (+55): </label>
+        <input type = "tel" name="Telefone" id="Telefone" required>
+
+        <!-- campo para e-mail da escola -->
+        <label for  = "Email"> Email: </label>
+        <input type = "email" name="Email" id="Email" required>
+
+        <!-- campo para endereço da escola -->
+        <label for  = "endereco"> Endereço: </label>
+        <input type = "text"  id="endereco" name="endereco" required >
+
+        <!-- campo para CEP da escola -->
+        <label for  = "cep"> CEP: </label>
+        <input type = "text" name="cep" id="cep" required>
+
+        <!-- campo para cidade da escola -->
+        <label for  = "cidade"> cidade: </label>
+        <input type = "text" name="cidade" id="cidade" required>
+
+        <!-- campo de opção para Estado da escola -->
+        <label for  = "estado"> Estado: </label>
+        <select type= "text" name="estado" id="estado" required>
+            <option value = "Selecione"></option>
+            <option value = "AC"> AC </option>
+            <option value = "AL"> AL </option>
+            <option value = "AM"> AM </option>
+            <option value = "AP"> AP </option>
+            <option value = "BA"> BA </option>
+            <option value = "CE"> CE </option>
+            <option value = "DF"> DF </option>
+            <option value = "ES"> ES </option>
+            <option value = "GO"> GO </option>
+            <option value = "MA"> MA </option>
+            <option value = "MG"> MG </option>
+            <option value = "MS"> MS </option>
+            <option value = "MT"> MT </option>
+            <option value = "PA"> PA </option>
+            <option value = "PB"> PB </option>
+            <option value = "PE"> PE </option>
+            <option value = "PI"> PI </option>
+            <option value = "PR"> PR </option>
+            <option value = "RJ"> RJ </option>
+            <option value = "RN"> RN </option>
+            <option value = "RO"> RO </option>
+            <option value = "RR"> RR </option>
+            <option value = "RS"> RS </option>
+            <option value = "SC"> SC </option>
+            <option value = "SE"> SE </option>
+            <option value = "SP"> SP </option>
+            <option value = "TO"> TO </option>
+        </select>
+
+        <!-- campo de opção para tunro de funcionamento da escola -->
+        <label for   = "Turno_de_funcionamento">Turno de funcionamento:</label>
+        <select type = "text" id="Turno_de_funcionamento" name="Turno_de_funcionamento" required> 
+            <option value = "">           Selecione  </option>
+            <Option value = "Matutino">   Matutino   </Option>
+            <Option value = "Vespertino"> Vespertino </Option>
+            <Option value = "Noturno">    Noturno    </Option>
+            <option value = "Integral">   Integral   </option>
+        </select>
+
+        <!-- campo de opção para nível de escolaridade da escola -->
+        <label for   = "Nivel_de_escolaridade">Nível de escolaridade:</label>
+
+        <select type = "text"id="Nivel_de_escolaridade" name="Nivel_de_escolaridade"  required>
+            <option value = "">Selecione</option>
+            <option value = "Ens._Fundamental_II">              Ens. Fundamental II              </option>
+            <option value = "Ens._Medio">                       Ens. Medio                       </option>
+            <option value = "Ens._Fundamental_II_e_Ens._Medio"> Ens. Fundamental II e Ens. Medio </option>
+        </select>
+
+        <!-- campo para cursos oferecidos da escola -->
+        <label for  = "cursos_oferecidos">Cursos oferecidos:</label>
+        <input type = "text" name="cursos_oferecidos" id="cursos_oferecidos" required>
+
+        <button type = "submit">Cadastrar</button>
+        
+    </form>
+</body>
+</html>
