@@ -21,3 +21,7 @@ def cadastrar_form():
     cidade   = request.args.get("Cidade")
     genero   = request.args.get("Genero")
     etnia    = request.args.get("Etnia")
+
+@alunos_bp.route("/cadastrar_form_escola")
+def cadastrar():
+     return

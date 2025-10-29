@@ -37,6 +37,7 @@ def validar(payload):
     dados = {
         'id_vaga': id_vagas, 'titulo':titulo, 'descricao': descricao, 'empresa_id':empresa_id, 'cidade': cidade, 'remuneracao':remuneracao, 'requisitos':requisitos, 'data_publicacao':data_publicacao, 'tipo': tipo, 'estado': estado
     }
+    return dados
 
 def salvar_vagas(id_vagas, titulo, descricao, empresa_id, cidade, remuneracao, requisitos, data_publicacao, tipo, estado):
     existe = os.path.isfile(ARQUIVO_CSV)

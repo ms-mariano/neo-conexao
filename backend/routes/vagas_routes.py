@@ -1,16 +1,16 @@
 from flask import Blueprint, request, jsonify, render_template
 
-escolas_bp = Blueprint("vagas", __name__)
+vagas_bp = Blueprint("vagas", __name__)
 
-@escolas_bp.route("/")
+@vagas_bp.route("/")
 def index():
     return render_template("index.html")
 
-@escolas_bp.route("/sobre")
+@vagas_bp.route("/sobre")
 def sobre():
     return render_template("sobre.html")
 
-@escolas_bp.route("/listar_vagas")
+@vagas_bp.route("/listar_vagas")
 def listar():
     escola = listar()
     resposta = "<h1>Lista de vagas</h1><ul>"
@@ -19,6 +19,6 @@ def listar():
         resposta += "</ul>"
         return resposta
     
-@escolas_bp.route("/cadastrar_form_vagas")
+@vagas_bp.route("/cadastrar_form_vagas")
 def cadastrar():
     return

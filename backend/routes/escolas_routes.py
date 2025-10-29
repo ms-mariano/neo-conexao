@@ -18,7 +18,10 @@ def listar():
         resposta += f"<li>{p['Nome_da_instituicao']} ({p['Tipo_de_instituicao']}) - {p['INEP']} ({p['CNPJ']}) - {p['Telefone']} ({p['Email']}) - {p['endereco']} ({p['cidade']}) - {p['estado']} ({p['cep']}) - {p['Turno_de_funcionamento']} ({p['Nivel_de_escolaridade']})- {p['cursos_oferecidos']}<li>"
         resposta += "</ul>"
         return resposta
+@escolas_bp.route("/cadastrar_form")
+def cadastrar_form():
+     
     
-@escolas_bp.route("/cadastrar_form_escola")
-def cadastrar():
-    return
+    @escolas_bp.route("/cadastrar_form_escola")
+    def cadastrar():
+        return

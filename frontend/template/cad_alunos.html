@@ -4,16 +4,14 @@
 <head>
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-
     <title>Cadastro de Alunos</title>
-
     <link rel = "stylesheet" href = "style.css">
 </head>
 
 <body>
     <h1>Cadastro de Alunos</h1>
 
-    <form action    = "http://127.0.0.1:5000/cadastrar_form" method = "get">
+    <form action    = "http://127.0.0.1:5000/cadastrar_alunos" method = "POST">
 
         <!-- campo para nome do aluno -->
         <label for  = "nome">Nome Completo:</label>
@@ -45,9 +43,11 @@
 
         <!-- campo de opção para gênero do aluno -->
         <label for  = "genero">Gênero:</label>
-        <input type = "radio" name="genero" id="genero" required> Masculino
-        <input type = "radio" name="genero" id="genero" required> Feminino
-        <input type = "radio" name="genero" id="genero" required> Não informar
+        <select id = "genero" required>
+            <option value = "">               Selecione           </option>
+            <option value = "Masculino">         Masculino              </option>
+            <option value = "Feminino">          Feminino               </option>
+        </select>
 
         <!-- campo de opção para etnia do aluno -->
         <label for  = "etnia">Identificação Étnico-Racial:</label>

@@ -1,8 +1,7 @@
 from flask import Flask 
-import csv
+import csv, uuid
 import os
-from flask import request
-from flask import render_template
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -19,8 +18,6 @@ def ensure_csv():
         with open (ARQUIVO_CSV, 'w', newline='', encoding='utf-8')as f:
             writer = csv. DictWriter(f, fieldnames=FIELDNAMES)
             writer.writeheader()
-
-
 
 def norm(s):
     return s.strip() if isinstance(s, str) else ''
@@ -43,6 +40,13 @@ def validar(payload):
     dados = {
         'Nome_da_instituicao': Nome_da_instituicao, 'Tipo_de_instituicao': Tipo_de_instituicao, 'INEP': INEP, 'CNPJ': CNPJ, 'Telefone':Telefone,'Email':Email, 'endereco':endereco, 'cidade':cidade, 'estado':estado, 'cep':cep,'Turno_de_funcionamento':Turno_de_funcionamento, 'Nivel_de_escolaridade':Nivel_de_escolaridade, 'cursos_oferecidos':cursos_oferecidos
     }
+    return dados
+
+def salvar(dados):
+    ensure_csv()
+    registro = dados.copy()
+    registro['id_escola'] = str(uuid.uuid4())
+    registro['timestamp']  = datetime.now().isoformat(timespec='seconds')
 
 def salvar_escola(Nome_da_instituicao, Tipo_de_instituicao, INEP, CNPJ, Telefone, Email, endereco, cidade, estado, cep, Turno_de_funcionamento, Nivel_de_escolaridade, cursos_oferecidos):
     existe = os.path.isfile(ARQUIVO_CSV)

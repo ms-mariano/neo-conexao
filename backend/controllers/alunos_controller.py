@@ -1,6 +1,7 @@
-import uuid, datetime
+from datetime import datetime 
 import os, csv
-from   utils.csv_utils import adicionar_registro
+from uuid import uuid
+from utils.csv_utils import adicionar_registro
 
 ARQUIVO_CSV = "data/alunos.csv"
 FIELDNAMES  = [
@@ -37,3 +38,4 @@ def validar(payload):
 
     adicionar_registro(ARQUIVO_CSV, aluno, FIELDNAMES)
     return {"mensagem": "Aluno cadastrado com sucesso!", "dados": aluno}, 201
+

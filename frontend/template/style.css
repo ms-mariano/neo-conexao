@@ -3,52 +3,13 @@ body {
   background-color: var(--color-white);
   margin: 30px;
   color: #333;
-  position: relative;
-  min-height: 100vh;
-  overflow-x: hidden;
+  background-image: url(img/bolha.png), url(img/bolha.png), url(img/bolha.png);
+  background-position: 1000px, -400px, 1000px;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position-y: top, center, bottom;
+
 }
 
-.bolha {
-  position: absolute;
-  background-image: url("img/bolha.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  width: 14vw;
-  height: 14vw;
-  pointer-events: none;
-}
-
-.bolha1 {
-  top: 3%;
-  right: 4%;
-}
-
-.bolha2 {
-  top: 45%;
-  left: 6%;
-}
-
-.bolha3 {
-  bottom: 2%;
-  right: 4%;
-}
-
-/*Ajustes para telas grandes*/
-@media (min-width: 1200px) {
-  .bolha1 { top: 5%; left: 6%; }
-  .bolha2 { top: 50%; right: 10%; }
-  .bolha3 { bottom: 3%; left: 8%; }
-}
-
-/*Ajustes para telas pequenas*/
-@media (max-width: 700px) {
-  .bolha {
-    width: 22vw;
-    height: 22vw;
-  }
-  .bolha2 { top: 55%; right: 5%; }
-}
  /* cores do site */
 :root {
   --color-cyan: #00bcd2;
@@ -164,21 +125,36 @@ h1 {
   color: #2c3e50;
 }
 
-@media only screen and (max-width: 480px) {
-  #logo {
-    width: 100%;
-    text-align: center;
-  }
+.Mao {
+  position: absolute;
 }
 
+#logo {
+  position: relative; /* Necessário para posicionar a imagem corretamente */
+  width: 3000px; /* Largura da caixa */
+  height: 1000px; /* Altura da caixa */
+  max-width: 105%;
+  
+}
+#neoconexao {
+  position: relative;
+}
 
+#maoE {
+  right: 900px;
+  top: 100px;
+}
+
+#maoD {
+  left: 900px;
+  bottom: 180px;
+
+}
 img {
   margin: 0 auto;
   display: block;
   max-width: 100%;
   height: auto;
-  pointer-events: none;
-  user-select: none;
 }
 
 form {
@@ -186,6 +162,7 @@ form {
   background: var(--color-darkpurple);
   color: var(--color-white);
   font-size: 20.2px;
+  color: white;
   padding: 50px;
   border-radius: 75px;
   width: 1212px;
@@ -203,19 +180,21 @@ label {
   margin-top: 10px;
 }
 
-input,
-select {
+input {
+  background-color: var(--color-darkpurple);
+}
+input, select {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
-  background-color: var(--color-white);
+  background-color: var(--color-darkpur);
   border: 1px solid var(--color-white);
   opacity: 100%;
   border-radius: 100px;
 }
 
-input, select, option {
-  background-color: #ffffff;
+select, option {
+  background-color: white;
 }
 button {
   margin-top: 15px;
@@ -237,4 +216,6 @@ button:hover {
     justify-content: space-between;
     align-items: center;
   }
+
+  
 }

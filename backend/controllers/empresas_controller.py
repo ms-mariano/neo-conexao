@@ -11,7 +11,6 @@ FIELDNAMES  = [
 
 def ensure_csv():
     os.makedirs(os.path.dirname (ARQUIVO_CSV), exist_ok = True)
-
     if not os.path.isfile (ARQUIVO_CSV):
         with open (ARQUIVO_CSV, 'w', newline='', encoding='utf-8') as f:
             writer = csv. DictWriter(f, fieldnames=FIELDNAMES)
