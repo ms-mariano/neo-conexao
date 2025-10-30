@@ -1,0 +1,255 @@
+body {
+  font-family: "Unna", serif;
+  background-color: var(--color-white);
+  margin: 0;
+  padding: 0;
+  color: #333;
+
+  background-image: url(img/bolha.png), url(img/bolha.png), url(img/bolha.png);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+
+  /* Posições dinâmicas usando unidades relativas */
+  background-position:
+      left 50vw top -40vh,   /* 1ª bolha — canto superior direito */
+      right 50vw center,     /* 2ª bolha — centro à esquerda */
+      left 50vw bottom -5vh;/* 3ª bolha — canto inferior direito */
+
+  /* Mantém tamanho proporcional da imagem */
+  background-size: 75vw auto, 75vw auto, 75vw auto;
+}
+
+
+ /* cores do site */
+:root {
+  --color-cyan: #00bcd2;
+  --color-darkpink: #d2008C;
+  --color-purple: #782CD9;
+  --color-darkpurple: #695eaf;
+  --color-white: #ffffff;
+  --color-grey: #eeeeee;
+}
+
+/* barra de navegação */
+header {
+  border-bottom: 1px solid var(--color-darkpurple);
+  color: var(--color-darkpurple);
+  margin-right: 100px;
+  margin-left: 100px;
+  padding: 0.1rem 2rem;
+  text-align: left;
+  flex-direction: row;
+}
+
+/* textos */
+
+h1 {
+  text-align: center;
+}
+#inicio {
+  padding-top: 1vw;
+  text-align: center;
+  border-bottom: 1px solid var(--color-cyan);
+  font-size: 3vw;
+}
+h2 {
+  padding-top: 50px;
+  text-align: center;
+  color: var(--color-cyan);
+}
+
+
+p {
+  padding-left: 125px;
+  padding-right: 125px;
+  color: black;
+  font-family: "Unna", serif;
+  font-size:25px;
+}
+
+.pleft {
+  text-align: left;
+  padding-left: 10px;
+  padding: 100px;
+  color: var(--color-darkpurple);
+  font-family: "Unna", serif;
+  font-size: larger;
+
+}
+
+.pright {
+  text-align: right;
+  padding-right: 10px;
+  padding: 100px;
+  color: var(--color-darkpurple);
+  font-family: "Unna", serif;
+  font-size: larger;
+}
+
+ul {
+  padding-left: 125px;
+  padding-right: 125px;
+  color: black;
+  font-family: "Unna", serif;
+  font-size:larger;
+}
+/* menu */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  color: inherit;
+}
+
+.menu li a {
+  margin: 10px 0;
+  text-align: center;
+  color: var(--color-purple);
+}
+
+.menu-btn {
+  display: none;
+}
+
+
+@media (min-width: 768px) {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  main {
+    display: flex;
+    gap: -2rem;
+    flex-direction: column;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .menu li {
+    margin: 0 15px;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #0080ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+h1 {
+  color: #2c3e50;
+}
+
+.Mao {
+  position: absolute;
+}
+
+#logo {
+  /*position: relative; /* Necessário para posicionar a imagem corretamente */
+  /*width: 100vw; /* Largura da caixa */
+  /*height: auto; /* Altura da caixa */
+  /*display: block;
+  /*max-width: 105%;
+  /*margin: 0 auto;*/
+  background-size: cover;     /* cobre toda a área */
+  background-position: center;/* centraliza */
+  background-repeat: no-repeat;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+#neoconexao {
+  position: relative;
+}
+
+#maoE {
+  right: 900px;
+  top: 100px;
+}
+
+#maoD {
+  left: 900px;
+  bottom: 180px;
+
+}
+img {
+  margin: 0 auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+form {
+  
+  background: var(--color-darkpurple);
+  color: var(--color-white);
+  font-size: 20.2px;
+  color: white;
+  padding: 50px;
+  border-radius: 75px;
+  width: 1212px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+}
+ form h1 {
+  text-align: center;
+  color: #ffffff;
+  font-size: 24.2px;
+ }
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+input {
+  background-color: var(--color-darkpurple);
+}
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  background-color: var(--color-darkpur);
+  border: 1px solid var(--color-white);
+  opacity: 100%;
+  border-radius: 100px;
+}
+
+select, option {
+  background-color: white;
+}
+button {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #34495e;
+}
+
+@media (min-width: 768px) {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  
+}

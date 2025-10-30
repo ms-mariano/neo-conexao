@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meu Mapa com OpenStreetMap</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+        /* Define a altura e largura do contêiner do mapa */
+        #map { height: 600px; width: 80%; margin: 20px auto; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        // Coordenadas de exemplo: Mude para sua cidade!
+        var latitude = -23.4243; 
+        var longitude = -51.9369; 
+        var zoomInicial = 13; 
+
+        // PASSO 1: Inicializa o mapa no elemento 'map' e centraliza
+        var map = L.map('map').setView([latitude, longitude], zoomInicial);
+
+        // PASSO 2: Adiciona a camada de tiles do OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // PASSO 3: Adiciona um marcador simples
+        L.marker([latitude, longitude]).addTo(map)
+            .bindPopup("<b>Exemplo de Ponto!</b>").openPopup();
+
+    </script>
+
+</body>
+</html>

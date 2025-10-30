@@ -1,103 +1,231 @@
-from flask import Flask 
-import csv
-import os
-from flask import request
-from flask import render_template
+from flask import Flask, render_template, request, redirect
+import csv, os
+from datetime import datetime
 
+# ---------------------------------------------------------
+# CONFIGURAÇÕES INICIAIS
+# ---------------------------------------------------------
 app = Flask(__name__)
 
-ARQUIVO_CSV ='escolas.csv'
+DATA_PATH = "data"
+os.makedirs(DATA_PATH, exist_ok=True)
 
-#Escolas
+# ---------------------------------------------------------
+# FUNÇÕES AUXILIARES
+# ---------------------------------------------------------
+def inicializar_csv(nome_arquivo, cabecalho):
+    """Cria o arquivo CSV se não existir."""
+    caminho = os.path.join(DATA_PATH, nome_arquivo)
+    if not os.path.isfile(caminho):
+        with open(caminho, "w", newline="", encoding="utf-8") as f:
+            csv.DictWriter(f, fieldnames=cabecalho).writeheader()
 
-def salvar_escola(Nome_da_instituicao, Tipo_de_instituicao, INEP, CNPJ, Telefone, Email, endereco, cidade, estado, cep, Turno_de_funcionamento, Nivel_de_escolaridade, cursos_oferecidos):
-    existe = os.path.isfile(ARQUIVO_CSV)
-    with open(ARQUIVO_CSV, mode='a', newline='', encoding='utf-8') as file:
-        escritor = csv.writer(file)
-        if not existe:
-            escritor.writerow([ 'Nome_da_instituicao', 'Tipo_de_instituicao', 'INEP', 'CNPJ', 'Telefone', 'Email', 'endereco', 'cidade', 'estado', 'cep', 'Turno_de_funcionamento', 'Nivel_de_escolaridade', 'cursos_oferecidos'])
-        escritor.writerow([Nome_da_instituicao, Tipo_de_instituicao, INEP, CNPJ, Telefone, Email, endereco, cidade, estado, cep, Turno_de_funcionamento, Nivel_de_escolaridade, cursos_oferecidos])
+def salvar_csv(nome_arquivo, dados, cabecalho):
+    """Salva um novo registro no arquivo CSV."""
+    caminho = os.path.join(DATA_PATH, nome_arquivo)
+    precisa_cabecalho = not os.path.isfile(caminho) or os.stat(caminho).st_size == 0
+    with open(caminho, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=cabecalho)
+        if precisa_cabecalho:
+            writer.writeheader()
+        writer.writerow(dados)
 
-def ler_escola():
-    dados = []
-    if os.path.isfile(ARQUIVO_CSV):
-        with open(ARQUIVO_CSV, mode="r", encoding='utf-8') as file:
-            leitor = csv.DictReader(file)
-            for linha in leitor:
-                dados.append(linha)
-    return dados
+def ler_csv(nome_arquivo):
+    """Lê o conteúdo de um arquivo CSV e retorna uma lista de dicionários."""
+    caminho = os.path.join(DATA_PATH, nome_arquivo)
+    if not os.path.isfile(caminho) or os.stat(caminho).st_size == 0:
+        return []
+    with open(caminho, newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
 
+# ---------------------------------------------------------
+# INICIALIZA OS ARQUIVOS CSV
+# ---------------------------------------------------------
+inicializar_csv("alunos.csv", ["id", "nome", "email", "telefone", "cgm", "idade", "bairro", "cidade", "genero", "etnia"])
+inicializar_csv("empresas.csv", ["id_empresa", "timestamp", "nome", "nome_fantasia", "cnpj", "endereco", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao"])
+inicializar_csv("vagas.csv", ["id_vagas", "titulo", "descricao", "empresa_id", "cidade", "remuneracao", "requisitos", "data_publicacao", "tipo", "estado"])
+inicializar_csv("escolas.csv", ["id", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade", "cursos_oferecidos"])
+inicializar_csv("cursos.csv", ["nome", "descricao", "carga_horaria", "escola_id", "cidade", "estado", "requisitos", "modalidade"])
+inicializar_csv("blog.csv", ["id", "id_autor", "texto"])
+inicializar_csv("opiniao.csv" ["id", "id_blog", "id_autor", "texto"])
+# ---------------------------------------------------------
+# ROTAS PRINCIPAIS
+# ---------------------------------------------------------
 @app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/sobre")
+@app.route("/sobre.html")
 def sobre():
     return render_template("sobre.html")
 
-@app.route("/listar_escola")
-def listar():
-    escola = ler_escola()
-    resposta = "<h1>Lista de escolas</h1><ul>"
-    for p in escola:
-        resposta += f"<li>{p['Nome_da_instituicao']} ({p['Tipo_de_instituicao']}) - {p['INEP']} ({p['CNPJ']}) - {p['Telefone']} ({p['Email']}) - {p['endereco']} ({p['cidade']}) - {p['estado']} ({p['cep']}) - {p['Turno_de_funcionamento']}- ({p['Nivel_de_escolaridade']})- {p['cursos_oferecidos']}<li>"
-        resposta += "</ul>"
-        return resposta
-    
-@app.route("/cadastrar_form_escola")
-def cadastrar_form_escola():
-    Nome_da_instituicao = request.args.get("Nome_da_instituicao")
-    Tipo_de_instituicao = request.args.get("Tipo_de_instituicao")
-    INEP = request.args.get("INEP")
-    CNPJ = request.args.get("CNPJ")
-    Telefone = request.args.get("Telefone")
-    Email = request.args.get("Email")
-    endereco = request.args.get("endereco")
-    cidade = request.args.get("cidade")
-    estado = request.args.get("estado")
-    cep = request.args.get("cep")
-    Turno_de_funcionamento = request.args.get("turno_de_funcionamento")
-    Nivel_de_escolaridade = request.args.get("nivel_de_escolaridade")
-    cursos_oferecidos = request.args.get("cursos_oferecidos")
-    
-    salvar_escola(Nome_da_instituicao, Tipo_de_instituicao, INEP, CNPJ, Telefone, Email, endereco, cidade, estado, cep, Turno_de_funcionamento, Nivel_de_escolaridade, cursos_oferecidos)
-    return f"Escola cadastrada com sucesso: {Nome_da_instituicao} ({Tipo_de_instituicao}) - {INEP} ({CNPJ}) - {Telefone} ({Email}) - {endereco} ({cidade})- {estado} ({cep})- {Turno_de_funcionamento} ({Nivel_de_escolaridade})- {cursos_oferecido}"
+@app.route("/perfil.html")
+def perfil():
+    return render_template("perfil.html")
 
-#Alunos
+# ---------------------------------------------------------
+# ROTA ALUNOS
+# ---------------------------------------------------------
+@app.route("/cadastrar_alunos", methods=["GET", "POST"])
+def alunos():
+    arquivo = "alunos.csv"
+    cabecalho = ["id", "nome", "email", "telefone", "cgm", "idade", "bairro", "cidade", "genero", "etnia"]
 
-def salvar_alunos(nome, email, telefone, cgm, idade, bairro, cidade, genero, etnia):
-    existe = os.path.isfile(ARQUIVO_CSV)
-    with open(ARQUIVO_CSV, mode='a', newline='', encoding= 'utf-8') as file:
-        escritor = csv.writer(file)
-        if not existe:
-            escritor.writerow(['nome', 'email', 'telefone', 'cgm', 'idade', 'bairro', 'cidade', 'genero', 'etnia'])
-        escritor.writerow([nome, email, telefone, cgm, idade, bairro, cidade, genero, etnia])
+    if request.method == "POST":
+        registros = ler_csv(arquivo)
+        novo_id = len(registros) + 1
+        dados = {
+            "id": str(novo_id),
+            "nome": request.form["nome"],
+            "email": request.form["email"],
+            "telefone": request.form["telefone"],
+            "cgm": request.form["cgm"],
+            "idade": request.form["idade"],
+            "bairro": request.form["bairro"],
+            "cidade": request.form["cidade"],
+            "genero": request.form["genero"],
+            "etnia": request.form["etnia"]
+        }
+        salvar_csv(arquivo, dados, cabecalho)
+        return redirect("/cadastrar_alunos")
+
+    registros = ler_csv(arquivo)
+    return render_template("cad_alunos.html", registros=registros)
+
+# ---------------------------------------------------------
+# ROTA EMPRESAS
+# ---------------------------------------------------------
+@app.route("/empresas", methods=["GET", "POST"])
+def empresas():
+    arquivo = "empresas.csv"
+    cabecalho = ["id_empresa", "timestamp", "nome", "nome_fantasia", "cnpj", "endereco", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao"]
+
+    if request.method == "POST":
+        registros = ler_csv(arquivo)
+        novo_id = len(registros) + 1
+        dados = {
+            "id_empresa": str(novo_id),
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "nome": request.form["nome"],
+            "nome_fantasia": request.form["nome_fantasia"],
+            "cnpj": request.form["cnpj"],
+            "endereco": request.form["endereco"],
+            "bairro": request.form["bairro"],
+            "cidade": request.form["cidade"],
+            "cep": request.form["cep"],
+            "estado": request.form["estado"],
+            "telefone": request.form["telefone"],
+            "email": request.form["email"],
+            "area_atuacao": request.form.get("area_atuacao", "")
+        }
+        salvar_csv(arquivo, dados, cabecalho)
+        return redirect("/empresas")
+
+    registros = ler_csv(arquivo)
+    return render_template("industrias.html", registros=registros)
+
+# ---------------------------------------------------------
+# ROTA VAGAS
+# ---------------------------------------------------------
+@app.route("/cadastrar_form_vagas", methods=["GET", "POST"])
+def vagas():
+    arquivo = "vagas.csv"
+    cabecalho = ["id_vagas", "titulo", "descricao", "empresa_id", "cidade", "remuneracao", "requisitos", "data_publicacao", "tipo", "estado"]
+
+    if request.method == "POST":
+        registros = ler_csv(arquivo)
+        novo_id = len(registros) + 1
+        dados = {
+            "id_vagas": str(novo_id),
+            "titulo": request.form["titulo"],
+            "descricao": request.form["descricao"],
+            "empresa_id": request.form["empresa_id"],
+            "cidade": request.form["cidade"],
+            "remuneracao": request.form["remuneracao"],
+            "requisitos": request.form["requisitos"],
+            "data_publicacao": datetime.now().strftime("%Y-%m-%d"),
+            "tipo": request.form["tipo"],
+            "estado": request.form["estado"],
+        }
+        salvar_csv(arquivo, dados, cabecalho)
+        return redirect("/cadastrar_form_vagas")
+
+    registros = ler_csv(arquivo)
+    return render_template("cad_vagas.html", registros=registros)
+
+# ---------------------------------------------------------
+# ROTA ESCOLAS
+# ---------------------------------------------------------
+@app.route("/cadastrar_form_escola", methods=["GET", "POST"])
+def escolas():
+    arquivo = "escolas.csv"
+    cabecalho = ["id", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade", "cursos_oferecidos"]
+
+    if request.method == "POST":
+        registros = ler_csv(arquivo)
+        novo_id = len(registros) + 1
+        dados = {
+            "id": str(novo_id),
+            "Nome_da_instituicao": request.form["Nome_da_instituicao"],
+            "Tipo_de_instituicao": request.form["Tipo_de_instituicao"],
+            "INEP": request.form["INEP"],
+            "CNPJ": request.form["CNPJ"],
+            "Telefone": request.form["Telefone"],
+            "Email": request.form["Email"],
+            "endereco": request.form["endereco"],
+            "cidade": request.form["cidade"],
+            "estado": request.form["estado"],
+            "cep": request.form["cep"],
+            "Turno_de_funcionamento": request.form["Turno_de_funcionamento"],
+            "Nivel_de_escolaridade": request.form["Nivel_de_escolaridade"],
+            "cursos_oferecidos": request.form["cursos_oferecidos"],
+        }
+        salvar_csv(arquivo, dados, cabecalho)
+        return redirect("/cadastrar_form_escola")
+
+    registros = ler_csv(arquivo)
+    return render_template("cad_escolas.html", registros=registros)
+
+# ---------------------------------------------------------
+# ROTA CURSOS
+# ---------------------------------------------------------
+@app.route("/cadastrar_form_cursos", methods=["GET", "POST"])
+def cursos():
+    arquivo = "cursos.csv"
+    cabecalho = ["nome", "descricao", "carga_horaria", "escola_id", "cidade", "estado", "requisitos", "modalidade"]
+
+    if request.method == "POST":
+        registros = ler_csv(arquivo)
+        novo_id = len(registros) + 1
+        dados = {
+            "id": str(novo_id),
+            "nome": request.form["nome"],
+            "descricao": request.form["descricao"],
+            "carga_horaria": request.form["carga_horaria"],
+            "escola_id": request.form["escola_id"],
+            "cidade": request.form["cidade"],
+            "estado": request.form["estado"],
+            "requisitos": request.form["requisitos"],
+            "modalidade": request.form["modalidade"],
+        }
+        salvar_csv(arquivo, dados, cabecalho)
+        return redirect("/cadastrar_form_cursos")
+
+    registros = ler_csv(arquivo)
+    return render_template("cad_cursos.html", registros=registros)
+
+# ---------------------------------------------------------
+# ROTA BLOG
+# ---------------------------------------------------------
 
 
-def ler_problemas():
-    dados = []
-    if os.path.isfile(ARQUIVO_CSV):
-        with open(ARQUIVO_CSV, mode='r', encoding='utf-8') as file:
-            leitor = csv.DictReader(file)
-            for linha in leitor:
-                dados.append(linha)
-    return dados
+# ---------------------------------------------------------
+# ROTA CHAT
+# ---------------------------------------------------------
 
-@app.route("/cadastrar_form")
-def cadastrar_form():
-    nome = request.args.get("Nome")
-    email = request.args.get("Email")
-    telefone = request.args.get("telefone")
-    cgm = request.args.get("CGM")
-    idade = request.args.get("Idade")
-    bairro = request.args.get("Bairro")
-    cidade = request.args.get("Cidade")
-    genero = request.args.get("Genero")
-    etnia = request.args.get("Etnia")
 
-    salvar_alunos(nome, email, telefone, cgm, idade, bairro, cidade, genero, etnia)
-
-    return f"Aluno cadastrado com sucesso: {nome} ({email}) {telefone} {cgm} {idade} - {cidade} ({bairro}) {genero} {etnia}"
-    
-if __name__=="__main__":
+# ---------------------------------------------------------
+# EXECUÇÃO
+# ---------------------------------------------------------
+if __name__ == "__main__":
     app.run(debug=True)
