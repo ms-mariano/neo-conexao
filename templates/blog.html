@@ -1,1 +1,26 @@
-!DOCTYPE
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Novo Post</title>
+</head>
+<body>
+    <h1>Escrever Nova Experiência</h1>
+    
+    <form method="POST" action="/blog/novo"> 
+        
+        <label for="autor">Seu Nome/Pseudônimo:</label><br>
+        <input type="text" id="autor" name="autor" required><br><br>
+
+        <label for="titulo">Título da Experiência:</label><br>
+        <input type="text" id="titulo" name="titulo" required><br><br>
+
+        <label for="conteudo">Conteúdo da Experiência:</label><br>
+        <textarea id="conteudo" name="conteudo" rows="10" required></textarea><br><br>
+
+        <button type="submit">Publicar Post</button>
+    </form>
+    
+    <p><a href="/blog">Voltar para o Blog</a></p>
+</body>
+</html>

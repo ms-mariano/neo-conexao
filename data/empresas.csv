@@ -1,1 +1,2 @@
-id_empresa,timestamp,nome,nome_fantasia,cnpj,endereco,bairro,cidade,cep,estado,telefone,email,area_atuacao
+id_empresa,timestamp,nome_empresa,nome_fantasia,cnpj,endereco,bairro,cidade,cep,estado,telefone,email,area_atuacao
+1,2025-10-31 11:51:28,Dolly Company,Dolly Guaraná,12345676,1234,Jd. Olímpico,Xique-Xique,12346542,BA,44 12345678,dolly@dolly.com,Indústria Alimenítcia

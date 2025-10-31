@@ -1,81 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-    <meta charset = "UTF-8">
-    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- !!! CORRIGIDO: O CSS deve estar no <head> !!! -->
+    <link rel="stylesheet" href="../static/css/style.css">
     <title>Cadastro de Empresas</title>
 </head>
 
 <body>
-
-    <form action="http://127.0.0.1:5000/cadastrar_form_empresas" method="POST">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- !!! CORRIGIDO: 'action' removido. O form enviará para a própria URL. !!! -->
+    <form method="POST">
 
         <h1>CADASTRO DE EMPRESAS</h1>
 
-        <!-- campo para nome da empresa -->
-        <label for  = "nome_da_empresa">Nome da Empresa:</label>
-        <input type = "text" name="nome_da_empresa" id="nome_da_empresa" required>
+        <!-- Corrigido: 'name', 'id' e 'for' atualizados para "nome" -->
+        <label for="nome">Nome da Empresa:</label>
+        <input type="text" name="nome" id="nome" required>
 
-        <!-- campo para nome-fantasia da empresa -->
-        <label for  = "nome_fantasia">Nome fantasia:</label>
-        <input type = "text" name="nome_fantasia">
+        <!-- Corrigido: 'id' e 'for' adicionados -->
+        <label for="nome_fantasia">Nome fantasia:</label>
+        <input type="text" name="nome_fantasia" id="nome_fantasia">
 
-        <!-- campo para CNPJ da empresa -->
-        <label for  = "CNPJ">CNPJ:</label>
-        <input type = "text" name="CNPJ" id="CNPJ" required>
+        <!-- Corrigido: 'name', 'id' e 'for' atualizados para "cnpj" (minúsculo) -->
+        <label for="cnpj">CNPJ:</label>
+        <input type="text" name="cnpj" id="cnpj" required>
 
-        <!-- campo para e-mail da empresa -->
-        <label for  = "Email">Email:</label>
-        <input type = "email" name="Email" id="Email" required>
+        <!-- Corrigido: 'name', 'id' e 'for' atualizados para "email" (minúsculo) -->
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+        
+        <!-- Corrigido: 'name', 'id' e 'for' atualizados para "area_atuacao" -->
+        <label for="area_atuacao">Área de atuação:</label>
+        <input type="text" id="area_atuacao" name="area_atuacao" required>
 
-        <!-- campo para CEP da empresa -->
-        <label for  = "CEP">CEP:</label>
-        <input type = "text" name="CEP" id="CEP" required>
+        <!-- Corrigido: 'id' e 'for' atualizados -->
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required>
 
-        <!-- campo para área de atuação da empresa -->
-        <label for  = "Área de atuação">Área de atuação:</label>
-        <input type = "text" id="area_de_atuacao" name="area_de_atuacao" required>
+        <label for="bairro">Bairro:</label>
+        <input type="text" id="bairro" name="bairro" required>
 
-        <!-- campo para endereço da empresa -->
-        <label for  = "Endereço">Endereço:</label>
-        <input type = "text" id="endereco" name="endereco" required>
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" required>
+        
+        <!-- Corrigido: 'name', 'id' e 'for' atualizados para "cep" (minúsculo) -->
+        <label for="cep">CEP:</label>
+        <input type="text" name="cep" id="cep" required>
 
-        <label for  = "estado">Estado:</label>
-        <select type= "text" name="estado" id="estado" required>
-            <option value = "Selecione"></option>
-            <option value = "AC"> AC </option>
-            <option value = "AL"> AL </option>
-            <option value = "AM"> AM </option>
-            <option value = "AP"> AP </option>
-            <option value = "BA"> BA </option>
-            <option value = "CE"> CE </option>
-            <option value = "DF"> DF </option>
-            <option value = "ES"> ES </option>
-            <option value = "GO"> GO </option>
-            <option value = "MA"> MA </option>
-            <option value = "MG"> MG </option>
-            <option value = "MS"> MS </option>
-            <option value = "MT"> MT </option>
-            <option value = "PA"> PA </option>
-            <option value = "PB"> PB </option>
-            <option value = "PE"> PE </option>
-            <option value = "PI"> PI </option>
-            <option value = "PR"> PR </option>
-            <option value = "RJ"> RJ </option>
-            <option value = "RN"> RN </option>
-            <option value = "RO"> RO </option>
-            <option value = "RR"> RR </option>
-            <option value = "RS"> RS </option>
-            <option value = "SC"> SC </option>
-            <option value = "SE"> SE </option>
-            <option value = "SP"> SP </option>
-            <option value = "TO"> TO </option>
+        <label for="estado">Estado:</label>
+        <!-- Corrigido: Removido 'type="text"' e melhorado o placeholder -->
+        <select name="estado" id="estado" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="AC"> AC </option>
+            <option value="AL"> AL </option>
+            <option value="AM"> AM </option>
+            <option value="AP"> AP </option>
+            <option value="BA"> BA </option>
+            <option value="CE"> CE </option>
+            <option value="DF"> DF </option>
+            <option value="ES"> ES </option>
+            <option value="GO"> GO </option>
+            <option value="MA"> MA </option>
+            <option value="MG"> MG </option>
+            <option value="MS"> MS </option>
+            <option value="MT"> MT </option>
+            <option value="PA"> PA </option>
+            <option value="PB"> PB </option>
+            <option value="PE"> PE </option>
+            <option value="PI"> PI </option>
+            <option value="PR"> PR </option>
+            <option value="RJ"> RJ </option>
+            <option value="RN"> RN </option>
+            <option value="RO"> RO </option>
+            <option value="RR"> RR </option>
+            <option value="RS"> RS </option>
+            <option value="SC"> SC </option>
+            <option value="SE"> SE </option>
+            <option value="SP"> SP </option>
+            <option value="TO"> TO </option>
         </select>
 
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" required>
+        
+        <button type="submit">Cadastrar</button>
     </form>
-    <button type="submit">Cadastrar</button>
+
 </body>
 
 </html>

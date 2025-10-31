@@ -216,6 +216,8 @@ label {
 
 input {
   background-color: var(--color-darkpurple);
+  color: var(--color-white);
+  
 }
 input, select {
   width: 100%;
@@ -250,6 +252,176 @@ button:hover {
     justify-content: space-between;
     align-items: center;
   }
+}
+
 
   
+  /* --- Menu Superior --- */
+  nav {
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  nav ul li {
+    display: inline-block;
+    margin: 0 20px;
+  }
+  nav ul li a {
+    text-decoration: none;
+    color: #6246ea;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  /* --- Seção Introdução --- */
+  .intro {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .intro h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 70px;
+    color: #00bcd4;
+    margin-bottom: 10px;
+  }
+  
+  .intro p {
+    color: #533f73;
+    line-height: 1.6;
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+  
+  .pesquise {
+    text-decoration: none;
+    color: #00bcd4;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  /* --- Card da Escola --- */
+  .escola {
+    display: flex;
+    justify-content: center;
+    margin: 60px 0;
+  }
+  
+  .card {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    overflow: hidden;
+    max-width: 800px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  
+  .card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .card .info {
+    padding: 20px;
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+  }
+  
+  .card .info h2 {
+    margin-top: 0;
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .card .info p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+   /* Estilos específicos para o blog */
+   .blog-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+.post-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.post-card h2 {
+    margin-top: 0;
+    color: #333;
+}
+.post-meta {
+    font-size: 0.9em;
+    color: #777;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+.post-content {
+    /* !!! ESSENCIAL: Faz o texto respeitar as quebras de linha do formulário !!! */
+    white-space: pre-wrap;
+    line-height: 1.6;
+    color: #444;
+}
+.link-novo-post {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.link-novo-post:hover {
+    background-color: #0056b3;
+}
+
+ /* Estilos que pegamos do outro blog para manter a consistência */
+ body {
+  background-color: #f9f9f9; /* Um fundo levemente diferente */
+}
+.blog-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+.post-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.post-card h2 {
+  margin-top: 0;
+  color: #333;
+}
+.post-meta {
+  font-size: 0.9em;
+  color: #777;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+/* Para HTML estático, é melhor usar tags <p> do que 'pre-wrap' */
+.post-content p {
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 15px;
+}
+.post-content p:last-child {
+  margin-bottom: 0;
 }

@@ -1,79 +1,88 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang = "pt-br">
+
 <head>
-        <meta charset = "UTF-8">
-        <meta name    = "viewport" content = "width=device-width, initial-scale=1.0">
-        <link rel     = "stylesheet" href  = "../static/css/style.css">
+    <meta charset = "UTF-8">
+    <meta name    = "viewport"   content = "width=device-width, initial-scale=1.0">
+    <link rel     = "stylesheet" href    = "../static/css/style.css">
+
     <title>Cadastro de Cursos</title>
 </head>
+
 <body>
     <h1>Cadastro de Cursos</h1>
-    <form action="http://127.0.0.1:5000/cadastrar_form_cursos" method="POST">
-        
+    <form method = "POST">
+
         <label for  = "nome">Nome:</label>
-        <input type = "text" id="nome" name="nome" required>
+        <input type = "text" id = "nome" name = "nome" required>
 
         <label for  = "descricao">Descrição:</label>
-        <input type = "text" id="descricao" name="descricao" required>
-        
+        <input type = "text" id = "descricao" name = "descricao" required>
+
         <label for  = "carga_horaria">Carga Horária:</label>
-        <input type = "text" id="carga_horaria" name="carga_horaria" required>
-        
-        <label for  = "escola_id">Escola ID:</label>
-        <input type = "text" id="escola_id" name="escola_id" required>
-        
+        <input type = "number" id = "carga_horaria" name = "carga_horaria" required>
+
+        <!-- Seleção escola -->
+        <label for   = "escola_id">Escola:</label>
+        <select name = "escola_id" id = "escola_id" required>
+            <option value = "" disabled selected>Selecione a escola</option>
+            {% for i in escolas %}
+            <option value="{{ i.id }}">{{ i.Nome_da_instituicao }}</option>
+            {% endfor %}
+        </select><br>
+
         <label for  = "cidade">Cidade:</label>
-        <input type = "text" id="cidade" name="cidade" required>
+        <input type = "text" id = "cidade" name = "cidade" required>
 
-        <label for  = "estado"> Estado: </label>
-        <select type= "text" name="estado" id="estado" required>
-            <option value = "Selecione"></option>
-            <option value = "AC"> AC </option>
-            <option value = "AL"> AL </option>
-            <option value = "AM"> AM </option>
-            <option value = "AP"> AP </option>
-            <option value = "BA"> BA </option>
-            <option value = "CE"> CE </option>
-            <option value = "DF"> DF </option>
-            <option value = "ES"> ES </option>
-            <option value = "GO"> GO </option>
-            <option value = "MA"> MA </option>
-            <option value = "MG"> MG </option>
-            <option value = "MS"> MS </option>
-            <option value = "MT"> MT </option>
-            <option value = "PA"> PA </option>
-            <option value = "PB"> PB </option>
-            <option value = "PE"> PE </option>
-            <option value = "PI"> PI </option>
-            <option value = "PR"> PR </option>
-            <option value = "RJ"> RJ </option>
-            <option value = "RN"> RN </option>
-            <option value = "RO"> RO </option>
-            <option value = "RR"> RR </option>
-            <option value = "RS"> RS </option>
-            <option value = "SC"> SC </option>
-            <option value = "SE"> SE </option>
-            <option value = "SP"> SP </option>
-            <option value = "TO"> TO </option>
+        <label for   = "estado"> Estado: </label>
+        <select name = "estado" id="estado" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="AC">AC</option>
+            <option value="AL">AL</option>
+            <option value="AM">AM</option>
+            <option value="AP">AP</option>
+            <option value="BA">BA</option>
+            <option value="CE">CE</option>
+            <option value="DF">DF</option>
+            <option value="ES">ES</option>
+            <option value="GO">GO</option>
+            <option value="MA">MA</option>
+            <option value="MG">MG</option>
+            <option value="MS">MS</option>
+            <option value="MT">MT</option>
+            <option value="PA">PA</option>
+            <option value="PB">PB</option>
+            <option value="PE">PE</option>
+            <option value="PI">PI</option>
+            <option value="PR">PR</option>
+            <option value="RJ">RJ</option>
+            <option value="RN">RN</option>
+            <option value="RO">RO</option>
+            <option value="RR">RR</option>
+            <option value="RS">RS</option>
+            <option value="SC">SC</option>
+            <option value="SE">SE</option>
+            <option value="SP">SP</option>
+            <option value="TO">TO</option>
         </select>
 
-
-        <label for  = "requisitos">Requisitos:</label>
-        <select type= "text"  id="requisitos" name="requisitos" required>
-            <option value = "">Selecione</option>
-            <option value = " 9°ano"> 9°ano</option>
-            <option value = "Ensino Médio">     Ensino Médio      </option>
+        <label for = "requisitos">Requisitos:</label>
+        <select id = "requisitos" name="requisitos" required>
+            <option value = "" disabled selected>Selecione</option>
+            <option value = "9°ano">9°ano</option>
+            <option value = "Ensino Médio">Ensino Médio</option>
         </select>
 
-        <label for  = "modalidade">Modalidade:</label>
-        <select type= "text"  id="modalidade" name="modalidade" required>
-            <option value = "">Selecione</option>
-            <option value = " Integrado"> Integrado</option>
-            <option value = "Subsequente">     Subsequente     </option>
+        <label for="modalidade">Modalidade:</label>
+        <select id="modalidade" name = "modalidade" required>
+            <option value = "" disabled selected> Selecione   </option>
+            <option value = "Integrado">          Integrado   </option>
+            <option value = "Subsequente">        Subsequente </option>
         </select>
 
         <button type = "submit">Cadastrar</button>
 
     </form>
 </body>
+
 </html>

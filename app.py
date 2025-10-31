@@ -41,13 +41,12 @@ def ler_csv(nome_arquivo):
 # ---------------------------------------------------------
 # INICIALIZA OS ARQUIVOS CSV
 # ---------------------------------------------------------
-inicializar_csv("alunos.csv", ["id", "nome", "email", "telefone", "cgm", "idade", "bairro", "cidade", "genero", "etnia"])
-inicializar_csv("empresas.csv", ["id_empresa", "timestamp", "nome", "nome_fantasia", "cnpj", "endereco", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao"])
-inicializar_csv("vagas.csv", ["id_vagas", "titulo", "descricao", "empresa_id", "cidade", "remuneracao", "requisitos", "data_publicacao", "tipo", "estado"])
-inicializar_csv("escolas.csv", ["id", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade", "cursos_oferecidos"])
-inicializar_csv("cursos.csv", ["nome", "descricao", "carga_horaria", "escola_id", "cidade", "estado", "requisitos", "modalidade"])
-inicializar_csv("blog.csv", ["id", "id_autor", "texto"])
-inicializar_csv("opiniao.csv" ["id", "id_blog", "id_autor", "texto"])
+inicializar_csv("alunos.csv",   ["id", "nome", "email", "telefone", "cgm", "idade", "bairro", "cidade", "genero", "etnia"])
+inicializar_csv("empresas.csv", ["id_empresa", "timestamp", "nome_empresa", "nome_fantasia", "cnpj", "endereco", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao"])
+inicializar_csv("vagas.csv",    ["id_vagas", "titulo", "descricao", "empresa_id", "cidade", "remuneracao", "requisitos", "data_publicacao", "tipo", "estado"])
+inicializar_csv("escolas.csv",  ["id", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade", "cursos_oferecidos"])
+inicializar_csv("cursos.csv",   ["nome", "descricao", "carga_horaria", "escola_id", "cidade", "estado", "requisitos", "modalidade"])
+inicializar_csv("blog.csv",     ["id_post", "id_autor", "texto", "timestamp"])
 # ---------------------------------------------------------
 # ROTAS PRINCIPAIS
 # ---------------------------------------------------------
@@ -55,14 +54,20 @@ inicializar_csv("opiniao.csv" ["id", "id_blog", "id_autor", "texto"])
 def index():
     return render_template("index.html")
 
-@app.route("/sobre.html")
+@app.route("/sobre")
 def sobre():
     return render_template("sobre.html")
 
-@app.route("/perfil.html")
+@app.route("/perfil")
 def perfil():
     return render_template("perfil.html")
 
+# ---------------------------------------------------------
+#ROTA CADASTRAR GERAL
+# ---------------------------------------------------------
+@app.route("/cadastrar")
+def cadastrar():
+      return render_template("cadastrar.html")
 # ---------------------------------------------------------
 # ROTA ALUNOS
 # ---------------------------------------------------------
@@ -95,7 +100,7 @@ def alunos():
 # ---------------------------------------------------------
 # ROTA EMPRESAS
 # ---------------------------------------------------------
-@app.route("/empresas", methods=["GET", "POST"])
+@app.route("/cadastrar_empresas", methods=["GET", "POST"])
 def empresas():
     arquivo = "empresas.csv"
     cabecalho = ["id_empresa", "timestamp", "nome", "nome_fantasia", "cnpj", "endereco", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao"]
@@ -103,37 +108,44 @@ def empresas():
     if request.method == "POST":
         registros = ler_csv(arquivo)
         novo_id = len(registros) + 1
+        
+        # --- CORRIGIDO ---
+        # Os nomes lidos do request.form (ex: "nome")
+        # agora correspondem às chaves do dicionário e ao cabecalho.
         dados = {
             "id_empresa": str(novo_id),
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "nome": request.form["nome"],
+            "nome": request.form["nome"], # Corrigido de "nome_empresa"
             "nome_fantasia": request.form["nome_fantasia"],
-            "cnpj": request.form["cnpj"],
+            "cnpj": request.form["cnpj"], # Corrigido (estava lendo "cnpj" mas o HTML enviava "CNPJ")
             "endereco": request.form["endereco"],
-            "bairro": request.form["bairro"],
-            "cidade": request.form["cidade"],
-            "cep": request.form["cep"],
+            "bairro": request.form["bairro"], # Adicionado ao HTML
+            "cidade": request.form["cidade"], # Adicionado ao HTML
+            "cep": request.form["cep"],     # Corrigido (estava lendo "cep" mas o HTML enviava "CEP")
             "estado": request.form["estado"],
-            "telefone": request.form["telefone"],
-            "email": request.form["email"],
-            "area_atuacao": request.form.get("area_atuacao", "")
+            "telefone": request.form["telefone"], # Adicionado ao HTML
+            "email": request.form["email"],   # Corrigido (estava lendo "email" mas o HTML enviava "Email")
+            "area_atuacao": request.form["area_atuacao"] # Corrigido de "area_atuacao"
         }
         salvar_csv(arquivo, dados, cabecalho)
-        return redirect("/empresas")
+        return redirect("/cadastrar_empresas")
 
     registros = ler_csv(arquivo)
-    return render_template("industrias.html", registros=registros)
-
+    return render_template("cad_empresas.html", registros=registros)
 # ---------------------------------------------------------
 # ROTA VAGAS
 # ---------------------------------------------------------
-@app.route("/cadastrar_form_vagas", methods=["GET", "POST"])
+@app.route("/cadastrar_vagas", methods=["GET", "POST"])
 def vagas():
-    arquivo = "vagas.csv"
+    # --- Definição dos arquivos ---
+    arquivo_vagas = "vagas.csv"
+    arquivo_empresas = "empresas.csv"
+
     cabecalho = ["id_vagas", "titulo", "descricao", "empresa_id", "cidade", "remuneracao", "requisitos", "data_publicacao", "tipo", "estado"]
 
     if request.method == "POST":
-        registros = ler_csv(arquivo)
+        # --- Lógica para salvar a VAGA (POST) ---
+        registros = ler_csv(arquivo_vagas)
         novo_id = len(registros) + 1
         dados = {
             "id_vagas": str(novo_id),
@@ -147,16 +159,25 @@ def vagas():
             "tipo": request.form["tipo"],
             "estado": request.form["estado"],
         }
-        salvar_csv(arquivo, dados, cabecalho)
-        return redirect("/cadastrar_form_vagas")
+        salvar_csv(arquivo_vagas, dados, cabecalho)
+        return redirect("/cadastrar_vagas")
 
-    registros = ler_csv(arquivo)
-    return render_template("cad_vagas.html", registros=registros)
+    # --- Lógica para exibir o FORMULÁRIO (GET) ---
+    registros_de_vagas = ler_csv(arquivo_vagas)
+    
+    lista_de_empresas = ler_csv(arquivo_empresas)
+
+    return render_template(
+        "cad_vagas.html", 
+        registros=registros_de_vagas,
+        empresas=lista_de_empresas
+    )
+
 
 # ---------------------------------------------------------
 # ROTA ESCOLAS
 # ---------------------------------------------------------
-@app.route("/cadastrar_form_escola", methods=["GET", "POST"])
+@app.route("/cadastrar_escola", methods=["GET", "POST"])
 def escolas():
     arquivo = "escolas.csv"
     cabecalho = ["id", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade", "cursos_oferecidos"]
@@ -181,7 +202,7 @@ def escolas():
             "cursos_oferecidos": request.form["cursos_oferecidos"],
         }
         salvar_csv(arquivo, dados, cabecalho)
-        return redirect("/cadastrar_form_escola")
+        return redirect("/cadastrar_escola")
 
     registros = ler_csv(arquivo)
     return render_template("cad_escolas.html", registros=registros)
@@ -191,11 +212,14 @@ def escolas():
 # ---------------------------------------------------------
 @app.route("/cadastrar_form_cursos", methods=["GET", "POST"])
 def cursos():
-    arquivo = "cursos.csv"
-    cabecalho = ["nome", "descricao", "carga_horaria", "escola_id", "cidade", "estado", "requisitos", "modalidade"]
+    arquivo_cursos = "cursos.csv"
+    arquivo_escolas = "escolas.csv"
+
+    cabecalho = ["id", "nome", "descricao", "carga_horaria", "escola_id", "cidade", "estado", "requisitos", "modalidade"]
 
     if request.method == "POST":
-        registros = ler_csv(arquivo)
+        # --- Lógica de salvar o CURSO (POST) ---
+        registros = ler_csv(arquivo_cursos)
         novo_id = len(registros) + 1
         dados = {
             "id": str(novo_id),
@@ -208,24 +232,98 @@ def cursos():
             "requisitos": request.form["requisitos"],
             "modalidade": request.form["modalidade"],
         }
-        salvar_csv(arquivo, dados, cabecalho)
+        salvar_csv(arquivo_cursos, dados, cabecalho)
         return redirect("/cadastrar_form_cursos")
 
-    registros = ler_csv(arquivo)
-    return render_template("cad_cursos.html", registros=registros)
+    # --- Lógica de exibir o FORMULÁRIO (GET) ---
+    registros_de_cursos = ler_csv(arquivo_cursos)
+    
+    lista_de_escolas = ler_csv(arquivo_escolas)
+
+    return render_template(
+        "cad_cursos.html", 
+        registros=registros_de_cursos,
+        escolas=lista_de_escolas
+    )
 
 # ---------------------------------------------------------
 # ROTA BLOG
 # ---------------------------------------------------------
+@app.route("/blog")
+def blog():
+    arquivo = "blog.csv"
+    
+    # Lê os posts do CSV
+    posts = ler_csv(arquivo)
+    
+    # Invertemos a lista para que o post mais recente apareça primeiro.
+    posts.reverse() 
+    
+    return render_template("blog.html", posts=posts)
 
+# ---------------------------------------------------------
+# ROTA PARA CRIAR NOVOS POSTS
+# ---------------------------------------------------------
+@app.route("/blog/novo", methods = ["GET", "POST"])
+def novo_post():
+    arquivo   = "blog.csv"
+    cabecalho = ["id_post", "timestamp", "titulo", "autor", "conteudo"]
 
+    if request.method == "POST":
+        # Salva o novo post
+        registros = ler_csv(arquivo)
+        novo_id = len(registros) + 1
+        dados = {
+            "id_post":   str(novo_id),
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M"),
+            "titulo":    request.form["titulo"],
+            "autor":     request.form["autor"],
+            "conteudo":  request.form["conteudo"], # Conteúdo vem da <textarea>
+        }
+        salvar_csv(arquivo, dados, cabecalho)
+        
+        # Redireciona de volta para a página principal do blog
+        return redirect("/blog")
+
+    # Se for GET, apenas mostra o formulário de criação
+    return render_template("blog.html")
+  
 # ---------------------------------------------------------
 # ROTA CHAT
 # ---------------------------------------------------------
+@app.route("/chat", methods=["GET", "POST"])
+def chat():
+    arquivo = "chat.csv"
+    cabecalho = ["id_mensagem", "id_aluno", "id_escola", "remetente", "mensagem", "timestamp"]
+    
+    if request.method == "POST":
+        registros = ler_csv(arquivo)
+        novo_id = len(registros) + 1
+        dados = {
+            "id_mensagem": str(novo_id),
+            "id_aluno": request.form["id_aluno"],
+            "id_escola": request.form["id_escola"],
+            "remetente": request.form["remetente"],
+            "mensagem": request.form["mensagem"],
+            "timestamp": datetime.now().strftime("%Y-%m-%d")
+            
+        }
+        salvar_csv(arquivo, dados, cabecalho)
+        return redirect("/chat")
+
+    registros = ler_csv(arquivo)
+    return render_template("chat.html", registros=registros)
+
+# ---------------------------------------------------------
+# ROTA DIVULGAÇÃO DE ESCOLAS
+# ---------------------------------------------------------
+@app.route("/divulgacao_escolas")
+def div_escolas():
+    return render_template("div_escolas.html")
 
 
 # ---------------------------------------------------------
 # EXECUÇÃO
 # ---------------------------------------------------------
 if __name__ == "__main__":
-    app.run(debug=True)
+        app.run(debug=True)

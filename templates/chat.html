@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clone de Chat Básico Estilo Twitter</title>
+    <style>
+        /* Estilos básicos para simular o layout do Twitter */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        #chat-container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        #feed-mensagens {
+            height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .mensagem {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            background-color: #e8f5fe; /* Cor de fundo de um "Tweet" */
+            border: 1px solid #c8e8fc;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+        }
+
+        .mensagem strong {
+            color: #1da1f2; /* Cor azul do Twitter */
+            margin-right: 5px;
+        }
+
+        #input-area {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        #input-mensagem {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        #botao-enviar {
+            background-color: #1da1f2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        #botao-enviar:hover {
+            background-color: #0c85d0;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <header style="padding: 15px; border-bottom: 1px solid #ddd;">
+            <h2 style="margin: 0; color: #1da1f2;">🐦 Feed Simples</h2>
+        </header>
+
+        <div id="feed-mensagens">
+            <div class="mensagem">
+                <strong>@UsuarioExemplo</strong> Olá! Este é um chat simulado com HTML/CSS/JS. Para ser real, precisaria de um servidor!
+            </div>
+        </div>
+
+        <div id="input-area">
+            <input type="text" id="input-mensagem" placeholder="O que está acontecendo? (280 caracteres)">
+            <button id="botao-enviar">Tweetar</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('botao-enviar').addEventListener('click', function() {
+            const input = document.getElementById('input-mensagem');
+            const mensagemTexto = input.value.trim();
+
+            if (mensagemTexto) {
+                // 1. Cria o elemento da nova mensagem
+                const novaMensagemDiv = document.createElement('div');
+                novaMensagemDiv.className = 'mensagem';
+                
+                // 2. Adiciona o conteúdo (usuário e texto)
+                // Usando um nome de usuário fixo para o exemplo
+                novaMensagemDiv.innerHTML = '<strong>@MeuUsuario</strong> ' + mensagemTexto;
+                
+                // 3. Adiciona ao topo da área de mensagens
+                const feed = document.getElementById('feed-mensagens');
+                feed.prepend(novaMensagemDiv); // 'prepend' para aparecer em cima (como no Twitter)
+
+                // 4. Limpa o campo de input
+                input.value = '';
+
+                // 5. Rola para o topo para ver a nova mensagem (opcional, dependendo do layout)
+                feed.scrollTop = 0;
+            }
+        });
+    </script>
+</body>
+</html>

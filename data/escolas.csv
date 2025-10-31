@@ -1,1 +1,3 @@
 id,Nome_da_instituicao,Tipo_de_instituicao,INEP,CNPJ,Telefone,Email,endereco,cidade,estado,cep,Turno_de_funcionamento,Nivel_de_escolaridade,cursos_oferecidos
+1,CEEP Pe. Joseir Sversutti,Escolas técnicas,1234567890,12345679781,44 1234 5678,ceep@ceep.com,1234,Maringá,PR,1234,Matutino,Ens._Medio,Desenvolvimento de Sistemas
+2,Colégio Estadual Santa Maria Goretti,Escolas publicas,1234567891,12345679782,44 9876-1234,goreti@goreti.com,4321,Maringá,PR,1231,Integral,Ens._Fundamental_II_e_Ens._Medio,Engenharia
