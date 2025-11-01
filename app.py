@@ -30,12 +30,13 @@ def salvar_csv(nome_arquivo, dados, cabecalho):
             writer.writeheader()
         writer.writerow(dados)
 
+
 def ler_csv(nome_arquivo):
     """Lê o conteúdo de um arquivo CSV e retorna uma lista de dicionários."""
     caminho = os.path.join(DATA_PATH, nome_arquivo)
     if not os.path.isfile(caminho) or os.stat(caminho).st_size == 0:
         return []
-    with open(caminho, newline="", encoding="utf-8") as f:
+    with open(caminho, newline="\n", encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
 # ---------------------------------------------------------
@@ -46,7 +47,7 @@ inicializar_csv("empresas.csv", ["id_empresa", "timestamp", "nome_empresa", "nom
 inicializar_csv("vagas.csv",    ["id_vagas", "titulo", "descricao", "empresa_id", "cidade", "remuneracao", "requisitos", "data_publicacao", "tipo", "estado"])
 inicializar_csv("escolas.csv",  ["id", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade", "cursos_oferecidos"])
 inicializar_csv("cursos.csv",   ["nome", "descricao", "carga_horaria", "escola_id", "cidade", "estado", "requisitos", "modalidade"])
-inicializar_csv("blog.csv",     ["id_post", "id_autor", "texto", "timestamp"])
+inicializar_csv("blog.csv",     ["id_post", "timestamp", "titulo", "autor", "conteudo"])
 # ---------------------------------------------------------
 # ROTAS PRINCIPAIS
 # ---------------------------------------------------------
@@ -210,7 +211,7 @@ def escolas():
 # ---------------------------------------------------------
 # ROTA CURSOS
 # ---------------------------------------------------------
-@app.route("/cadastrar_form_cursos", methods=["GET", "POST"])
+@app.route("/cadastrar_cursos", methods=["GET", "POST"])
 def cursos():
     arquivo_cursos = "cursos.csv"
     arquivo_escolas = "escolas.csv"
@@ -233,7 +234,7 @@ def cursos():
             "modalidade": request.form["modalidade"],
         }
         salvar_csv(arquivo_cursos, dados, cabecalho)
-        return redirect("/cadastrar_form_cursos")
+        return redirect("/cadastrar_cursos")
 
     # --- Lógica de exibir o FORMULÁRIO (GET) ---
     registros_de_cursos = ler_csv(arquivo_cursos)
@@ -257,9 +258,13 @@ def blog():
     posts = ler_csv(arquivo)
     
     # Invertemos a lista para que o post mais recente apareça primeiro.
-    posts.reverse() 
-    
+    posts = list(reversed(posts)) 
+
     return render_template("blog.html", posts=posts)
+
+# ---------------------------------------------------------
+# ROTA BLOG (LISTAR POSTS)
+# ---------------------------------------------------------
 
 # ---------------------------------------------------------
 # ROTA PARA CRIAR NOVOS POSTS
@@ -280,13 +285,14 @@ def novo_post():
             "autor":     request.form["autor"],
             "conteudo":  request.form["conteudo"], # Conteúdo vem da <textarea>
         }
+        dados["conteudo"] = f"\"{dados['conteudo']}\""
         salvar_csv(arquivo, dados, cabecalho)
         
         # Redireciona de volta para a página principal do blog
         return redirect("/blog")
 
     # Se for GET, apenas mostra o formulário de criação
-    return render_template("blog.html")
+    return render_template("cad_post.html")
   
 # ---------------------------------------------------------
 # ROTA CHAT

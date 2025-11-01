@@ -1,427 +1,488 @@
 body {
-  font-family: "Unna", serif;
-  background-color: var(--color-white);
-  margin: 0;
-  padding: 0;
-  color: #333;
+    font-family: "Unna", serif;
+    background-color: var(--color-white);
+    margin: 0;
+    padding: 0;
+    color: #333;
 
-  background-image: url(img/bolha.png), url(img/bolha.png), url(img/bolha.png);
-  background-repeat: no-repeat, no-repeat, no-repeat;
+    background-image: url(img/bolha.png), url(img/bolha.png), url(img/bolha.png);
+    background-repeat: no-repeat, no-repeat, no-repeat;
 
-  /* Posições dinâmicas usando unidades relativas */
-  background-position:
-      left 50vw top -40vh,   /* 1ª bolha — canto superior direito */
-      right 50vw center,     /* 2ª bolha — centro à esquerda */
-      left 50vw bottom -5vh;/* 3ª bolha — canto inferior direito */
+    /* Posições dinâmicas usando unidades relativas */
+    background-position:
+        left 50vw top -40vh,
+        /* 1ª bolha — canto superior direito */
+        right 50vw center,
+        /* 2ª bolha — centro à esquerda */
+        left 50vw bottom -5vh;
+    /* 3ª bolha — canto inferior direito */
 
-  /* Mantém tamanho proporcional da imagem */
-  background-size: 75vw auto, 75vw auto, 75vw auto;
+    /* Mantém tamanho proporcional da imagem */
+    background-size: 75vw auto, 75vw auto, 75vw auto;
 }
 
 
- /* cores do site */
+/* cores do site */
 :root {
-  --color-cyan: #00bcd2;
-  --color-darkpink: #d2008C;
-  --color-purple: #782CD9;
-  --color-darkpurple: #695eaf;
-  --color-white: #ffffff;
-  --color-grey: #eeeeee;
+    --color-cyan: #00bcd2;
+    --color-darkpink: #d2008C;
+    --color-purple: #782CD9;
+    --color-darkpurple: #695eaf;
+    --color-darkerpurple: #5e54a0;
+    --color-white: #ffffff;
+    --color-grey: #eeeeee;
 }
 
 /* barra de navegação */
 header {
-  border-bottom: 1px solid var(--color-darkpurple);
-  color: var(--color-darkpurple);
-  margin-right: 100px;
-  margin-left: 100px;
-  padding: 0.1rem 2rem;
-  text-align: left;
-  flex-direction: row;
+    border-bottom: 1px solid var(--color-darkpurple);
+    color: var(--color-darkpurple);
+    margin-right: 100px;
+    margin-left: 100px;
+    padding: 0.1rem 2rem;
+    text-align: left;
+    flex-direction: row;
+}
+
+/* rodapé */
+footer {
+    border-top: 1px solid var(--color-darkpurple);
+    margin-right: 100px;
+    margin-left: 100px;
+    padding: 0.1rem 2rem;
+
+}
+
+footer,
+a {
+    font-size: large;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: var(--color-darkpurple);
 }
 
 /* textos */
 
 h1 {
-  text-align: center;
+    text-align: center;
 }
+
 #inicio {
-  padding-top: 1vw;
-  text-align: center;
-  border-bottom: 1px solid var(--color-cyan);
-  font-size: 3vw;
+    padding-top: 1vw;
+    text-align: center;
+    border-bottom: 1px solid var(--color-cyan);
+    font-size: 3vw;
 }
+
 h2 {
-  padding-top: 50px;
-  text-align: center;
-  color: var(--color-cyan);
+    padding-top: 10px;
+    text-align: center;
+    color: var(--color-cyan);
 }
 
 
 p {
-  padding-left: 125px;
-  padding-right: 125px;
-  color: black;
-  font-family: "Unna", serif;
-  font-size:25px;
+    padding-left: 125px;
+    padding-right: 125px;
+    color: black;
+    font-family: "Unna", serif;
+    font-size: x-large;
+}
+
+li {
+
+    text-align: justify;
+    color: black;
+    font-family: "Unna", serif;
+    font-size: larger;
+    padding: 10px;
 }
 
 .pleft {
-  text-align: left;
-  padding-left: 10px;
-  padding: 100px;
-  color: var(--color-darkpurple);
-  font-family: "Unna", serif;
-  font-size: larger;
+    text-align: left;
+    padding-left: 10px;
+    padding: 100px;
+    color: black;
+    font-family: "Unna", serif;
+    font-size: x-large;
 
 }
 
 .pright {
-  text-align: right;
-  padding-right: 10px;
-  padding: 100px;
-  color: var(--color-darkpurple);
-  font-family: "Unna", serif;
-  font-size: larger;
+    text-align: right;
+    padding-right: 10px;
+    padding: 100px;
+    color: black;
+    font-family: "Unna", serif;
+    font-size: x-large;
 }
 
 ul {
-  padding-left: 125px;
-  padding-right: 125px;
-  color: black;
-  font-family: "Unna", serif;
-  font-size:larger;
+    padding-left: 125px;
+    padding-right: 125px;
+    color: black;
+    font-family: "Unna", serif;
+    font-size: larger;
 }
+
 /* menu */
 .menu {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0;
-  color: inherit;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    color: inherit;
 }
 
 .menu li a {
-  margin: 10px 0;
-  text-align: center;
-  color: var(--color-purple);
+    margin: 10px 0;
+    text-align: center;
+    color: var(--color-purple);
 }
 
 .menu-btn {
-  display: none;
+    display: none;
 }
 
 
 @media (min-width: 768px) {
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-  main {
-    display: flex;
-    gap: -2rem;
-    flex-direction: column;
-  }
+    main {
+        display: flex;
+        gap: -2rem;
+        flex-direction: column;
+    }
 
-  .menu {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
+    .menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
 
-  .menu li {
-    margin: 0 15px;
-  }
+    .menu li {
+        margin: 0 15px;
+    }
 }
 
 .text-center {
-  text-align: center;
+    text-align: center;
 }
 
 .btn {
-  padding: 10px 20px;
-  background-color: #0080ff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+    padding: 10px 20px;
+    background-color: #0080ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 h1 {
-  color: #2c3e50;
+    color: #2c3e50;
 }
 
 .Mao {
-  position: absolute;
+    position: absolute;
 }
 
 #logo {
-  /*position: relative; /* Necessário para posicionar a imagem corretamente */
-  /*width: 100vw; /* Largura da caixa */
-  /*height: auto; /* Altura da caixa */
-  /*display: block;
-  /*max-width: 105%;
-  /*margin: 0 auto;*/
-  background-size: cover;     /* cobre toda a área */
-  background-position: center;/* centraliza */
-  background-repeat: no-repeat;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
+    /*position: relative; /* Necessário para posicionar a imagem corretamente */
+    /*width: 100vw; /* Largura da caixa */
+    /*height: auto; /* Altura da caixa */
+    /*display: block;
+    /*max-width: 105%;
+    /*margin: 0 auto;*/
+    background-size: cover;
+    /* cobre toda a área */
+    background-position: center;
+    /* centraliza */
+    background-repeat: no-repeat;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
 }
+
 #neoconexao {
-  position: relative;
+    position: relative;
 }
 
 #maoE {
-  right: 900px;
-  top: 100px;
+    right: 900px;
+    top: 100px;
 }
 
 #maoD {
-  left: 900px;
-  bottom: 180px;
+    left: 900px;
+    bottom: 180px;
 
 }
+
 img {
-  margin: 0 auto;
-  display: block;
-  max-width: 100%;
-  height: auto;
+    margin: 0 auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
+/* --- Seção formulário --- */
 form {
-  
-  background: var(--color-darkpurple);
-  color: var(--color-white);
-  font-size: 20.2px;
-  color: white;
-  padding: 50px;
-  border-radius: 75px;
-  width: 1212px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  margin: 0 auto;
+
+    background: var(--color-darkpurple);
+    color: var(--color-white);
+    font-size: 20.2px;
+    color: white;
+    padding: 50px;
+    border-radius: 75px;
+    width: 1212px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
 }
- form h1 {
-  text-align: center;
-  color: #ffffff;
-  font-size: 24.2px;
- }
+
+form h1 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 24.2px;
+}
+
+#blog {
+    background: var(--color-darkpurple);
+    color: var(--color-white);
+    font-size: 20.2px;
+    color: white;
+    padding: 50px;
+    border-radius: 75px;
+    width: 700px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+}
 label {
-  font-weight: bold;
-  display: block;
-  margin-top: 10px;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
 }
 
 input {
-  background-color: var(--color-darkpurple);
-  color: var(--color-white);
-  
-}
-input, select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  background-color: var(--color-darkpur);
-  border: 1px solid var(--color-white);
-  opacity: 100%;
-  border-radius: 100px;
+    background-color: var(--color-darkpurple);
+    color: var(--color-white);
+
 }
 
-select, option {
-  background-color: white;
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    background-color: var(--color-darkpurple);
+    border: 1px solid var(--color-white);
+    opacity: 100%;
+    border-radius: 100px;
 }
+
+textarea {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    min-height: 150px;
+    max-height: 200px;
+    padding: 8px;
+    margin-top: 5px;
+}
+select, option {
+    background-color: white;
+}
+
 button {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #2c3e50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--color-darkpurple);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    border: 1px solid var(--color-white);
 }
 
 button:hover {
-  background-color: #34495e;
+    background-color: var(--color-darkerpurple);
+}
+
+#botao {
+    color: white;
 }
 
 @media (min-width: 768px) {
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
 
-  
-  /* --- Menu Superior --- */
-  nav {
+
+/* --- Menu Superior --- */
+nav {
     text-align: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding: 20px 0;
-  }
-  nav ul {
+}
+
+nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  nav ul li {
+}
+
+nav ul li {
     display: inline-block;
     margin: 0 20px;
-  }
-  nav ul li a {
+}
+
+nav ul li a {
     text-decoration: none;
     color: #6246ea;
     font-weight: 600;
     letter-spacing: 0.5px;
-  }
-  
-  /* --- Seção Introdução --- */
-  .intro {
+}
+
+/* --- Seção Introdução --- */
+.intro {
     text-align: center;
     padding: 60px 20px;
     max-width: 800px;
     margin: 0 auto;
-  }
-  
-  .intro h1 {
-    font-family: 'Playfair Display', serif;
+}
+
+.intro h1 {
+    font-family: 'Unna', serif;
     font-size: 70px;
     color: #00bcd4;
     margin-bottom: 10px;
-  }
-  
-  .intro p {
+}
+
+.intro p {
     color: #533f73;
     line-height: 1.6;
     font-size: 14px;
     margin-bottom: 30px;
-  }
-  
-  .pesquise {
+}
+
+.pesquise {
     text-decoration: none;
     color: #00bcd4;
     font-weight: bold;
     font-size: 16px;
-  }
-  
-  /* --- Card da Escola --- */
-  .escola {
+}
+
+/* --- Card da Escola --- */
+.escola {
     display: flex;
     justify-content: center;
     margin: 60px 0;
-  }
-  
-  .card {
+}
+
+.card {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 15px;
     overflow: hidden;
     max-width: 800px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  }
-  
-  .card img {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    position: relative;
     width: 100%;
     height: auto;
     display: block;
-  }
-  
-  .card .info {
+}
+
+.card .info {
     padding: 20px;
     color: white;
     background: rgba(0, 0, 0, 0.4);
-  }
-  
-  .card .info h2 {
-    margin-top: 0;
-    font-family: 'Playfair Display', serif;
-  }
-  
-  .card .info p {
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  
-   /* Estilos específicos para o blog */
-   .blog-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-}
-.post-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 30px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.post-card h2 {
-    margin-top: 0;
-    color: #333;
-}
-.post-meta {
-    font-size: 0.9em;
-    color: #777;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-.post-content {
-    /* !!! ESSENCIAL: Faz o texto respeitar as quebras de linha do formulário !!! */
-    white-space: pre-wrap;
-    line-height: 1.6;
-    color: #444;
-}
-.link-novo-post {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-.link-novo-post:hover {
-    background-color: #0056b3;
 }
 
- /* Estilos que pegamos do outro blog para manter a consistência */
- body {
-  background-color: #f9f9f9; /* Um fundo levemente diferente */
+.card .info h2 {
+    margin-top: 0;
+    font-family: 'Unna', serif;
 }
+
+.card .info p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Estilos específicos para o blog */
+/* Container geral do blog */
 .blog-container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 20px;
 }
+
+/* Título da página */
+.blog-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+/* Cada post individual */
 .post-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 30px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: #ffffff;
+    opacity: 90%;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 30px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.post-card h2 {
-  margin-top: 0;
-  color: #333;
+
+/* Efeito hover */
+.post-card:hover {
+    opacity: 100%;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
-.post-meta {
-  font-size: 0.9em;
-  color: #777;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
+
+/* Título do post */
+.post-titulo {
+    color: #0056b3;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
 }
-/* Para HTML estático, é melhor usar tags <p> do que 'pre-wrap' */
-.post-content p {
-  line-height: 1.6;
-  color: #444;
-  margin-bottom: 15px;
+
+/* Autor e data */
+.post-autor {
+    color: #666;
+    font-weight: bold;
+    margin-bottom: 8px;
 }
-.post-content p:last-child {
-  margin-bottom: 0;
+
+.post-data {
+    color: #999;
+    font-size: 0.9rem;
+    text-align: right;
+    margin-top: 10px;
+}
+
+/* Conteúdo */
+.post-conteudo {
+    color: #333;
+    line-height: 1.6;
+    white-space: pre-line; /* mantém quebras de linha */
+}
+
+/* Mensagem quando não há posts */
+.sem-posts {
+    text-align: center;
+    color: #777;
+    font-style: italic;
 }

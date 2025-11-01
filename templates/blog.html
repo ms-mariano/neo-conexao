@@ -1,26 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <title>Criar Novo Post</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Neo Conexão</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
-    <h1>Escrever Nova Experiência</h1>
-    
-    <form method="POST" action="/blog/novo"> 
-        
-        <label for="autor">Seu Nome/Pseudônimo:</label><br>
-        <input type="text" id="autor" name="autor" required><br><br>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="/">Início</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/chat">Chat</a></li>
+                <li><a href="/perfil">Perfil</a></li>
+                <li><a href="/cadastrar">Cadastros</a></li>
+                <li><a href="/divulgacao_escolas">Escolas</a></li>
+            </ul>
+        </nav>
+    </header>
+    <button><a id="botao" href="/blog/novo">+Criar novo post</a></button>
 
-        <label for="titulo">Título da Experiência:</label><br>
-        <input type="text" id="titulo" name="titulo" required><br><br>
+    <main class="blog-container">
+        <h2>Relatos de Alunos</h2>
 
-        <label for="conteudo">Conteúdo da Experiência:</label><br>
-        <textarea id="conteudo" name="conteudo" rows="10" required></textarea><br><br>
+        {% for post in posts %}
+        <article class="post-card">
+            <h3 class="post-titulo">{{ post["titulo"] }}</h3>
+            <p class="post-autor"><strong>{{ post["autor"] }}</strong></p>
+            <p class="post-conteudo">{{ post["conteudo"] }}</p>
+            <p class="post-data">{{ post["timestamp"] }}</p>
+        </article>
+        {% else %}
+        <p class="sem-posts">Ainda não há posts publicados.</p>
+        {% endfor %}
+    </main>
 
-        <button type="submit">Publicar Post</button>
-    </form>
-    
-    <p><a href="/blog">Voltar para o Blog</a></p>
+    <footer>
+        <a>2025 NEO CONEXÃO</a><br>
+        <a>@neo_conexao</a><br>
+        <a>ODS 4: Educação de qualidade</a>
+    </footer>
 </body>
+
 </html>
