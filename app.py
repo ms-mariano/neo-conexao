@@ -40,17 +40,17 @@ def ler_csv(nome_arquivo):
 
     if not os.path.isfile(caminho) or os.stat(caminho).st_size == 0:
         return []
-    with open(caminho, newline="\n", encoding="utf-8") as f:
+    with open(caminho, newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
 # ---------------------------------------------------------
 # INICIALIZA OS ARQUIVOS CSV
 # ---------------------------------------------------------
 inicializar_csv("alunos.csv",   ["id", "nome", "email", "telefone", "cgm", "idade", "bairro", "cidade", "genero", "etnia"])
-inicializar_csv("empresas.csv", ["id_empresa", "timestamp", "nome_empresa", "nome_fantasia", "cnpj", "endereco", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao"])
-inicializar_csv("vagas.csv",    ["id_vagas", "titulo", "descricao", "nome_empresa", "telefone_empresa", "cidade", "remuneracao", "carga_horaria", "requisitos", "data_publicacao", "tipo", "estado", "cep_vaga"])
-inicializar_csv("escolas.csv",  ["id", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco_completo", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade", "cursos_oferecidos"])
-inicializar_csv("cursos.csv",   ["nome", "descricao", "carga_horaria", "Nome_da_instituicao", "requisitos", "modalidade"])
+inicializar_csv("empresas.csv", ["id_empresa", "timestamp", "nome_empresa", "nome_fantasia", "cnpj", "endereco_completo", "rua", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao"])
+inicializar_csv("vagas.csv",    ["id_vagas", "titulo", "descricao", "nome_empresa", "telefone_empresa", "cidade", "estado", "bairro", "rua", "numero", "cep_vaga", "remuneracao", "carga_horaria", "requisitos", "data_publicacao", "tipo"])
+inicializar_csv("escolas.csv",  ["id_escola", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco_completo", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade", "cursos_oferecidos"])
+inicializar_csv("cursos.csv", ["id", "nome", "descricao", "carga_horaria", "Nome_da_instituicao", "requisitos", "modalidade"])
 inicializar_csv("blog.csv",     ["id_post", "timestamp", "titulo", "autor", "conteudo"])
 # ---------------------------------------------------------
 # ROTAS PRINCIPAIS
@@ -98,7 +98,7 @@ def alunos():
             "etnia": request.form["etnia"]
         }
         salvar_csv(arquivo, dados, cabecalho)
-        return redirect("/cadastrar_alunos")
+        return redirect("/")
 
     registros = ler_csv(arquivo)
     return render_template("cad_alunos.html", registros=registros)
@@ -109,7 +109,7 @@ def alunos():
 @app.route("/cadastrar_empresas", methods=["GET", "POST"])
 def empresas():
     arquivo = "empresas.csv"
-    cabecalho = ["id_empresa", "timestamp", "nome", "nome_fantasia", "cnpj", "endereco_completo", "rua", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao"]
+    cabecalho = ["id_empresa", "timestamp", "nome_empresa", "nome_fantasia", "cnpj", "endereco_completo", "rua", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao"]
 
     if request.method == "POST":
         registros = ler_csv(arquivo)
@@ -126,7 +126,7 @@ def empresas():
         dados = {
             "id_empresa": str(novo_id),
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "nome": request.form["nome"],
+            "nome_empresa": request.form["nome_empresa"],
             "nome_fantasia": request.form["nome_fantasia"],
             "cnpj": request.form["cnpj"],
             "endereco_completo": endereco_completo_empresa,
@@ -140,7 +140,7 @@ def empresas():
             "area_atuacao": request.form["area_atuacao"] 
         }
         salvar_csv(arquivo, dados, cabecalho)
-        return redirect("/cadastrar_empresas")
+        return redirect("/")
 
     registros = ler_csv(arquivo)
     return render_template("cad_empresas.html", registros=registros)
@@ -152,7 +152,12 @@ def cad_vagas():
     arquivo_vagas = "vagas.csv"
     arquivo_empresas = "empresas.csv"
 
-    cabecalho = ["id_vagas", "titulo", "descricao", "nome_empresa", "telefone_empresa", "cidade", "remuneracao", "carga_horaria", "requisitos", "data_publicacao", "tipo", "estado", "cep_vaga"]
+    # Cabeçalho atualizado com os novos campos
+    cabecalho = [
+        "id_vagas", "titulo", "descricao", "nome_empresa", "telefone_empresa",
+        "cidade", "estado", "bairro", "rua", "numero", "cep_vaga",
+        "remuneracao", "carga_horaria", "requisitos", "data_publicacao", "tipo"
+    ]
 
     if request.method == "POST":
         registros = ler_csv(arquivo_vagas)
@@ -167,6 +172,7 @@ def cad_vagas():
                 telefone_empresa = e.get("telefone", "")
                 break
 
+        # --- Dados da vaga ---
         dados = {
             "id_vagas":         str(novo_id),
             "titulo":           request.form["titulo"],
@@ -174,18 +180,22 @@ def cad_vagas():
             "nome_empresa":     nome_empresa,
             "telefone_empresa": telefone_empresa,
             "cidade":           request.form["cidade"],
+            "estado":           request.form["estado"],
+            "bairro":           request.form.get("bairro", ""),
+            "rua":              request.form.get("rua", ""),
+            "numero":           request.form.get("numero", ""),
+            "cep_vaga":         request.form["cep_vaga"],
             "remuneracao":      request.form["remuneracao"],
             "carga_horaria":    request.form["carga_horaria"],
             "requisitos":       request.form["requisitos"],
             "data_publicacao":  datetime.now().strftime("%d-%m-%Y"),
             "tipo":             request.form["tipo"],
-            "estado":           request.form["estado"],
-            "cep_vaga":         request.form["cep_vaga"],
         }
 
         salvar_csv(arquivo_vagas, dados, cabecalho)
         return redirect("/vagas")
 
+    # Se for GET, apenas exibe o formulário
     registros_de_vagas = ler_csv(arquivo_vagas)
     lista_de_empresas = ler_csv(arquivo_empresas)
 
@@ -194,6 +204,7 @@ def cad_vagas():
         registros=registros_de_vagas,
         empresas=lista_de_empresas
     )
+
 
 # ---------------------------------------------------------
 # ROTA DIVULGAÇÃO DE VAGAS
@@ -235,14 +246,14 @@ def detalhe_vaga(id_vagas):
 @app.route("/cadastrar_escola", methods=["GET", "POST"])
 def escolas():
     arquivo = "escolas.csv"
-    cabecalho = ["id_escola", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco_completo", "rua", "numero", "bairro", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade", "cursos_oferecidos"]
+    cabecalho = ["id_escola", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco_completo", "rua", "numero", "bairro", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade"]
 
     if request.method == "POST":
         registros = ler_csv(arquivo)
         novo_id = len(registros) + 1
         
         # --- Busca o telefone da escola ---
-        escolas = ler_csv(escolas.csv)
+        escolas = ler_csv("escolas.csv")
         Nome_da_instituicao = request.form["Nome_da_instituicao"]
         Telefone = ""
         for e in escolas:
@@ -275,13 +286,13 @@ def escolas():
             "estado":                 estado_escola,
             "Turno_de_funcionamento": request.form["Turno_de_funcionamento"],
             "Nivel_de_escolaridade":  request.form["Nivel_de_escolaridade"],
-            "cursos_oferecidos":      request.form["cursos_oferecidos"],
         }
         salvar_csv(arquivo, dados, cabecalho)
-        return redirect("/cadastrar_escola")
+        return redirect("/divulgacao_escolas")
 
     registros = ler_csv(arquivo)
     return render_template("cad_escolas.html", registros=registros)
+
 
 # ---------------------------------------------------------
 # ROTA CURSOS (FORMULÁRIO DE CADASTRO)
@@ -291,28 +302,71 @@ def cad_cursos():
     arquivo_cursos = "cursos.csv"
     arquivo_escolas = "escolas.csv"
 
-    cabecalho = ["id", "nome", "descricao", "carga_horaria", "Nome_da_instituicao", "requisitos", "modalidade"]
+    # Cabeçalho atualizado com os dados da instituição
+    cabecalho = [
+        "id", "nome", "descricao", "carga_horaria",
+        "Nome_da_instituicao", "Telefone", "Email",
+        "rua", "numero", "bairro", "cidade", "estado", "cep",
+        "requisitos", "modalidade"
+    ]
 
     if request.method == "POST":
         registros = ler_csv(arquivo_cursos)
         novo_id = len(registros) + 1
-        dados = {
-            "id": str(novo_id),
-            "nome": request.form["nome"],
-            "descricao": request.form["descricao"],
-            "carga_horaria": request.form["carga_horaria"],
-            "Nome_da_instituicao": request.form["Nome_da_instituicao"], 
-            "requisitos": request.form["requisitos"],
-            "modalidade": request.form["modalidade"],
-        }
-        salvar_csv(arquivo_cursos, dados, cabecalho)
-        return redirect(url_for('cursos'))
 
+        # --- Busca os dados da escola selecionada ---
+        escolas = ler_csv(arquivo_escolas)
+        nome_escola = request.form["Nome_da_instituicao"]
+
+        telefone_escola = ""
+        email_escola = ""
+        rua_escola = ""
+        numero_escola = ""
+        bairro_escola = ""
+        cidade_escola = ""
+        estado_escola = ""
+        cep_escola = ""
+
+        for e in escolas:
+            if e["Nome_da_instituicao"] == nome_escola:
+                telefone_escola = e.get("Telefone", "")
+                email_escola = e.get("Email", "")
+                rua_escola = e.get("rua", "")
+                numero_escola = e.get("numero", "")
+                bairro_escola = e.get("bairro", "")
+                cidade_escola = e.get("cidade", "")
+                estado_escola = e.get("estado", "")
+                cep_escola = e.get("cep", "")
+                break
+
+        # --- Cria o registro do curso ---
+        dados = {
+            "id":                str(novo_id),
+            "nome":              request.form["nome"],
+            "descricao":         request.form["descricao"],
+            "carga_horaria":     request.form["carga_horaria"],
+            "Nome_da_instituicao": nome_escola,
+            "Telefone":          telefone_escola,
+            "Email":             email_escola,
+            "rua":               rua_escola,
+            "numero":            numero_escola,
+            "bairro":            bairro_escola,
+            "cidade":            cidade_escola,
+            "estado":            estado_escola,
+            "cep":               cep_escola,
+            "requisitos":        request.form["requisitos"],
+            "modalidade":        request.form["modalidade"],
+        }
+
+        salvar_csv(arquivo_cursos, dados, cabecalho)
+        return redirect("/cursos")
+
+    # Se for GET, apenas exibe o formulário
     registros_de_cursos = ler_csv(arquivo_cursos)
     lista_de_escolas = ler_csv(arquivo_escolas)
 
     return render_template(
-        "cad_cursos.html", 
+        "cad_cursos.html",
         registros=registros_de_cursos,
         escolas=lista_de_escolas
     )
@@ -322,15 +376,32 @@ def cad_cursos():
 # ---------------------------------------------------------
 @app.route("/cursos")
 def cursos():
-    arquivo = "cursos.csv"
-    
-    # Lê os posts do CSV
-    cursos = ler_csv(arquivo)
-    
-    # Invertemos a lista para que o post mais recente apareça primeiro.
-    cursos = list(reversed(cursos)) 
+    arquivo_cursos = "cursos.csv"
+    arquivo_escolas = "escolas.csv"
 
-    return render_template("div_cursos.html", cursos=cursos)
+    cursos = ler_csv(arquivo_cursos)
+    escolas = ler_csv(arquivo_escolas)
+
+    # --- Coleta filtros (se existirem) ---
+    escola = request.args.get("escola", "").strip().lower()
+    cidade = request.args.get("cidade", "").strip().lower()
+    modalidade = request.args.get("modalidade", "").strip().lower()
+
+    # --- Aplica filtros ---
+    if escola:
+        cursos = [c for c in cursos if c["Nome_da_instituicao"].lower() == escola]
+    if cidade:
+        cursos = [c for c in cursos if cidade in c["cidade"].lower()]
+    if modalidade:
+        cursos = [c for c in cursos if modalidade in c["modalidade"].lower()]
+
+    cursos = list(reversed(cursos))
+
+    return render_template(
+        "div_cursos.html",
+        cursos=cursos,
+        escolas=escolas  # 👈 Passamos as escolas para o HTML
+    )
 
 # ---------------------------------------------------------
 # ROTA DETALHE CURSOS
@@ -342,7 +413,7 @@ def detalhe_curso(id):
 
     curso_encontrado = None
     for c in curso:
-        if c["id_curso"] == id:
+        if c["id"] == id:
             curso_encontrado = c
             break
 

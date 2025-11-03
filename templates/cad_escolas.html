@@ -12,20 +12,20 @@
     <header>
         <nav>
             <button class="menu-btn">☰</button>
-
             <ul class="menu">
                 <li><a href="/"> Início </a></li>
                 <li><a href="/sobre"> Sobre </a></li>
                 <li><a href="/blog"> Blog </a></li>
-                <li><a href="/perfil"> Perfil </a></li>
                 <li><a href="/cadastrar"> Cadastros </a></li>
                 <li><a href="/divulgacao_escolas"> Escolas </a></li>
+                <li><a href="/vagas"> Vagas </a></li>
+                <li><a href="/cursos"> Cursos </a></li>
             </ul>
         </nav>
     </header>
     
     <h1>Cadastro de Escolas</h1>
-    <form action="http://127.0.0.1:5000/cadastrar_escola" method="POST">
+    <form action="http://127.0.0.1:5000/cadastrar_escola" method="POST" class="cadform">
         
         <!-- campo para nome da escola -->
         <label for  = "Nome_da_instituicao">Nome da instituicao:</label>
@@ -35,9 +35,9 @@
         <label for  = "Tipo_de_instituicao">Tipo de instituicao:</label>
         <select type= "text"  id="Tipo_de_instituicao" name="Tipo_de_instituicao" required>
             <option value = "">Selecione</option>
-            <option value = "Escolas particulares"> Escolas particulares </option>
-            <option value = "Escolas publicas">     Escolas publicas     </option>
-            <option value = "Escolas técnicas">     Escolas técnicas     </option>
+            <option value = "Escola particular"> Escola particular </option>
+            <option value = "Escola pública">     Escola pública     </option>
+            <option value = "Escola técnica">     Escola técnica     </option>
         </select>
 
         <!-- campo para INEP da escola -->
@@ -192,10 +192,6 @@
             <option value = "Ens. Medio">                       Ens. Medio                       </option>
             <option value = "Ens. Fundamental II e Ens. Medio"> Ens. Fundamental II e Ens. Medio </option>
         </select>
-
-        <!-- campo para cursos oferecidos da escola -->
-        <label for  = "cursos_oferecidos">Cursos oferecidos:</label>
-        <input type = "text" name="cursos_oferecidos" id="cursos_oferecidos" required>
 
         <button type = "submit">Cadastrar</button>
         

@@ -1,2 +1,2 @@
-id_vagas,titulo,descricao,nome_empresa,telefone_empresa,cidade,remuneracao,carga_horaria,requisitos,data_publicacao,tipo,estado,cep_vaga
-1,Entregador de Dolly,"Entrega refrigerantes da empresa Dolly Guaraná, com sabor brasileiro",Dolly Company,44 12345678,Maringá,10000,4 horas,16 anos e saber entregar Dolly,03-11-2025,Estagio,PR,87070450
+id_vagas,titulo,descricao,nome_empresa,telefone_empresa,cidade,estado,bairro,rua,numero,cep_vaga,remuneracao,carga_horaria,requisitos,data_publicacao,tipo
+1,Beta Tester,Testa software de sistemas,Nova Conect Co.,44 991234567,Maringá,PR,Parque Industrial Bandeirantes,Rua Violanda Marcon de Assumpção,52,87070135,1518,4 horas,16 anos e conhecimento básico sobre sistemas,03-11-2025,Estagio

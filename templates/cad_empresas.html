@@ -13,25 +13,25 @@
     <header>
         <nav>
             <button class="menu-btn">☰</button>
-
             <ul class="menu">
                 <li><a href="/"> Início </a></li>
                 <li><a href="/sobre"> Sobre </a></li>
                 <li><a href="/blog"> Blog </a></li>
-                <li><a href="/perfil"> Perfil </a></li>
                 <li><a href="/cadastrar"> Cadastros </a></li>
                 <li><a href="/divulgacao_escolas"> Escolas </a></li>
+                <li><a href="/vagas"> Vagas </a></li>
+                <li><a href="/cursos"> Cursos </a></li>
             </ul>
         </nav>
     </header>
     <!-- !!! CORRIGIDO: 'action' removido. O form enviará para a própria URL. !!! -->
-    <form method="POST">
+    <form method="POST" class="cadform">
 
         <h1>CADASTRO DE EMPRESAS</h1>
 
         <!-- Corrigido: 'name', 'id' e 'for' atualizados para "nome" -->
-        <label for="nome">Nome da Empresa:</label>
-        <input type="text" name="nome" id="nome" required>
+        <label for="nome_empresa">Nome da Empresa:</label>
+        <input type="text" name="nome_empresa" id="nome_empresa" required>
 
         <!-- Corrigido: 'id' e 'for' adicionados -->
         <label for="nome_fantasia">Nome fantasia:</label>

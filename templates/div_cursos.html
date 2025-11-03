@@ -9,36 +9,59 @@
 
 <body>
     <header>
-            <nav>
-                <ul class = "menu"> 
-                    <li><a href="/">                   Início    </a></li>
-                    <li><a href="/sobre">              Sobre     </a></li>
-                    <li><a href="/blog">               Blog      </a></li>
-                    <li><a href="/perfil">             Perfil    </a></li>
-                    <li><a href="/cadastrar">          Cadastros </a></li>
-                    <li><a href="/divulgacao_escolas"> Escolas   </a></li>
-                    <li><a href="/vagas">              Vagas     </a></li>
-                    <li><a href="/cursos">             Cursos    </a></li>
-                </ul>
-            </nav>
+        <nav>
+            <button class="menu-btn">☰</button>
+            <ul class="menu">
+                <li><a href="/"> Início </a></li>
+                <li><a href="/sobre"> Sobre </a></li>
+                <li><a href="/blog"> Blog </a></li>
+                <li><a href="/cadastrar"> Cadastros </a></li>
+                <li><a href="/divulgacao_escolas"> Escolas </a></li>
+                <li><a href="/vagas"> Vagas </a></li>
+                <li><a href="/cursos"> Cursos </a></li>
+            </ul>
+        </nav>
     </header>
     <main class="vagas-container">
         <button><a id="botao" href="/cadastrar_cursos">+Adicionar Curso</a></button>
-    <h1>Explore Nossos Cursos</h1>
+        <h1>Explore Nossos Cursos</h1>
 
-    <main class="vagas-container">
+        <form method="get" action="/cursos" class="filtro-form">
+            <select name="escola">
+                <option value="">Todas as escolas</option>
+                {% for e in escolas %}
+                    {% set nome_escola = e["Nome_da_instituicao"] %}
+                    <option value="{{ nome_escola|lower }}"
+                        {% if request.args.get('escola', '').lower() == nome_escola|lower %}selected{% endif %}>
+                        {{ nome_escola }}
+                    </option>
+                {% endfor %}
+            </select>
+        
+            <input type="text" id="filtro-cidade" name="cidade" placeholder="Buscar por cidade..." 
+                   value="{{ request.args.get('cidade', '') }}">
+        
+            <select name="modalidade">
+                <option value="">Todas as modalidades</option>
+                <option value="Integrado" {% if request.args.get('modalidade') == 'Integrado' %}selected{% endif %}>Integrado</option>
+                <option value="Subsequente" {% if request.args.get('modalidade') == 'Subsequente' %}selected{% endif %}>Subsequente</option>
+            </select>
+        
+            <button type="submit">🔍 Filtrar</button>
+        </form>
+        
         
         {% for curso in cursos %}
-            <article class="vaga-card">
+            <div class="vaga-card">
                 <h2>{{ curso["nome"] }}</h2>
                 <p><strong>Instituição:</strong> {{ curso["Nome_da_instituicao"] }}</p>
                 <p><strong>Modalidade:</strong> {{ curso["modalidade"] }}</p>
+                <p><strong>Requisitos:</strong> {{ curso["requisitos"] }}</p>
                 <p><strong>Cidade:</strong> {{ curso["cidade"] }} - {{ curso["estado"] }}</p>
                 
     
-                <a href="/cursos/{{ curso['id_curso'] }}" class="btn-vermais">Ver detalhes</a>
-                </a>
-            </article>
+                <a href="/cursos/{{ curso['id'] }}" class="btn-vermais">Ver detalhes</a>
+            </div>
         {% else %}
             <p>Nenhum curso encontrado no momento.</p>
         {% endfor %}

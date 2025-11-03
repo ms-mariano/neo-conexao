@@ -5,28 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/style.css">
-    <title>Cadastro de vagas</title>
+    <title>Cadastro de Vagas</title>
 </head>
 
 <body>
     <header>
         <nav>
             <button class="menu-btn">☰</button>
-
             <ul class="menu">
                 <li><a href="/"> Início </a></li>
                 <li><a href="/sobre"> Sobre </a></li>
                 <li><a href="/blog"> Blog </a></li>
-                <li><a href="/perfil"> Perfil </a></li>
                 <li><a href="/cadastrar"> Cadastros </a></li>
                 <li><a href="/divulgacao_escolas"> Escolas </a></li>
+                <li><a href="/vagas"> Vagas </a></li>
+                <li><a href="/cursos"> Cursos </a></li>
             </ul>
         </nav>
     </header>
 
     <h1>Cadastro de Vagas</h1>
 
-    <form method="POST">
+    <form method="POST" class="cadform">
 
         <label for="titulo">Título:</label>
         <input type="text" id="titulo" name="titulo" required>
@@ -70,10 +70,19 @@
         <label for="cep_vaga">CEP da vaga:</label>
         <input type="text" id="cep_vaga" name="cep_vaga" required>
 
+        <label for="rua">Rua:</label>
+        <input type="text" id="rua" name="rua">
+
+        <label for="numero">Número:</label>
+        <input type="text" id="numero" name="numero">
+
+        <label for="bairro">Bairro:</label>
+        <input type="text" id="bairro" name="bairro" required>
+
         <label for="cidade">Cidade:</label>
         <input type="text" id="cidade" name="cidade" required>
 
-        <label for="estado"> Estado: </label>
+        <label for="estado">Estado:</label>
         <select name="estado" id="estado" required>
             <option value="" disabled selected>Selecione</option>
             <option value="AC"> AC </option>
@@ -110,12 +119,79 @@
     </form>
 
     <script>
-        // Ao selecionar uma empresa, preencher o telefone automaticamente (campo oculto)
+        // --- Auto preencher telefone da empresa ---
         document.getElementById("nome_empresa").addEventListener("change", function() {
             const telefone = this.options[this.selectedIndex].getAttribute("data-telefone");
             document.getElementById("telefone_empresa").value = telefone || "";
         });
+
+        // --- Integração com a API ViaCEP ---
+        const CEP_API_URL = 'https://viacep.com.br/ws/';
+
+        function consultarCep(cep) {
+            const cepLimpo = cep.replace(/\D/g, '');
+            const ruaInput = document.getElementById('rua');
+            const numeroInput = document.getElementById('numero');
+            const bairroInput = document.getElementById('bairro');
+            const cidadeInput = document.getElementById('cidade');
+            const ufInput = document.getElementById('estado');
+
+            if (cepLimpo.length !== 8) {
+                ruaInput.value = '';
+                bairroInput.value = '';
+                cidadeInput.value = '';
+                ufInput.value = '';
+                return;
+            }
+
+            ruaInput.value = 'Buscando...';
+            bairroInput.value = 'Buscando...';
+            cidadeInput.value = 'Buscando...';
+            ufInput.value = 'Buscando...';
+            numeroInput.value = '';
+
+            fetch(`${CEP_API_URL}${cepLimpo}/json/`)
+                .then(response => response.json())
+                .then(dados => {
+                    if (dados.erro) {
+                        alert('CEP não encontrado!');
+                        ruaInput.value = '';
+                        bairroInput.value = '';
+                        cidadeInput.value = '';
+                        ufInput.value = '';
+                        return;
+                    }
+
+                    ruaInput.value = dados.logradouro || '';
+                    bairroInput.value = dados.bairro || '';
+                    cidadeInput.value = dados.localidade || '';
+                    ufInput.value = dados.uf || '';
+                    numeroInput.focus();
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar CEP:', error);
+                    alert('Erro ao consultar o CEP. Tente novamente.');
+                    ruaInput.value = '';
+                    bairroInput.value = '';
+                    cidadeInput.value = '';
+                    ufInput.value = '';
+                });
+        }
+
+        // Chamar a busca ao sair do campo de CEP
+        document.getElementById('cep_vaga').addEventListener('blur', function() {
+            consultarCep(this.value);
+        });
+
+        // Buscar ao apertar Enter no campo CEP
+        document.getElementById('cep_vaga').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                consultarCep(this.value);
+            }
+        });
     </script>
+
 </body>
 
 </html>

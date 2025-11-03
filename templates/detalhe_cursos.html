@@ -23,10 +23,10 @@
         <p><strong>Instituição:</strong> {{ curso["Nome_da_instituicao"] }}</p>
         <p><strong>Descrição:</strong> {{ curso["descricao"] }}</p>
         
-        <p><strong>Carga Horária:</strong> {{ curso["carga_horaria"] }}</p>
+        <p><strong>Carga Horária:</strong> {{ curso["carga_horaria"] }}h</p>
         <p><strong>Requisitos:</strong> {{ curso["requisitos"] }}</p>
         <p><strong>Modalidade:</strong> {{ curso["modalidade"] }}</p>
-        <p><strong>Cidade:</strong> {{ curso["cidade"] }} - {{ curso["estado"] }}</p>
+        <p><strong>Endereço:</strong> {{ curso["rua"] }}, {{ curso["numero"] }}, {{ curso["bairro"] }}, {{ curso["cidade"] }} - {{ curso["estado"] }}</p>
 
         <p><strong>Contato (Telefone):</strong> {{ curso["Telefone"] }}</p>
         
@@ -41,5 +41,4 @@
     </main>
 </body>
 </html>
-
 

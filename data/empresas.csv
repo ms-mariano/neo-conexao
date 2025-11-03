@@ -1,4 +1,3 @@
-id_empresa,timestamp,nome_empresa,nome_fantasia,cnpj,endereco,bairro,cidade,cep,estado,telefone,email,area_atuacao
-1,2025-10-31 11:51:28,Dolly Company,Dolly Guaraná,12345676,1234,Jd. Olímpico,Xique-Xique,12346542,BA,44 12345678,dolly@dolly.com,Indústria Alimenítcia
-2,2025-11-03 08:29:20,Neo Company,Neo Company,12345676, R. Pioneira Gabriella de Araújo Vivan,Jd. Olímpico,Maringá,12346542,PR,44 99882-6392,neocompany@gmail.com,Tecnologia
-3,2025-11-03 11:45:45,Julio Company,Elo Kaizen,89393298434,"Rua Santa Terezinha, 836, Zona Leste - Mandaguaçu/PR",Rua Santa Terezinha,Zona Leste,Mandaguaçu,87162100,PR,44988063151,julio.oliveira.santana595@gmail.com,TI
+id_empresa,timestamp,nome_empresa,nome_fantasia,cnpj,endereco_completo,rua,bairro,cidade,cep,estado,telefone,email,area_atuacao
+1,2025-11-03 15:42:34,Nova Conect Co.,Nova Conect,098765432,"Rua das Primaveras, 69, Conjunto Habitacional Inocente Vila Nova Júnior - Maringá/PR",Rua das Primaveras,Conjunto Habitacional Inocente Vila Nova Júnior,Maringá,87060-050,PR,44 991234567,novaconect@gmail.com,Desenvolvimento de Software
+2,2025-11-03 16:19:00,Neo Company,Neo Company,12345676,"Rua Rouxinol, 599, Jardim Olímpico - Maringá/PR",Rua Rouxinol,Jardim Olímpico,Maringá,87070350,PR,44 4321 5678,neocompany@gmail.com,Tecnologia

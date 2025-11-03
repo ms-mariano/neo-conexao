@@ -1,2 +1,3 @@
-id,nome,descricao,carga_horaria,Nome_da_instituicao,requisitos,modalidade
-1,Desenvolvimento de Sistemas,Desenvolve sistemas,200,,9°ano,Integrado
+id,nome,descricao,carga_horaria,Nome_da_instituicao,Telefone,Email,rua,numero,bairro,cidade,estado,cep,requisitos,modalidade
+1,Desenvolvimento de Sistemas,"Desenvolve sistemas Web em HTML, CSS e JavaScript",2000,CEEP Pe. Joseir Sversutti,44 9876-1234,ceep@ceep.com,Rua Rouxinol,599,Jardim Olímpico,Maringá,PR,,9°ano,Integrado
+2,Técnico em Estética ,"Possui diversas alternativas de atuação, podendo trabalhar em clinicas de estética, centros de cirurgia plástica, academias, no comércio de cosméticos, além da possibilidade de trabalhar de forma autônoma.",1350,Colégio Estadual Santa Maria Goretti,44 1234 5678,goreti@goreti.com,Avenida 19 de Dezembro,8,Zona 04,Maringá,PR,,Ensino Médio,Subsequente
