@@ -486,3 +486,49 @@ nav ul li a {
     color: #777;
     font-style: italic;
 }
+/* Aba de Vagas */
+.vagas-container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+.vaga-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    transition: transform 0.2s ease;
+}
+
+.vaga-card:hover {
+    transform: translateY(-5px);
+}
+
+.vaga-card h3 {
+    color: #4a148c;
+    margin-bottom: 10px;
+}
+
+.btn-vermais {
+    display: inline-block;
+    padding: 8px 15px;
+    background: #4a148c;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.btn-vermais:hover {
+    background: #6a1b9a;
+}
+
+.vaga-detalhe {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}

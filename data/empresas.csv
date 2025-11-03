@@ -1,2 +1,3 @@
 id_empresa,timestamp,nome_empresa,nome_fantasia,cnpj,endereco,bairro,cidade,cep,estado,telefone,email,area_atuacao
-1,2025-10-31 11:51:28,Dolly Company,Dolly Guaraná,12345676,1234,Jd. Olímpico,Xique-Xique,12346542,BA,44 12345678,dolly@dolly.com,Indústria Alimenítcia
+1,2025-10-31 11:51:28,Dolly Company,Dolly Guaraná,12345676,1234,Jd. Olímpico,Xique-Xique,12346542,BA,44 12345678,dolly@dolly.com,Indústria Alimenítcia2,2025-11-01 18:21:03,Neo Company,Neo Company,12345676, R. Pioneira Gabriella de Araújo Vivan,Jd. Olímpico,Maringá,12346542,PR,44 99847-1505,neocompany@gmail.com,Tecnologia
+2,2025-11-01 18:21:03,Neo Company,Neo Company,12345676, R. Pioneira Gabriella de Araújo Vivan,Jd. Olímpico,Maringá,12346542,PR,44 99847-1505,neocompany@gmail.com,Tecnologia

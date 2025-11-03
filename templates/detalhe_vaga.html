@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ vaga["titulo"] }} | Neo Conexão</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="/vagas">← Voltar para as vagas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="vaga-detalhe">
+        <h2>{{ vaga["titulo"] }}</h2>
+
+        <p><strong>Empresa:</strong> {{ vaga["nome_empresa"] }}</p>
+        <p><strong>Descrição:</strong> {{ vaga["descricao"] }}</p>
+        <p><strong>Requisitos:</strong> {{ vaga["requisitos"] }}</p>
+        <p><strong>Remuneração:</strong> R${{ vaga["remuneracao"] }}</p>
+        <p><strong>Cidade:</strong> {{ vaga["cidade"] }} - {{ vaga["estado"] }}</p>
+        <p><strong>Tipo:</strong> {{ vaga["tipo"] }}</p>
+        <p><strong>Data de Publicação:</strong> {{ vaga["data_publicacao"] }}</p>
+    </main>
+</body>
+</html>

@@ -33,11 +33,11 @@
         <label for="descricao">Descrição:</label>
         <input type="text" id="descricao" name="descricao" required>
 
-        <label for="empresa_id">Nome da Empresa:</label>
-        <select name="empresa_id" id="empresa_id" required>
+        <label for="nome_empresa">Nome da Empresa:</label>
+        <select name="nome_empresa" id="nome_empresa" required>
             <option value="" disabled selected>Selecione a Empresa</option>
             {% for i in empresas %}
-            <option value="{{ i.id_empresa }}">{{ i.nome_fantasia }} ({{ i.area_atuacao }})</option>
+            <option value="{{ i.nome_empresa }}">{{ i.nome_fantasia }} ({{ i.area_atuacao }})</option>
             {% endfor %}
         </select><br>
 
@@ -47,6 +47,9 @@
 
         <label for="remuneracao">Remuneração:</label>
         <input type="text" id="remuneracao" name="remuneracao" required>
+
+        <label for="carga_horaria">Carga Horária:</label>
+        <input type="text" id="carga_horaria" name="carga_horaria" required>
 
         <label for="requisitos">Requisitos:</label>
         <input type="text" id="requisitos" name="requisitos" required>

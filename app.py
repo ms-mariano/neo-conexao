@@ -44,9 +44,9 @@ def ler_csv(nome_arquivo):
 # ---------------------------------------------------------
 inicializar_csv("alunos.csv",   ["id", "nome", "email", "telefone", "cgm", "idade", "bairro", "cidade", "genero", "etnia"])
 inicializar_csv("empresas.csv", ["id_empresa", "timestamp", "nome_empresa", "nome_fantasia", "cnpj", "endereco", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao"])
-inicializar_csv("vagas.csv",    ["id_vagas", "titulo", "descricao", "empresa_id", "cidade", "remuneracao", "requisitos", "data_publicacao", "tipo", "estado"])
+inicializar_csv("vagas.csv",    ["id_vagas", "titulo", "descricao", "nome_empresa", "cidade", "remuneracao", "carga_horaria", "requisitos", "data_publicacao", "tipo", "estado"])
 inicializar_csv("escolas.csv",  ["id", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade", "cursos_oferecidos"])
-inicializar_csv("cursos.csv",   ["nome", "descricao", "carga_horaria", "escola_id", "cidade", "estado", "requisitos", "modalidade"])
+inicializar_csv("cursos.csv",   ["nome", "descricao", "carga_horaria", "Nome_da_instituicao", "cidade", "estado", "requisitos", "modalidade"])
 inicializar_csv("blog.csv",     ["id_post", "timestamp", "titulo", "autor", "conteudo"])
 # ---------------------------------------------------------
 # ROTAS PRINCIPAIS
@@ -137,12 +137,12 @@ def empresas():
 # ROTA VAGAS
 # ---------------------------------------------------------
 @app.route("/cadastrar_vagas", methods=["GET", "POST"])
-def vagas():
+def cad_vagas():
     # --- Definição dos arquivos ---
     arquivo_vagas = "vagas.csv"
     arquivo_empresas = "empresas.csv"
 
-    cabecalho = ["id_vagas", "titulo", "descricao", "empresa_id", "cidade", "remuneracao", "requisitos", "data_publicacao", "tipo", "estado"]
+    cabecalho = ["id_vagas", "titulo", "descricao", "nome_empresa", "cidade", "remuneracao", "carga_horaria", "requisitos", "data_publicacao", "tipo", "estado"]
 
     if request.method == "POST":
         # --- Lógica para salvar a VAGA (POST) ---
@@ -152,16 +152,17 @@ def vagas():
             "id_vagas": str(novo_id),
             "titulo": request.form["titulo"],
             "descricao": request.form["descricao"],
-            "empresa_id": request.form["empresa_id"],
+            "nome_empresa": request.form["nome_empresa"],
             "cidade": request.form["cidade"],
             "remuneracao": request.form["remuneracao"],
+            "carga_horaria": request.form["carga_horaria"],
             "requisitos": request.form["requisitos"],
-            "data_publicacao": datetime.now().strftime("%Y-%m-%d"),
+            "data_publicacao": datetime.now().strftime("%d-%m-%Y"),
             "tipo": request.form["tipo"],
             "estado": request.form["estado"],
         }
         salvar_csv(arquivo_vagas, dados, cabecalho)
-        return redirect("/cadastrar_vagas")
+        return redirect("/vagas")
 
     # --- Lógica para exibir o FORMULÁRIO (GET) ---
     registros_de_vagas = ler_csv(arquivo_vagas)
@@ -174,6 +175,39 @@ def vagas():
         empresas=lista_de_empresas
     )
 
+# ---------------------------------------------------------
+# ROTA DIVULGAÇÃO DE VAGAS
+# ---------------------------------------------------------
+@app.route("/vagas")
+def vagas():
+    arquivo = "vagas.csv"
+    
+    # Lê os posts do CSV
+    vagas = ler_csv(arquivo)
+    
+    # Invertemos a lista para que o post mais recente apareça primeiro.
+    vagas = list(reversed(vagas)) 
+
+    return render_template("div_vagas.html", vagas=vagas)
+
+# ---------------------------------------------------------
+# ROTA DETALHE DE VAGA
+# ---------------------------------------------------------
+@app.route("/vagas/<id_vagas>")
+def detalhe_vaga(id_vagas):
+    arquivo = "vagas.csv"
+    vaga = ler_csv(arquivo)
+
+    vaga_encontrada = None
+    for v in vaga:
+        if v["id_vagas"] == id_vagas:
+            vaga_encontrada = v
+            break
+
+    if vaga_encontrada:
+        return render_template("detalhe_vaga.html", vaga=vaga_encontrada)
+    else:
+        return "<h2>Vaga não encontrada</h2>", 404
 
 # ---------------------------------------------------------
 # ROTA ESCOLAS
@@ -212,11 +246,11 @@ def escolas():
 # ROTA CURSOS
 # ---------------------------------------------------------
 @app.route("/cadastrar_cursos", methods=["GET", "POST"])
-def cursos():
+def cad_cursos():
     arquivo_cursos = "cursos.csv"
     arquivo_escolas = "escolas.csv"
 
-    cabecalho = ["id", "nome", "descricao", "carga_horaria", "escola_id", "cidade", "estado", "requisitos", "modalidade"]
+    cabecalho = ["id", "nome", "descricao", "carga_horaria", "Nome_da_instituicao", "cidade", "estado", "requisitos", "modalidade"]
 
     if request.method == "POST":
         # --- Lógica de salvar o CURSO (POST) ---
@@ -227,14 +261,14 @@ def cursos():
             "nome": request.form["nome"],
             "descricao": request.form["descricao"],
             "carga_horaria": request.form["carga_horaria"],
-            "escola_id": request.form["escola_id"],
+            "Nome_da_instituicao": request.form["Nome_da_instituicao"],
             "cidade": request.form["cidade"],
             "estado": request.form["estado"],
             "requisitos": request.form["requisitos"],
             "modalidade": request.form["modalidade"],
         }
         salvar_csv(arquivo_cursos, dados, cabecalho)
-        return redirect("/cadastrar_cursos")
+        return redirect("/cursos")
 
     # --- Lógica de exibir o FORMULÁRIO (GET) ---
     registros_de_cursos = ler_csv(arquivo_cursos)
@@ -246,6 +280,21 @@ def cursos():
         registros=registros_de_cursos,
         escolas=lista_de_escolas
     )
+# ---------------------------------------------------------
+# ROTA DIVULGAÇÃO DE CURSOS
+# ---------------------------------------------------------
+@app.route("/cursos")
+def cursos():
+    arquivo = "cursos.csv"
+    
+    # Lê os posts do CSV
+    cursos = ler_csv(arquivo)
+    
+    # Invertemos a lista para que o post mais recente apareça primeiro.
+    cursos = list(reversed(cursos)) 
+
+    return render_template("div_cursos.html", cursos=cursos)
+
 
 # ---------------------------------------------------------
 # ROTA BLOG
@@ -261,10 +310,6 @@ def blog():
     posts = list(reversed(posts)) 
 
     return render_template("blog.html", posts=posts)
-
-# ---------------------------------------------------------
-# ROTA BLOG (LISTAR POSTS)
-# ---------------------------------------------------------
 
 # ---------------------------------------------------------
 # ROTA PARA CRIAR NOVOS POSTS

@@ -1,2 +1,2 @@
-id_vagas,titulo,descricao,empresa_id,cidade,remuneracao,requisitos,data_publicacao,tipo,estado
-1,Beta Tester,Testa sistemas,1,Maringá,1800,16 anos e conhecimento básico sobre sistemas,2025-10-31,Estagio,PR
+id_vagas,titulo,descricao,nome_empresa,cidade,remuneracao,carga_horaria,requisitos,data_publicacao,tipo,estado
+1,Beta Tester,Testa sistemas,Neo Company,Maringá,1518,4 horas,14 anos e conhecimento básico sobre sistemas,02-11-2025,Jovem aprendiz,PR

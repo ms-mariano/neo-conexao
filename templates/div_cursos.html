@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Divulgação de cursos | Neo Conexão</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="/"> Início </a></li>
+                <li><a href="/sobre"> Sobre </a></li>
+                <li><a href="/blog"> Blog </a></li>
+                <li><a href="/chat"> Chat </a></li>
+                <li><a href="/perfil"> Perfil </a></li>
+                <li><a href="/cadastrar"> Cadastros </a></li>
+                <li><a href="/divulgacao_escolas"> Escolas </a></li>
+                <li><a href="/vagas"> Vagas </a></li>
+                <li><a href="/cursos"> Cursos </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="vagas-container">
+        <button><a id="botao" href="/cadastrar_cursos">+Adicionar cursos</a></button>
+        <h2>Cursos disponíveis</h2>
+        
+        {% for curso in cursos %}
+        <div class="vaga-card">
+            <h3>{{ curso["titulo"] }}</h3>
+            <p><strong>Curso:</strong> {{ curso["nome"] }}</p>
+            <p><strong>Nome da escola:</strong> {{ curso["Nome_da_instituicao"] }}</p>
+            <p><strong>Cidade:</strong> {{ curso["cidade"] }} - {{ curso["estado"] }}</p>
+            <p><strong>Descricao:</strong> {{ curso["descricao"] }}</p>
+            <p><strong>Requisitos:</strong> {{ curso["requisitos"] }}</p>
+            <p><strong>Carga Horária:</strong> {{ curso["carga_horaria"] }}</p>
+            <p><strong>Modalidade:</strong> {{ curso["modalidade"] }}</p>
+            <p class="post-curso">{{ curso["data_publicacao"] }}</p>
+            <a href="/curso/{{ curso['id_curso'] }}" class="btn-vermais">Ver mais</a>
+        </div>
+        {% else %}
+        <p>Não há curso cadastradas no momento.</p>
+        {% endfor %}
+    </main>
+</body>
+</html>
