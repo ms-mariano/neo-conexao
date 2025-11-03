@@ -17,14 +17,15 @@
                 <li><a href="/"> Início </a></li>
                 <li><a href="/sobre"> Sobre </a></li>
                 <li><a href="/blog"> Blog </a></li>
-                <li><a href="/chat"> Chat </a></li>
                 <li><a href="/perfil"> Perfil </a></li>
                 <li><a href="/cadastrar"> Cadastros </a></li>
                 <li><a href="/divulgacao_escolas"> Escolas </a></li>
             </ul>
         </nav>
     </header>
+
     <h1>Cadastro de Vagas</h1>
+
     <form method="POST">
 
         <label for="titulo">Título:</label>
@@ -37,13 +38,16 @@
         <select name="nome_empresa" id="nome_empresa" required>
             <option value="" disabled selected>Selecione a Empresa</option>
             {% for i in empresas %}
-            <option value="{{ i.nome_empresa }}">{{ i.nome_fantasia }} ({{ i.area_atuacao }})</option>
+            <option 
+                value="{{ i.nome_empresa }}" 
+                data-telefone="{{ i.telefone }}">
+                {{ i.nome_fantasia }} ({{ i.area_atuacao }})
+            </option>
             {% endfor %}
-        </select><br>
+        </select>
 
-
-        <label for="cidade">Cidade:</label>
-        <input type="text" id="cidade" name="cidade" required>
+        <!-- Campo oculto que receberá o telefone -->
+        <input type="hidden" id="telefone_empresa" name="telefone_empresa">
 
         <label for="remuneracao">Remuneração:</label>
         <input type="text" id="remuneracao" name="remuneracao" required>
@@ -62,6 +66,12 @@
             <option value="Treinee"> Treinee </option>
             <option value="Emprego"> Emprego </option>
         </select>
+
+        <label for="cep_vaga">CEP da vaga:</label>
+        <input type="text" id="cep_vaga" name="cep_vaga" required>
+
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" required>
 
         <label for="estado"> Estado: </label>
         <select name="estado" id="estado" required>
@@ -98,6 +108,14 @@
         <button type="submit">Cadastrar</button>
 
     </form>
+
+    <script>
+        // Ao selecionar uma empresa, preencher o telefone automaticamente (campo oculto)
+        document.getElementById("nome_empresa").addEventListener("change", function() {
+            const telefone = this.options[this.selectedIndex].getAttribute("data-telefone");
+            document.getElementById("telefone_empresa").value = telefone || "";
+        });
+    </script>
 </body>
 
 </html>

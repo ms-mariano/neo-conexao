@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ escolas["titulo"] }} | Neo Conexão</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="/divulgacao_escolas">← Voltar para as escola</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="escolas">
+        <h2>{{ escolas["titulo"] }}</h2>
+
+        <p><strong>Escola:</strong> {{ escolas["Nome_da_instituicao"] }}</p>
+        <p><strong>Tipo de instituicao:</strong> {{ escolas["Tipo_de_instituicao"] }}</p>
+        <p><strong>INEP:</strong> {{ escolas["INEP"] }}</p>
+        <p><strong>Cidade:</strong> {{ escolas["cidade"] }} - {{ escolas["estado"] }}</p>
+        <p><strong>Turno de funcionamento:</strong> {{ escolas["Turno_de_funcionamento"] }}</p>
+        <p><strong>Telefone de contato:</strong> {{ escolas["Telefone"] }}</p>
+        <p><strong>Nivel de escolaridade:</strong> {{ escolas["Nivel_de_escolaridade"] }}</p>
+</main>
+</body>
+</html>

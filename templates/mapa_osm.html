@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Meu Mapa com OpenStreetMap</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa</title>
+    <h3>ft. OpenStreetMap</h3>
+    <meta charset = "utf-8" />
+    <meta name    = "viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     <style>
+        /* Esse style não deveria estar no style.css??? */
         /* Define a altura e largura do contêiner do mapa */
         #map { height: 600px; width: 80%; margin: 20px auto; border: 1px solid #ccc; }
     </style>
 </head>
+
 <body>
 
     <div id="map"></div>
@@ -19,7 +23,7 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <script>
-        // Coordenadas de exemplo: Mude para sua cidade!
+        // Coordenadas de exemplo: Mude para sua cidade
         var latitude = -23.4243; 
         var longitude = -51.9369; 
         var zoomInicial = 13; 

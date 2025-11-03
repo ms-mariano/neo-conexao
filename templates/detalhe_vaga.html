@@ -5,6 +5,7 @@
     <title>{{ vaga["titulo"] }} | Neo Conexão</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
     <header>
         <nav>
@@ -24,6 +25,7 @@
         <p><strong>Cidade:</strong> {{ vaga["cidade"] }} - {{ vaga["estado"] }}</p>
         <p><strong>Tipo:</strong> {{ vaga["tipo"] }}</p>
         <p><strong>Data de Publicação:</strong> {{ vaga["data_publicacao"] }}</p>
+        <p><strong>Telefone de contato:</strong> {{ vaga["telefone_empresa"] }}</p>
     </main>
 </body>
 </html>

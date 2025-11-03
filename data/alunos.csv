@@ -2,3 +2,4 @@ id,nome,email,telefone,cgm,idade,bairro,cidade,genero,etnia
 1,Rodrigo Simão dos Santos,rodrigo.simao.santos@escola.pr.gov.br,44 99847-1505,0987654321,2009-05-15,Jd. Olímpico,Maringá,Masculino,Branca
 2,Marcos Saturno Bezerra,marcos.saturno.b3z3@gmail.com,44 4321 5678,123456654,2010-01-27,Jd. Aurora,Maringá,Masculino,Branca
 3,Maria Eloisa dos Santos Mariano,m.mariano15@escola.pr.gov.br,44 99882-6392,1002054422,2010-02-15,Jd. Olímpico,Maringá,Feminino,Parda
+4,Julio Cesar de Oliveira Santana,julio.oliveira.santana@escola.pr.gov.br,44 98806-3151,3454343325532,2009-07-19,Zona Leste,Mandaguaçu,Feminino,Branca

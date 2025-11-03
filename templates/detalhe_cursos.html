@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ curso["nome"] }} | Neo Conexão</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="/cursos">← Voltar para os cursos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="vaga-detalhe">
+        <h2>{{ curso["nome"] }}</h2>
+
+        <p><strong>Instituição:</strong> {{ curso["Nome_da_instituicao"] }}</p>
+        <p><strong>Descrição:</strong> {{ curso["descricao"] }}</p>
+        
+        <p><strong>Carga Horária:</strong> {{ curso["carga_horaria"] }}</p>
+        <p><strong>Requisitos:</strong> {{ curso["requisitos"] }}</p>
+        <p><strong>Modalidade:</strong> {{ curso["modalidade"] }}</p>
+        <p><strong>Cidade:</strong> {{ curso["cidade"] }} - {{ curso["estado"] }}</p>
+
+        <p><strong>Contato (Telefone):</strong> {{ curso["Telefone"] }}</p>
+        
+        <!-- 
+          O seu formulário de cadastro (cad_cursos) não inclui 'valor' ou 'data_inicio'.
+          Se você adicionar esses campos ao seu CSV, descomente as linhas abaixo.
+        -->
+        <!-- 
+        <p><strong>Valor:</strong> R$ {{ curso["valor"] }}</p>
+        <p><strong>Data de Início:</strong> {{ curso["data_inicio"] }}</p> 
+        -->
+    </main>
+</body>
+</html>
+
+

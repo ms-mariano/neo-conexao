@@ -1,3 +1,4 @@
 id_empresa,timestamp,nome_empresa,nome_fantasia,cnpj,endereco,bairro,cidade,cep,estado,telefone,email,area_atuacao
-1,2025-10-31 11:51:28,Dolly Company,Dolly Guaraná,12345676,1234,Jd. Olímpico,Xique-Xique,12346542,BA,44 12345678,dolly@dolly.com,Indústria Alimenítcia2,2025-11-01 18:21:03,Neo Company,Neo Company,12345676, R. Pioneira Gabriella de Araújo Vivan,Jd. Olímpico,Maringá,12346542,PR,44 99847-1505,neocompany@gmail.com,Tecnologia
-2,2025-11-01 18:21:03,Neo Company,Neo Company,12345676, R. Pioneira Gabriella de Araújo Vivan,Jd. Olímpico,Maringá,12346542,PR,44 99847-1505,neocompany@gmail.com,Tecnologia
+1,2025-10-31 11:51:28,Dolly Company,Dolly Guaraná,12345676,1234,Jd. Olímpico,Xique-Xique,12346542,BA,44 12345678,dolly@dolly.com,Indústria Alimenítcia
+2,2025-11-03 08:29:20,Neo Company,Neo Company,12345676, R. Pioneira Gabriella de Araújo Vivan,Jd. Olímpico,Maringá,12346542,PR,44 99882-6392,neocompany@gmail.com,Tecnologia
+3,2025-11-03 11:45:45,Julio Company,Elo Kaizen,89393298434,"Rua Santa Terezinha, 836, Zona Leste - Mandaguaçu/PR",Rua Santa Terezinha,Zona Leste,Mandaguaçu,87162100,PR,44988063151,julio.oliveira.santana595@gmail.com,TI

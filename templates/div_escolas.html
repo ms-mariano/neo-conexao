@@ -21,38 +21,40 @@
         <li><a href="/"> Início </a></li>
                 <li><a href="/sobre"> Sobre </a></li>
                 <li><a href="/blog"> Blog </a></li>
-                <li><a href="/chat"> Chat </a></li>
                 <li><a href="/perfil"> Perfil </a></li>
                 <li><a href="/cadastrar"> Cadastros </a></li>
                 <li><a href="/divulgacao_escolas"> Escolas </a></li>
-                <li><a href="/vagas"> Vagas </a></li>
+                <li><a href="/vagas"> vagas </a></li>
     </nav>
   </header>
 
   <section class="intro">
     <h1>ESCOLAS</h1>
+    <div class="texto">
+      
     <p>
       Somos uma equipe de alunos que se importa com o futuro do mundo, por isso
       criamos a Neo Conexão, um projeto que pretende ajudar os adolescentes e
       jovens adultos a conseguir empregos que eles se interessem e amem.
     </p>
-    <a href="#" class="pesquise">🔍 Pesquise</a>
+  </div>
   </section>
 
-  <section class="escola">
-    <div class="card">
-      <img src="../static/css/img/CEEP.png" alt="CEEP Maringá">
-      <div class="info">
-
-        <h2>CEEP MARINGÁ</h2>
-        <p>
-          Localizada no bairro Jd. Olímpico, em Maringá, a Escola Estadual de
-          Ensino Médio abriga cursos profissionalizantes.
-        </p>
-
-      </div>
+  <main class="escolas-container">
+    <button><a id="botao" href="/cadastrar_escola">+Adicionar escolas</a></button>
+    <h2>Escolas Disponíveis</h2>
+    
+    {% for escolas in escolas %}
+    <div class="escolas-card">
+        <p><strong>Nome da instituicao:</strong> {{ escolas["Nome_da_instituicao"] }}</p>
+        <p><strong>Cidade:</strong> {{ escolas["cidade"] }} - {{ escolas["estado"] }}-{{ escolas["endereco_completo"] }} </p>
+        <p><strong>Tipo de instituicao:</strong> {{ escolas["Tipo_de_instituicao"] }}</p>
+        <p class="post-data">{{ escolas["data_publicacao"] }}</p>
+        <a href="/escolas/{{ escolas['id_escola'] }}" class="btn-vermais">Ver mais</a>
     </div>
-  </section>
+    {% else %}
+    <p>Não há escolas cadastradas no momento.</p>
+    {% endfor %}
+</main>
 </body>
-
 </html>
