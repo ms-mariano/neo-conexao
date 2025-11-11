@@ -1,0 +1,6 @@
+id_mensagem,id_aluno,id_escola,remetente,mensagem,timestamp
+1,1,1,aluno,oi ceep maringá,2025-11-11 10:54
+2,1,5,aluno,oi ceep maneiro,2025-11-11 10:56
+3,1,1,aluno,oi,2025-11-11 10:56
+4,1,1,aluno,"OIIII
+",2025-11-11 12:23

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Neo Conexão</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Login</h1>
+  <form method="POST" action="/login">
+    <label>Email:</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label>Senha:</label><br>
+    <input type="password" name="senha" required><br><br>
+
+    <label>Tipo de usuário:</label><br>
+    <select name="tipo">
+      <option value="alunos">Aluno</option>
+      <option value="escolas">Escola</option>
+      <option value="empresas">Empresa</option>
+    </select><br><br>
+
+    <button type="submit">Entrar</button>
+  </form>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul>
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+</body>
+</html>

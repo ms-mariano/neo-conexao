@@ -1,2 +1,6 @@
 id_vagas,titulo,descricao,nome_empresa,telefone_empresa,cidade,estado,bairro,rua,numero,cep_vaga,remuneracao,carga_horaria,requisitos,data_publicacao,tipo
 1,Beta Tester,Testa software de sistemas,Nova Conect Co.,44 991234567,Maringá,PR,Parque Industrial Bandeirantes,Rua Violanda Marcon de Assumpção,52,87070135,1518,4 horas,16 anos e conhecimento básico sobre sistemas,03-11-2025,Estagio
+2,Analise de Dados ,Analisa dados,Neo Company,44 4321 5678,Colombo,PR,Atuba,Rua Enemézio do Rosário Junior,10,83408350,1800,3,"14 anos, conhecimento básico em análise de dados",04-11-2025,Jovem aprendiz
+3,Programador,Programa uai.,Atena Maker Co.,41 3257-6488,Curitiba,PR,Bacacheri,Rua Costa Rica,233,82510-180,1518,20 (semanais),Conhecimento básico em programação e ser minimamente bonito ,05-11-2025,Estagio
+4,Cientista ,Testa e faz pesquisas com as propriedades medicinais do cânhamo,Hêmpora Co.,44 98824365,Maringá,PR,Jardim Olímpico,Rua Rouxinol,599,87070350,1800,3,Conhecimento na área de Biologia e Química,05-11-2025,Emprego
+5,Analista de Dados,"Trabalha com análises e levantamento de dados com os resultados e potuação obtidas pelos alunos, entre outras informações no site Terra Vermelha",Terra Vermelha Inc.,44 999409839,Maringá,PR,Jardim Olímpico,Rua Rouxinol,599,87070350,1912,4,Saber fazer análises precisas a partir dos dados apresentados,05-11-2025,Jovem aprendiz

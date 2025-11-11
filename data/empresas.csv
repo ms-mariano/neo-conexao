@@ -1,3 +1,7 @@
-id_empresa,timestamp,nome_empresa,nome_fantasia,cnpj,endereco_completo,rua,bairro,cidade,cep,estado,telefone,email,area_atuacao
-1,2025-11-03 15:42:34,Nova Conect Co.,Nova Conect,098765432,"Rua das Primaveras, 69, Conjunto Habitacional Inocente Vila Nova Júnior - Maringá/PR",Rua das Primaveras,Conjunto Habitacional Inocente Vila Nova Júnior,Maringá,87060-050,PR,44 991234567,novaconect@gmail.com,Desenvolvimento de Software
-2,2025-11-03 16:19:00,Neo Company,Neo Company,12345676,"Rua Rouxinol, 599, Jardim Olímpico - Maringá/PR",Rua Rouxinol,Jardim Olímpico,Maringá,87070350,PR,44 4321 5678,neocompany@gmail.com,Tecnologia
+id_empresa,timestamp,nome_empresa,nome_fantasia,cnpj,endereco_completo,rua,bairro,cidade,cep,estado,telefone,email,area_atuacao,senha
+1,2025-11-03 15:42:34,Nova Conect Co.,Nova Conect,098765432,"Rua das Primaveras, 69, Conjunto Habitacional Inocente Vila Nova Júnior - Maringá/PR",Rua das Primaveras,Conjunto Habitacional Inocente Vila Nova Júnior,Maringá,87060-050,PR,44 991234567,novaconect@gmail.com,Desenvolvimento de Software,x
+2,2025-11-03 16:19:00,Neo Company,Neo Company,12345676,"Rua Rouxinol, 599, Jardim Olímpico - Maringá/PR",Rua Rouxinol,Jardim Olímpico,Maringá,87070350,PR,44 4321 5678,neocompany@gmail.com,Tecnologia,x
+3,2025-11-05 12:49:12,Hêmpora Co.,Hêmpora,202314567,"Rua Rouxinol, 599, Jardim Olímpico - Maringá/PR",Rua Rouxinol,Jardim Olímpico,Maringá,87070350,PR,44 98824365,hempora@gmail.com,Saúde,x
+4,2025-11-05 12:53:08,Terra Vermelha Inc.,Terra Vermelha,12345676,"Rua Rouxinol, 599, Jardim Olímpico - Maringá/PR",Rua Rouxinol,Jardim Olímpico,Maringá,87070350,PR,44 999409839,terravermelha@gmail.com,Educação e Tecnologia,x
+5,2025-11-05 12:55:51,Atena Maker Co.,Atena Maker ,0987654321,"Rua Costa Rica, 233, Bacacheri - Curitiba/PR",Rua Costa Rica,Bacacheri,Curitiba,82510-180,PR,41 3257-6488,atenamakerclub@gmail.com,Tecnologia,x
+6,2025-11-11 08:33:55,Coca-Cola Company,Coca-Cola,0987654321,"Rua Rouxinol, 208, Jardim Olímpico - Maringá/PR",Rua Rouxinol,Jardim Olímpico,Maringá,87070350,PR,45 998876543,cocacola@gmail.com,Indústria Alimentícia,Moranguinho

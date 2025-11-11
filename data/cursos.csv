@@ -1,3 +1,10 @@
 id,nome,descricao,carga_horaria,Nome_da_instituicao,Telefone,Email,rua,numero,bairro,cidade,estado,cep,requisitos,modalidade
-1,Desenvolvimento de Sistemas,"Desenvolve sistemas Web em HTML, CSS e JavaScript",2000,CEEP Pe. Joseir Sversutti,44 9876-1234,ceep@ceep.com,Rua Rouxinol,599,Jardim Olímpico,Maringá,PR,,9°ano,Integrado
-2,Técnico em Estética ,"Possui diversas alternativas de atuação, podendo trabalhar em clinicas de estética, centros de cirurgia plástica, academias, no comércio de cosméticos, além da possibilidade de trabalhar de forma autônoma.",1350,Colégio Estadual Santa Maria Goretti,44 1234 5678,goreti@goreti.com,Avenida 19 de Dezembro,8,Zona 04,Maringá,PR,,Ensino Médio,Subsequente
+1,Desenvolvimento de Sistemas,"Desenvolve sistemas Web em HTML, CSS e JavaScript",2000,CEEP Pe. Joseir Sversutti,44 9876-1234,ceep@ceep.com,Rua Rouxinol,599,Jardim Olímpico,Maringá,PR,,9°ano Completo,Integrado
+2,Técnico em Estética ,"Possui diversas alternativas de atuação, podendo trabalhar em clinicas de estética, centros de cirurgia plástica, academias, no comércio de cosméticos, além da possibilidade de trabalhar de forma autônoma.",1350,Colégio Estadual Santa Maria Goretti,44 1234 5678,goreti@goreti.com,Avenida 19 de Dezembro,8,Zona 04,Maringá,PR,,Ensino Médio Completo,Subsequente
+3,Gastronomia,Curso responsável pelo aprimoramento nas habilidades culinárias,1000,CEEP Curitiba,41 3284-6820,ceepcuritiba@ceep.com,Rua Frederico Maurer,3015,Boqueirão,Curitiba,PR,,9°ano Completo,Integrado
+4,Enfermagem,Enfermagem,3000,CEEP Pe. Joseir Sversutti,44 9876-1234,ceep@ceep.com,Rua Rouxinol,599,Jardim Olímpico,Maringá,PR,,Ensino Médio Completo,Subsequente
+5,Curso de Artes,Curso de Artes,1000,Colégio Estadual Santa Maria Goretti,44 1234 5678,goreti@goreti.com,Avenida 19 de Dezembro,8,Zona 04,Maringá,PR,,9°ano Completo,Integrado
+6,Edição de videos,edita videos,10,Colégio Estadual Santa Maria Goretti,44 1234 5678,goreti@goreti.com,Avenida 19 de Dezembro,8,Zona 04,Maringá,PR,,9°ano Completo,Integrado
+7,Agronomia,Curso de agronomia,3600,UENP,43 3511-3200,uenp@gmail.com,Rodovia PR 160,123,Setor 05,Cornélio Procópio,PR,,Ensino Médio Completo,Subsequente
+8,Mecânica,Mecânica,1600,CEEP Erotides Angelo Nichele,44 98765432,ceepfazendariogrande@gmail.com,Rua Rio da Várzea,1172,Iguaçu,Fazenda Rio Grande,PR,,9°ano Completo,Integrado
+9,Meio Ambiente,Curso técnico de Meio Ambiente,1200,CEEP Erotides Angelo Nichele,44 98765432,ceepfazendariogrande@gmail.com,Rua Rio da Várzea,1172,Iguaçu,Fazenda Rio Grande,PR,,9°ano Completo,Integrado

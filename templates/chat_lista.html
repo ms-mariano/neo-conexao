@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversas | Neo Conexão</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <nav>
+        <button class="menu-btn">☰</button>
+
+        <ul class="menu">
+            <li><a href="/"> Início </a></li>
+            <li><a href="/sobre"> Sobre </a></li>
+            <li><a href="/blog"> Blog </a></li>
+            <li><a href="/login"> Login </a></li>
+            <li><a href="/divulgacao_escolas"> Escolas </a></li>
+            <li><a href="/vagas"> Vagas </a></li>
+            <li><a href="/cursos"> Cursos </a></li>
+            <li><a href="/mapa"> Mapa</a></li>
+            <li><a href="/chat"> Chat </a></li>
+        </ul>
+    </nav>
+  </header>
+
+  <main class="chat-lista">
+    <h1>Suas Conversas</h1>
+
+    {% if historico %}
+      {% for h in historico %}
+      <div class="chat-card">
+        <a href="/chat/{{ h['id_escola'] }}">
+          <strong>{{ h["nome_escola"] }}</strong><br>
+          <small>{{ h["mensagem"][:50] }}...</small><br>
+          <span class="timestamp">{{ h["timestamp"] }}</span>
+        </a>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p>Você ainda não iniciou nenhuma conversa.</p>
+    {% endif %}
+  </main>
+</body>
+</html>

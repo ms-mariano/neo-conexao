@@ -1,37 +1,38 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang = "pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset = "UTF-8" />
+  <meta name    = "viewport" content = "width=device-width, initial-scale=1.0" />
 
   <title>Escolas - Neo Conexão</title>
 
-  <link rel="stylesheet" href="../static/css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Unna:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-    rel="stylesheet">
+  <link rel  = "stylesheet" href = "../static/css/style.css" />
+  <link href = "https://fonts.googleapis.com/css2?family=Unna:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel = "stylesheet">
 </head>
 
 <body>
   <header>
     <nav>
-      <button class="menu-btn">☰</button>
+      <button class = "menu-btn">☰</button>
 
-      <ul class="menu">
-        <li><a href="/"> Início </a></li>
-        <li><a href="/sobre"> Sobre </a></li>
-        <li><a href="/blog"> Blog </a></li>
-        <li><a href="/cadastrar"> Cadastros </a></li>
-        <li><a href="/divulgacao_escolas"> Escolas </a></li>
-        <li><a href="/vagas"> Vagas </a></li>
-        <li><a href="/cursos"> Cursos </a></li>
+      <ul class = "menu">
+        <li><a href="/">                   Início    </a></li>
+        <li><a href="/sobre">              Sobre     </a></li>
+        <li><a href="/blog">               Blog      </a></li>
+        <li><a href="/login">              Login </a></li>
+        <li><a href="/divulgacao_escolas"> Escolas   </a></li>
+        <li><a href="/vagas">              Vagas     </a></li>
+        <li><a href="/cursos">             Cursos    </a></li>
+        <li><a href="/chat"> Chat </a></li>
       </ul>
     </nav>
   </header>
 
-  <section class="intro">
+  <section class = "intro">
     <h1>ESCOLAS</h1>
-    <div class="texto">
+    <div class = "texto">
 
       <p>
         Somos uma equipe de alunos que se importa com o futuro do mundo, por isso
@@ -41,8 +42,8 @@
     </div>
   </section>
 
-  <main class="escolas-container">
-    <button><a id="botao" href="/cadastrar_escola">+Adicionar escolas</a></button>
+  <main class = "escolas-container">
+    <button><a id = "botao" href = "/cadastrar_escola">+Adicionar escolas</a></button>
     <h1>Escolas Disponíveis</h1>
 
     {% for escolas in escolas %}
@@ -50,8 +51,8 @@
       <p><strong>Nome da instituição:</strong> {{ escolas["Nome_da_instituicao"] }}</p>
       <p><strong>Cidade:</strong> {{ escolas["cidade"] }} - {{ escolas["estado"] }}</p>
       <p><strong>Tipo de instituição:</strong> {{ escolas["Tipo_de_instituicao"] }}</p>
-      <p class="post-data">{{ escolas["data_publicacao"] }}</p>
-      <a href="/escolas/{{ escolas['id_escola'] }}" class="btn-vermais">Ver mais</a>
+      <p class = "post-data">{{ escolas["data_publicacao"] }}</p>
+      <a href  = "/escolas/{{ escolas['id_escola'] }}" class="btn-vermais">Ver mais</a>
     </div>
     {% else %}
     <p>Não há escolas cadastradas no momento.</p>

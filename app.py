@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 import csv, os
 from datetime import datetime
 
@@ -6,6 +6,7 @@ from datetime import datetime
 # CONFIGURAÇÕES INICIAIS
 # ---------------------------------------------------------
 app = Flask(__name__)
+app.secret_key = "neoconexao"  # ⚠️ Troque depois por algo aleatório
 
 DATA_PATH = "data"
 os.makedirs(DATA_PATH, exist_ok=True)
@@ -42,16 +43,34 @@ def ler_csv(nome_arquivo):
         return []
     with open(caminho, newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
+    
+    
+def autenticar_usuario(email, senha, tipo):
+    """Verifica se existe usuário com email e senha válidos."""
+    arquivo = f"{tipo}.csv"
+    usuarios = ler_csv(arquivo)
+
+    for u in usuarios:
+        # compara sem depender de maiúscula/minúscula
+        email_usuario = u.get("email") or u.get("Email") or ""
+        senha_usuario = u.get("senha") or u.get("Senha") or ""
+        if email_usuario.lower() == email.lower() and senha_usuario == senha:
+            return u
+    return None
+
+
 
 # ---------------------------------------------------------
 # INICIALIZA OS ARQUIVOS CSV
 # ---------------------------------------------------------
-inicializar_csv("alunos.csv",   ["id", "nome", "email", "telefone", "cgm", "idade", "bairro", "cidade", "genero", "etnia"])
-inicializar_csv("empresas.csv", ["id_empresa", "timestamp", "nome_empresa", "nome_fantasia", "cnpj", "endereco_completo", "rua", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao"])
+inicializar_csv("alunos.csv", ["id", "nome", "email", "senha", "telefone", "cgm", "idade", "bairro", "cidade", "genero", "etnia"])
+inicializar_csv("empresas.csv", ["id_empresa", "timestamp", "nome_empresa", "nome_fantasia", "cnpj", "endereco_completo", "rua", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao", "senha"])
 inicializar_csv("vagas.csv",    ["id_vagas", "titulo", "descricao", "nome_empresa", "telefone_empresa", "cidade", "estado", "bairro", "rua", "numero", "cep_vaga", "remuneracao", "carga_horaria", "requisitos", "data_publicacao", "tipo"])
 inicializar_csv("escolas.csv",  ["id_escola", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco_completo", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade", "cursos_oferecidos"])
 inicializar_csv("cursos.csv", ["id", "nome", "descricao", "carga_horaria", "Nome_da_instituicao", "requisitos", "modalidade"])
 inicializar_csv("blog.csv",     ["id_post", "timestamp", "titulo", "autor", "conteudo"])
+inicializar_csv("chat.csv", ["id_mensagem", "id_aluno", "id_escola", "remetente", "mensagem", "timestamp"])
+
 # ---------------------------------------------------------
 # ROTAS PRINCIPAIS
 # ---------------------------------------------------------
@@ -68,16 +87,74 @@ def perfil():
     return render_template("perfil.html")
 
 # ---------------------------------------------------------
-#ROTA CADASTRAR GERAL
+# ROTA LOGIN GERAL
 # ---------------------------------------------------------
-@app.route("/cadastrar")
-def cadastrar():
-      return render_template("cadastrar.html")
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form["email"]
+        senha = request.form["senha"]
+        tipo = request.form["tipo"]
+
+        usuario = autenticar_usuario(email, senha, tipo)
+
+        if usuario:
+            session["usuario"] = usuario
+            session["tipo"] = tipo
+            flash("Login realizado com sucesso!", "sucesso")
+
+            # Redireciona conforme o tipo
+            if tipo == "alunos":
+                return redirect("/login_aluno")
+            elif tipo == "escolas":
+                return redirect("/login_escola")
+            else:
+                return redirect("/login_empresa")
+        else:
+            flash("E-mail ou senha incorretos!", "erro")
+
+    return render_template("login.html")
+
+# ---------------------------------------------------------
+# ROTA LOGIN ALUNO
+# ---------------------------------------------------------
+@app.route("/login_aluno")
+def dashboard_aluno():
+    if "usuario" not in session or session.get("tipo") != "alunos":
+        return redirect("/login")
+    return render_template("login_aluno.html", usuario=session["usuario"])
+
+# ---------------------------------------------------------
+# ROTA LOGIN ESCOLA
+# ---------------------------------------------------------
+@app.route("/login_escola")
+def dashboard_escola():
+    if "usuario" not in session or session.get("tipo") != "escolas":
+        return redirect("/login")
+    return render_template("login_escola.html", usuario=session["usuario"])
+
+# ---------------------------------------------------------
+# ROTA LOGIN EMPRESA
+# ---------------------------------------------------------
+@app.route("/login_empresa")
+def dashboard_empresa():
+    if "usuario" not in session or session.get("tipo") != "empresas":
+        return redirect("/login")
+    return render_template("login_empresa.html", usuario=session["usuario"])
+
+# ---------------------------------------------------------
+# ROTA LOGOUT
+# ---------------------------------------------------------
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("Logout realizado com sucesso!", "info")
+    return redirect("/login")
 
 # ---------------------------------------------------------
 # ROTA ALUNOS
 # ---------------------------------------------------------
-@app.route("/cadastrar_alunos", methods=["GET", "POST"])
+@app.route("/registro_alunos", methods=["GET", "POST"])
 def alunos():
     arquivo = "alunos.csv"
     cabecalho = ["id", "nome", "email", "telefone", "cgm", "idade", "bairro", "cidade", "genero", "etnia"]
@@ -101,15 +178,15 @@ def alunos():
         return redirect("/")
 
     registros = ler_csv(arquivo)
-    return render_template("cad_alunos.html", registros=registros)
+    return render_template("registro_alunos.html", registros=registros)
 
 # ---------------------------------------------------------
 # ROTA EMPRESAS
 # ---------------------------------------------------------
-@app.route("/cadastrar_empresas", methods=["GET", "POST"])
+@app.route("/registro_empresas", methods=["GET", "POST"])
 def empresas():
     arquivo = "empresas.csv"
-    cabecalho = ["id_empresa", "timestamp", "nome_empresa", "nome_fantasia", "cnpj", "endereco_completo", "rua", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao"]
+    cabecalho = ["id_empresa", "timestamp", "nome_empresa", "nome_fantasia", "cnpj", "endereco_completo", "rua", "bairro", "cidade", "cep", "estado", "telefone", "email", "area_atuacao", "senha"]
 
     if request.method == "POST":
         registros = ler_csv(arquivo)
@@ -122,6 +199,19 @@ def empresas():
         estado_empresa = request.form["estado"]
 
         endereco_completo_empresa = f"{rua_empresa}, {numero_empresa}, {bairro_empresa} - {cidade_empresa}/{estado_empresa}"
+        
+        
+        senha = request.form["senha"]
+        confirmar_senha = request.form["confirmar_senha"]
+
+        # --- Validação de senha ---
+        if senha != confirmar_senha:
+            flash("As senhas não coincidem!", "erro")
+            return redirect("/registro_empresas")
+
+        if len(senha) < 6:
+            flash("A senha deve ter pelo menos 6 caracteres!", "erro")
+            return redirect("/registro_empresas")
         
         dados = {
             "id_empresa": str(novo_id),
@@ -137,13 +227,14 @@ def empresas():
             "estado": request.form["estado"],
             "telefone": request.form["telefone"],
             "email": request.form["email"],   
-            "area_atuacao": request.form["area_atuacao"] 
+            "area_atuacao": request.form["area_atuacao"],
+            "senha":request.form["senha"],
         }
         salvar_csv(arquivo, dados, cabecalho)
         return redirect("/")
 
     registros = ler_csv(arquivo)
-    return render_template("cad_empresas.html", registros=registros)
+    return render_template("registro_empresas.html", registros=registros)
 # ---------------------------------------------------------
 # ROTA VAGAS
 # ---------------------------------------------------------
@@ -243,15 +334,26 @@ def detalhe_vaga(id_vagas):
 # ---------------------------------------------------------
 # ROTA ESCOLAS
 # ---------------------------------------------------------
-@app.route("/cadastrar_escola", methods=["GET", "POST"])
+@app.route("/registro_escola", methods=["GET", "POST"])
 def escolas():
     arquivo = "escolas.csv"
-    cabecalho = ["id_escola", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ", "Telefone", "Email", "endereco_completo", "rua", "numero", "bairro", "cidade", "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade"]
+    cabecalho = cabecalho = [
+    "id_escola", "Nome_da_instituicao", "Tipo_de_instituicao", "INEP", "CNPJ",
+    "Telefone", "Email", "endereco_completo", "rua", "numero", "bairro", "cidade",
+    "estado", "cep", "Turno_de_funcionamento", "Nivel_de_escolaridade", "senha"
+]
+
 
     if request.method == "POST":
         registros = ler_csv(arquivo)
         novo_id = len(registros) + 1
         
+        senha = request.form["senha"]
+        confirmar = request.form["confirmar_senha"]
+        if senha != confirmar:
+            flash("As senhas não coincidem!", "erro")
+            return redirect("/registro_escola")
+
         # --- Busca o telefone da escola ---
         escolas = ler_csv("escolas.csv")
         Nome_da_instituicao = request.form["Nome_da_instituicao"]
@@ -286,6 +388,7 @@ def escolas():
             "estado":                 estado_escola,
             "Turno_de_funcionamento": request.form["Turno_de_funcionamento"],
             "Nivel_de_escolaridade":  request.form["Nivel_de_escolaridade"],
+            "senha": senha
         }
         salvar_csv(arquivo, dados, cabecalho)
         return redirect("/divulgacao_escolas")
@@ -465,32 +568,6 @@ def novo_post():
     return render_template("cad_post.html")
   
 # ---------------------------------------------------------
-# ROTA CHAT
-# ---------------------------------------------------------
-@app.route("/chat", methods=["GET", "POST"])
-def chat():
-    arquivo = "chat.csv"
-    cabecalho = ["id_mensagem", "id_aluno", "id_escola", "remetente", "mensagem", "timestamp"]
-    
-    if request.method == "POST":
-        registros = ler_csv(arquivo)
-        novo_id = len(registros) + 1
-        dados = {
-            "id_mensagem": str(novo_id),
-            "id_aluno": request.form["id_aluno"],
-            "id_escola": request.form["id_escola"],
-            "remetente": request.form["remetente"],
-            "mensagem": request.form["mensagem"],
-            "timestamp": datetime.now().strftime("%Y-%m-%d")
-            
-        }
-        salvar_csv(arquivo, dados, cabecalho)
-        return redirect("/chat")
-
-    registros = ler_csv(arquivo)
-    return render_template("chat.html", registros=registros)
-
-# ---------------------------------------------------------
 # ROTA DIVULGAÇÃO DE ESCOLAS
 # ---------------------------------------------------------
 @app.route("/divulgacao_escolas")
@@ -522,9 +599,73 @@ def detalhe_escolas(id_escola):
     else:
         return "<h2>Escolas não encontrada</h2>", 404
 
+@app.route("/mapa")
+def mapa():
+    return render_template("mapa_osm.html")
+
+# ---------------------------------------------------------
+# ROTA CHAT
+# ---------------------------------------------------------
+@app.route("/chat")
+def chat_lista():
+    arquivo = "chat.csv"
+    mensagens = ler_csv(arquivo)
+    escolas = ler_csv("escolas.csv")
+
+    # Agrupa as últimas mensagens por escola
+    historico = {}
+    for msg in mensagens:
+        id_escola = msg["id_escola"]
+        if id_escola not in historico or msg["timestamp"] > historico[id_escola]["timestamp"]:
+            historico[id_escola] = msg
+
+    # Adiciona nome da escola
+    for h in historico.values():
+        for e in escolas:
+            if e["id_escola"] == h["id_escola"]:
+                h["nome_escola"] = e["Nome_da_instituicao"]
+                break
+
+    historico_ordenado = sorted(historico.values(), key=lambda x: x["timestamp"], reverse=True)
+    return render_template("chat_lista.html", historico=historico_ordenado)
+
+# ---------------------------------------------------------
+# ROTA CHAT CONVERSA
+# ---------------------------------------------------------
+@app.route("/chat/<id_escola>", methods=["GET", "POST"])
+def chat_conversa(id_escola):
+    arquivo = "chat.csv"
+    cabecalho = ["id_mensagem", "id_aluno", "id_escola", "remetente", "mensagem", "timestamp"]
+
+    if request.method == "POST":
+        registros = ler_csv(arquivo)
+        novo_id = len(registros) + 1
+        dados = {
+            "id_mensagem": str(novo_id),
+            "id_aluno": session["usuario"]["id"] if "usuario" in session and session.get("tipo") == "alunos" else "1",
+            "id_escola": id_escola,
+            "remetente": request.form["remetente"],
+            "mensagem": request.form["mensagem"],
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M")
+        }
+
+        salvar_csv(arquivo, dados, cabecalho)
+        return redirect(f"/chat/{id_escola}")
+
+    # Lê todas as mensagens entre esse aluno e a escola
+    todas = ler_csv(arquivo)
+    conversa = [m for m in todas if m["id_escola"] == id_escola]
+    conversa = sorted(conversa, key=lambda x: x["timestamp"])
+
+    escolas = ler_csv("escolas.csv")
+    escola_atual = next((e for e in escolas if e["id_escola"] == id_escola), None)
+    nome_escola = escola_atual["Nome_da_instituicao"] if escola_atual else "Escola não identificada"
+
+    return render_template("chat_conversa.html", conversa=conversa, nome_escola=nome_escola, id_escola=id_escola)
 
 # ---------------------------------------------------------
 # EXECUÇÃO
 # ---------------------------------------------------------
 if __name__ == "__main__":
         app.run(debug=True)
+
