@@ -12,16 +12,26 @@
     <header>
         <nav>
             <button class="menu-btn">☰</button>
+
             <ul class="menu">
-                <li><a href="/">Início</a></li>
-                <li><a href="/sobre">Sobre</a></li>
-                <li><a href="/blog">Blog</a></li>
+                <li><a href="/"> Início </a></li>
+                <li><a href="/sobre"> Sobre </a></li>
+                <li><a href="/blog"> Blog </a></li>
                 <li><a href="/login"> Login </a></li>
-                <li><a href="/divulgacao_escolas">Escolas</a></li>
-                <li><a href="/vagas">Vagas</a></li>
-                <li><a href="/cursos">Cursos</a></li>
+                <li><a href="/divulgacao_escolas"> Escolas </a></li>
+                <li><a href="/vagas"> Vagas </a></li>
+                <li><a href="/cursos"> Cursos </a></li>
+                <li><a href="/mapa"> Mapa</a></li>
                 <li><a href="/chat"> Chat </a></li>
             </ul>
+
+            <!-- 🧩 BLOCO DE INFORMAÇÃO DO USUÁRIO LOGADO -->
+            {% if session.usuario %}
+            <div class="usuario-logado">
+                <span>👤 {{ session.usuario["nome"] }}</span>
+                <a href="/logout" class="btn-logout">Sair</a>
+            </div>
+            {% endif %}
         </nav>
     </header>
 

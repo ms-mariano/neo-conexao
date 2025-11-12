@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>{{ escolas["titulo"] }} | Neo Conexão</title>
+    <title>{{ escolas["Nome_da_instituicao"] }} | Neo Conexão</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
@@ -10,21 +10,25 @@
     <header>
         <nav>
             <ul class="menu">
-                <li><a href="/divulgacao_escolas">← Voltar para as escola</a></li>
+                <li><a href="/divulgacao_escolas">← Voltar para as escolas</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="vaga-detalhe">
-        <h2>{{ escolas["titulo"] }}</h2>
+        <h2>{{ escolas["Nome_da_instituicao"] }}</h2>
 
-        <p><strong>Escola:</strong> {{ escolas["Nome_da_instituicao"] }}</p>
-        <p><strong>Tipo de instituicao:</strong> {{ escolas["Tipo_de_instituicao"] }}</p>
+        <p><strong>Tipo de instituição:</strong> {{ escolas["Tipo_de_instituicao"] }}</p>
         <p><strong>INEP:</strong> {{ escolas["INEP"] }}</p>
         <p><strong>Endereço:</strong> {{ escolas["endereco_completo"] }}</p>
         <p><strong>Turno de funcionamento:</strong> {{ escolas["Turno_de_funcionamento"] }}</p>
         <p><strong>Telefone de contato:</strong> {{ escolas["Telefone"] }}</p>
-        <p><strong>Nivel de escolaridade:</strong> {{ escolas["Nivel_de_escolaridade"] }}</p>
-</main>
+        <p><strong>Nível de escolaridade:</strong> {{ escolas["Nivel_de_escolaridade"] }}</p>
+
+        <!-- 🟢 BOTÃO DE CONTATO -->
+        <div style="margin-top: 20px;">
+            <a href="/chat/{{ escolas['id_escola'] }}" class="btn-contato">💬 Entrar em contato</a>
+        </div>
+    </main>
 </body>
 </html>

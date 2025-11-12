@@ -102,45 +102,13 @@ def login():
             session["usuario"] = usuario
             session["tipo"] = tipo
             flash("Login realizado com sucesso!", "sucesso")
-
-            # Redireciona conforme o tipo
-            if tipo == "alunos":
-                return redirect("/login_aluno")
-            elif tipo == "escolas":
-                return redirect("/login_escola")
-            else:
-                return redirect("/login_empresa")
+            return redirect(url_for("index"))  # ✅ Redireciona corretamente
         else:
             flash("E-mail ou senha incorretos!", "erro")
+            return render_template("login.html")  # Exibe novamente o login
 
+    # ✅ Se for GET, exibe o formulário de login normalmente
     return render_template("login.html")
-
-# ---------------------------------------------------------
-# ROTA LOGIN ALUNO
-# ---------------------------------------------------------
-@app.route("/login_aluno")
-def dashboard_aluno():
-    if "usuario" not in session or session.get("tipo") != "alunos":
-        return redirect("/login")
-    return render_template("login_aluno.html", usuario=session["usuario"])
-
-# ---------------------------------------------------------
-# ROTA LOGIN ESCOLA
-# ---------------------------------------------------------
-@app.route("/login_escola")
-def dashboard_escola():
-    if "usuario" not in session or session.get("tipo") != "escolas":
-        return redirect("/login")
-    return render_template("login_escola.html", usuario=session["usuario"])
-
-# ---------------------------------------------------------
-# ROTA LOGIN EMPRESA
-# ---------------------------------------------------------
-@app.route("/login_empresa")
-def dashboard_empresa():
-    if "usuario" not in session or session.get("tipo") != "empresas":
-        return redirect("/login")
-    return render_template("login_empresa.html", usuario=session["usuario"])
 
 # ---------------------------------------------------------
 # ROTA LOGOUT

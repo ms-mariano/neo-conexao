@@ -3,18 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <title>Login - Neo Conexão</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
-  <h1>Login</h1>
-  <form method="POST" action="/login">
-    <label>Email:</label><br>
-    <input type="email" name="email" required><br><br>
+  <header>
+    <nav>
+        <button class="menu-btn">☰</button>
 
-    <label>Senha:</label><br>
-    <input type="password" name="senha" required><br><br>
+        <ul class="menu">
+            <li><a href="/"> Início </a></li>
+            <li><a href="/sobre"> Sobre </a></li>
+            <li><a href="/blog"> Blog </a></li>
+            <li><a href="/login"> Login </a></li>
+            <li><a href="/divulgacao_escolas"> Escolas </a></li>
+            <li><a href="/vagas"> Vagas </a></li>
+            <li><a href="/cursos"> Cursos </a></li>
+            <li><a href="/mapa"> Mapa</a></li>
+            <li><a href="/chat"> Chat </a></li>
+        </ul>
 
-    <label>Tipo de usuário:</label><br>
+        <!-- 🧩 BLOCO DE INFORMAÇÃO DO USUÁRIO LOGADO -->
+        {% if session.usuario %}
+        <div class="usuario-logado">
+            <span>👤 {{ session.usuario["nome"] }}</span>
+            <a href="/logout" class="btn-logout">Sair</a>
+        </div>
+        {% endif %}
+    </nav>
+</header>
+  
+  <form method="POST" class="formlogin" action="/login">
+    <h1>LOGIN/REGISTRO</h1>
+    <label>EMAIL:</label><br>
+    <input type="email" name="email" class="inputlogin" placeholder="INSIRA SEU NOME DE USUÁRIO OU E-MAIL"><br><br>
+
+    <label>SENHA:</label><br>
+    <input type="password" name="senha" placeholder="INSIRA SUA SENHA" required><br><br>
+
+    <label>TIPO DE USUÁRIO:</label><br>
     <select name="tipo">
       <option value="alunos">Aluno</option>
       <option value="escolas">Escola</option>
